@@ -1,0 +1,121 @@
+"getter" snippets for defined tokens (input and calculated)
+
+
+Tokens for topology
+
+	<c:get select="$topology/@label" />
+	<c:get select="$topology/@artifactIdPrefix" />
+	<c:get select="$topology/@name" />
+	<c:get select="$topology/@allProject" />
+	<c:get select="$topology/@stormProject" />
+	<c:get select="$topology/@utilPkg" />
+	<c:get select="$topology/@utilDir" />
+	<c:get select="$topology/@mockPkg" />
+	<c:get select="$topology/@mockDir" />
+	<c:get select="$topology/@spoutPkg" />
+	<c:get select="$topology/@spoutDir" />
+	<c:get select="$topology/@topologyPkg" />
+	<c:get select="$topology/@topologyDir" />
+	<c:get select="$topology/@logicPkg" />
+	<c:get select="$topology/@logicDir" />
+	<c:get select="$topology/@beanPkg" />
+	<c:get select="$topology/@beanDir" />
+	<c:get select="$topology/@boltPkg" />
+	<c:get select="$topology/@boltDir" />
+	<c:get select="$topology/@exceptionPkg" />
+	<c:get select="$topology/@exceptionDir" />
+	<c:get select="$topology/@topologyJava" />
+	<c:get select="$topology/@iLoggerJava" />
+	<c:get select="$topology/@loggerJava" />
+	<c:get select="$topology/@taskHookJava" />
+	<c:get select="$topology/@mavenGroupId" />
+	<c:get select="$topology/@basePackage" />
+	<c:get select="$topology/@provider" />
+
+
+Tokens for root
+
+
+
+Tokens for bolt
+
+	<c:get select="$bolt/@label" />
+	<c:get select="$bolt/@name" />
+	<c:get select="$bolt/@boltTestJava" />
+	<c:get select="$bolt/@boltLogicJava" />
+	<c:get select="$bolt/@boltJava" />
+	<c:get select="$bolt/@iBoltJava" />
+	<c:get select="$bolt/@isComponent" />
+	<c:get select="$bolt/@componentKind" />
+	<c:get select="$bolt/@instances" />
+
+
+Tokens for spout
+
+	<c:get select="$spout/@label" />
+	<c:get select="$spout/@name" />
+	<c:get select="$spout/@spoutTestJava" />
+	<c:get select="$spout/@iSpoutJava" />
+	<c:get select="$spout/@spoutJava" />
+	<c:get select="$spout/@spoutLogicJava" />
+	<c:get select="$spout/@isComponent" />
+	<c:get select="$spout/@componentKind" />
+	<c:get select="$spout/@instances" />
+
+
+Tokens for type
+
+	<c:get select="$type/@typeJava" />
+	<c:get select="$type/@typeTestJava" />
+	<c:get select="$type/@name" />
+	<c:get select="$type/@isComponent" />
+
+
+Tokens for emits
+
+	<c:get select="$emits/@stream" />
+	<c:get select="$emits/@type" />
+	<c:get select="$emits/@emitMethod" />
+	<c:get select="$emits/@emitVar" />
+
+
+Tokens for reads
+
+	<c:get select="$reads/@stream" />
+	<c:get select="$reads/@grouping" />
+	<c:get select="$reads/@execMethod" />
+	<c:get select="$reads/@type" />
+	<c:get select="$reads/@execVar" />
+
+
+Tokens for environment
+
+	<c:get select="$environment/@properties" />
+	<c:get select="$environment/@name" />
+	<c:get select="$environment/@isComponent" />
+	<c:get select="$environment/@runLocally" />
+	<c:get select="$environment/@default" />
+
+
+Tokens for fieldRef
+
+	<c:get select="$fieldRef/@name" />
+
+
+Tokens for emits
+
+	<c:get select="$emits/@type" />
+	<c:get select="$emits/@emitMethod" />
+	<c:get select="$emits/@emitVar" />
+	<c:get select="$emits/@idType" />
+	<c:get select="$emits/@stream" />
+
+
+Tokens for field
+
+	<c:get select="$field/@name" />
+	<c:get select="$field/@type" />
+	<c:get select="$field/@var" />
+	<c:get select="$field/@getter" />
+	<c:get select="$field/@setter" />
+

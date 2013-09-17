@@ -1,0 +1,27 @@
+package <c:get select="$topology/@boltPkg" />;
+
+import backtype.storm.tuple.Tuple;
+
+import <c:get select="$topology/@beanPkg" />.*;
+
+public interface <c:get select="$bolt/@iBoltJava" /> {
+<c:iterate select="$bolt/emits" var="emits" >    
+
+	/*
+	 *  Emits an instance of EarnedTagInfo to stream Tags
+	 */
+	public void <c:get select="$emits/@emitMethod" />(<c:get select="$emits/@type" /> <c:get select="$emits/@emitVar" />);
+	
+	/*
+	 *  Emits an instance of EarnedTagInfo to stream Tags
+	 */
+	public void <c:get select="$emits/@emitMethod" />WithoutAnchor(<c:get select="$emits/@type" /> <c:get select="$emits/@emitVar" />);
+</c:iterate>
+
+    public void ack();
+
+    public void fail();
+
+	public int getTaskId();
+
+}

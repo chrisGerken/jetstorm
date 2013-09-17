@@ -1,0 +1,105 @@
+package <c:get select="$topology/@boltPkg" />;
+
+import <c:get select="$topology/@beanPkg" />.*;
+import <c:get select="$topology/@logicPkg" />.*;
+import <c:get select="$topology/@topologyPkg" />.<c:get select="$topology/@topologyJava" />;
+import <c:get select="$topology/@utilPkg" />.<c:get select="$topology/@iLoggerJava" />;
+
+import backtype.storm.task.OutputCollector;
+import backtype.storm.task.TopologyContext;
+import backtype.storm.topology.IRichBolt;
+import backtype.storm.topology.OutputFieldsDeclarer;
+import backtype.storm.tuple.Fields;
+import backtype.storm.tuple.Tuple;
+import backtype.storm.tuple.Values;
+
+import java.util.Map; 
+
+public class <c:get select="$bolt/@boltJava" /> implements IRichBolt, <c:get select="$bolt/@iBoltJava" /> {
+
+	private static final long serialVersionUID = 1L;
+	private OutputCollector collector;
+	private Map<String, Object> config;
+    private static final <c:get select="$topology/@iLoggerJava" /> log = <c:get select="$topology/@topologyJava" />.getLogger();
+	private <c:get select="$bolt/@boltLogicJava" /> logic = new <c:get select="$bolt/@boltLogicJava" />();
+	private Tuple anchor = null;
+	private int taskId;	
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@Override
+    public void prepare(Map config, TopologyContext context, OutputCollector collector) {
+        this.collector = collector;
+        this.config = config;
+         try { taskId = context.getThisTaskId(); }
+        catch (Throwable t) { taskId = 1; }
+        logic.prepare(config,context,this);		
+    }
+<c:iterate select="$bolt/emits" var="emits" >    
+
+	/*
+	 *  Emits an instance of <c:get select="$emits/@type" /> to stream <c:get select="$emits/@stream" />
+	 */
+	public void <c:get select="$emits/@emitMethod" />(<c:get select="$emits/@type" /> <c:get select="$emits/@emitVar" />) {
+		Values values = <c:get select="$emits/@emitVar" />.asValues();
+		collector.emit("<c:get select="$emits/@stream" />",anchor,values);
+	}
+
+
+	/*
+	 *  Emits an instance of <c:get select="$emits/@type" /> to stream <c:get select="$emits/@stream" />
+	 */
+	public void <c:get select="$emits/@emitMethod" />WithoutAnchor(<c:get select="$emits/@type" /> <c:get select="$emits/@emitVar" />) {
+		Values values = <c:get select="$emits/@emitVar" />.asValues();
+		collector.emit("<c:get select="$emits/@stream" />",values);
+	}
+</c:iterate>
+
+    @Override
+    public void execute(Tuple tuple) {
+    	anchor = tuple;
+	    try {
+<c:iterate select="$bolt/reads" var="reads" >
+	    	if ("<c:get select="$reads/@stream" />".equals(tuple.getSourceStreamId())) {
+	    		<c:get select="$reads/@type" /> <c:get select="$reads/@execVar" /> = new <c:get select="$reads/@type" />(tuple);
+	            logic.<c:get select="$reads/@execMethod" />(<c:get select="$reads/@execVar" />, this);
+	    	}
+</c:iterate>	
+		} catch (Exception e) { 
+			log.severe("<c:get select="$bolt/@boltJava" />", "execute", "Error executing Tuple", e); 
+	    }
+	}
+	
+    @Override
+    /*
+    *  NOTE: This method is not guaranteed to get called! Do not depend on it!
+    */
+    public void cleanup() {
+		logic.cleanup(this);
+    }
+
+    @Override
+    public void declareOutputFields(OutputFieldsDeclarer declarer) {
+<c:iterate select="$bolt/emits" var="emits" >    
+        declarer.declareStream("<c:get select="$emits/@stream" />", <c:get select="$emits/@type" />.asFields());
+</c:iterate>	
+    }
+    
+    public void ack() {
+    	collector.ack(anchor);
+    }
+    
+    public void fail() {
+    	collector.fail(anchor);
+    }
+
+	@Override
+	public Map<String, Object> getComponentConfiguration() {
+		return config;
+	}
+	
+	@Override
+	public int getTaskId() {
+		return taskId;
+	}
+
+}

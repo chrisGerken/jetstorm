@@ -1,0 +1,107 @@
+package <c:get select="$topology/@logicPkg" />;
+
+	<c:userRegion>// Begin imports<c:initialCode> 
+
+import <c:get select="$topology/@beanPkg" />.*;
+import <c:get select="$topology/@spoutPkg" />.<c:get select="$spout/@iSpoutJava" />;
+import <c:get select="$topology/@utilPkg" />.<c:get select="$topology/@loggerJava" />;
+import <c:get select="$topology/@utilPkg" />.<c:get select="$topology/@iLoggerJava" />;
+
+import backtype.storm.task.TopologyContext;
+
+import java.io.Serializable;
+import java.util.Map;
+
+	</c:initialCode>// End imports</c:userRegion> 
+
+public class <c:get select="$spout/@spoutLogicJava" /> implements Serializable {
+
+		<c:userRegion>// Begin declarations<c:initialCode>
+		 
+	private static final long serialVersionUID = 1L;
+
+    private static final <c:get select="$topology/@iLoggerJava" /> log = <c:get select="$topology/@loggerJava" />.getInstance();
+    private boolean written = false;
+
+		</c:initialCode>// End declarations</c:userRegion> 
+
+    public void nextTuple(final <c:get select="$spout/@iSpoutJava" /> spout) {
+
+			<c:userRegion>// Begin nextTuple() logic<c:initialCode> 
+			
+        try {
+
+
+        	
+       		Thread.sleep(100);
+
+    	} catch (InterruptedException e) {
+    		log.finest("<c:get select="$spout/@spoutLogicJava" />","nextTuple", e.toString());
+        } catch (Exception e) {
+       		log.severe("<c:get select="$spout/@spoutLogicJava" />","nextTuple", e.toString());
+        }
+
+			</c:initialCode>// End nextTuple() logic</c:userRegion> 
+
+    }
+
+    public void open(Map map, TopologyContext topologyContext, <c:get select="$spout/@iSpoutJava" /> spout) {
+
+			<c:userRegion>// Begin open() logic<c:initialCode> 
+ 
+ 
+			</c:initialCode>// End open() logic</c:userRegion> 
+
+    }
+
+    public void close(<c:get select="$spout/@iSpoutJava" /> spout) {
+
+			<c:userRegion>// Begin close() logic<c:initialCode> 
+
+
+			</c:initialCode>// End close() logic</c:userRegion> 
+
+    }
+
+    public void activate(<c:get select="$spout/@iSpoutJava" /> spout) {
+
+			<c:userRegion>// Begin activate() logic<c:initialCode> 
+
+
+			</c:initialCode>// End activate() logic</c:userRegion> 
+
+    }
+
+    public void deactivate(<c:get select="$spout/@iSpoutJava" /> spout) {
+
+			<c:userRegion>// Begin deactivate() logic<c:initialCode> 
+
+
+			</c:initialCode>// End deactivate() logic</c:userRegion> 
+
+    }
+
+    public void ack(Object o, <c:get select="$spout/@iSpoutJava" /> spout) {
+
+			<c:userRegion>// Begin ack() logic<c:initialCode> 
+
+
+			</c:initialCode>// End ack() logic</c:userRegion> 
+
+    }
+
+    public void fail(Object o, <c:get select="$spout/@iSpoutJava" /> spout) {
+
+			<c:userRegion>// Begin fail() logic<c:initialCode> 
+
+
+			</c:initialCode>// End fail() logic</c:userRegion> 
+
+    }
+
+<c:userRegion>// Begin custom methods<c:initialCode> 
+
+
+</c:initialCode>// End custom methods</c:userRegion> 
+
+}

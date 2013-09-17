@@ -1,0 +1,333 @@
+package <c:get select="$topology/@beanPkg" />;
+
+<c:userRegion>// Begin imports<c:initialCode> 
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectStreamException;
+import java.io.Serializable;
+
+import java.util.ArrayList;
+import java.util.Date;
+
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
+
+import <c:get select="$topology/@exceptionPkg" />.DataException;
+
+import backtype.storm.tuple.Fields;
+import backtype.storm.tuple.Tuple;
+import backtype.storm.tuple.Values;
+
+</c:initialCode>// End imports</c:userRegion> 
+
+public class <c:get select="$type/@typeJava" /> implements Serializable, Comparable<<c:get select="$type/@typeJava" />> {
+
+<c:iterate select="$type/field" var="field">
+	private <c:get select="$field/@type"/> <c:get select="$field/@var"/>;
+</c:iterate>	
+
+	public <c:get select="$type/@typeJava" />(Tuple tuple) {
+<c:iterate select="$type/field" var="field">
+<c:choose select="$field/@type" >
+<c:when test=" 'String' ">
+		<c:get select="$field/@var"/> = tuple.getString(<c:get select="$field/@index"/>);
+</c:when>
+<c:when test=" 'Integer' ">
+		<c:get select="$field/@var"/> = tuple.getInteger(<c:get select="$field/@index"/>);
+</c:when>
+<c:when test=" 'Date' ">
+		<c:get select="$field/@var"/> = new Date(tuple.getLong(<c:get select="$field/@index"/>));
+</c:when>
+<c:when test=" 'Long' ">
+		<c:get select="$field/@var"/> = tuple.getLong(<c:get select="$field/@index"/>);
+</c:when>
+<c:when test=" 'Double' ">
+		<c:get select="$field/@var"/> = tuple.getDouble(<c:get select="$field/@index"/>);
+</c:when>
+<c:when test=" 'Boolean' ">
+		<c:get select="$field/@var"/> = tuple.getBoolean(<c:get select="$field/@index"/>);
+</c:when>
+</c:choose>
+</c:iterate>	
+	}
+
+	public <c:get select="$type/@typeJava" />() {
+
+	}
+
+	public <c:get select="$type/@typeJava" />(JSONObject json) throws DataException {
+		try { json = json.getJSONObject("<c:get select="$type/@typeJava" />"); } 
+		catch (Throwable t) {
+			throw new DataException("Invalid JSON structure for <c:get select="$type/@typeJava" /> constructor");
+		}
+<c:iterate select="$type/field" var="field">
+<c:choose select="$field/@type" >
+<c:when test=" 'String' ">
+		if (json.has("<c:get select="$field/@name"/>")) {
+			try { <c:get select="$field/@var"/> = json.getString("<c:get select="$field/@name"/>"); } catch (Throwable t) {}
+		}
+</c:when>
+<c:when test=" 'Integer' ">
+		if (json.has("<c:get select="$field/@name"/>")) {
+			try { <c:get select="$field/@var"/> = json.getInt("<c:get select="$field/@name"/>"); } catch (Throwable t) {}
+		}
+</c:when>
+<c:when test=" 'Date' ">
+		if (json.has("<c:get select="$field/@name"/>")) {
+			try { <c:get select="$field/@var"/> = new Date(json.getLong("<c:get select="$field/@name"/>")); } catch (Throwable t) {}
+		}
+</c:when>
+<c:when test=" 'Long' ">
+		if (json.has("<c:get select="$field/@name"/>")) {
+			try { <c:get select="$field/@var"/> = json.getLong("<c:get select="$field/@name"/>"); } catch (Throwable t) {}
+		}
+</c:when>
+<c:when test=" 'Double' ">
+		if (json.has("<c:get select="$field/@name"/>")) {
+			try { <c:get select="$field/@var"/> = json.getDouble("<c:get select="$field/@name"/>"); } catch (Throwable t) {}
+		}
+</c:when>
+<c:when test=" 'Boolean' ">
+		if (json.has("<c:get select="$field/@name"/>")) {
+			try { <c:get select="$field/@var"/> = json.getBoolean("<c:get select="$field/@name"/>"); } catch (Throwable t) {}
+		}
+</c:when>
+</c:choose>
+</c:iterate>	
+	}
+
+	public <c:get select="$type/@typeJava" />(<c:iterate select="$type/field" var="field" delimiter=", "><c:get select="$field/@type"/> <c:get select="$field/@var"/></c:iterate>) {	
+<c:iterate select="$type/field" var="field">
+		this.<c:get select="$field/@var"/> = <c:get select="$field/@var"/>;
+</c:iterate>	
+	}
+
+	public Values asValues() {
+		return new Values(<c:iterate select="$type/field" var="field" delimiter=", "><c:get select="$field/@var"/></c:iterate>);
+	}
+<c:iterate select="$type/field" var="field">
+
+	public <c:get select="$field/@type"/> <c:get select="$field/@getter"/>() { 
+		return <c:get select="$field/@var"/>;
+	}
+	
+	public void <c:get select="$field/@setter"/>(<c:get select="$field/@type"/> value) {
+		this.<c:get select="$field/@var"/> = value;
+	}
+</c:iterate>	
+
+	private void writeObject(java.io.ObjectOutputStream out) throws IOException {
+<c:iterate select="$type/field" var="field">
+
+<c:choose select="$field/@type" >
+<c:when test=" 'String' ">
+		if (<c:get select="$field/@var"/> == null) {
+			out.writeBoolean(false);
+		} else {
+			out.writeBoolean(true);
+			out.writeInt(<c:get select="$field/@var"/>.length());
+			out.write(<c:get select="$field/@var"/>.getBytes());
+		}
+</c:when>
+<c:when test=" 'Integer' ">
+		if (<c:get select="$field/@var"/> == null) {
+			out.writeBoolean(false);
+		} else {
+			out.writeBoolean(true);
+			out.writeInt(<c:get select="$field/@var"/>);
+		}
+</c:when>
+<c:when test=" 'Date' ">
+		if (<c:get select="$field/@var"/> == null) {
+			out.writeBoolean(false);
+		} else {
+			out.writeBoolean(true);
+			out.writeLong(<c:get select="$field/@var"/>.getTime());
+		}
+</c:when>
+<c:when test=" 'Long' ">
+		if (<c:get select="$field/@var"/> == null) {
+			out.writeBoolean(false);
+		} else {
+			out.writeBoolean(true);
+			out.writeLong(<c:get select="$field/@var"/>);
+		}
+</c:when>
+<c:when test=" 'Double' ">
+		if (<c:get select="$field/@var"/> == null) {
+			out.writeBoolean(false);
+		} else {
+			out.writeBoolean(true);
+			out.writeDouble(<c:get select="$field/@var"/>);
+		}
+</c:when>
+<c:when test=" 'Boolean' ">
+		if (<c:get select="$field/@var"/> == null) {
+			out.writeBoolean(false);
+		} else {
+			out.writeBoolean(true);
+			out.writeBoolean(<c:get select="$field/@var"/>);
+		}
+</c:when>
+</c:choose>
+</c:iterate>	
+
+	}
+
+	private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+<c:iterate select="$type/field" var="field">
+
+<c:choose select="$field/@type" >
+<c:when test=" 'String' ">
+		if (in.readBoolean()) {
+			byte b[] = new byte[in.readInt()];
+			in.read(b);
+			<c:get select="$field/@var"/> = new String(b);
+		} else {
+			<c:get select="$field/@var"/> = null;
+		}
+</c:when>
+<c:when test=" 'Integer' ">
+		if (in.readBoolean()) {
+			<c:get select="$field/@var"/> = in.readInt();
+		} else {
+			<c:get select="$field/@var"/> = null;
+		}
+</c:when>
+<c:when test=" 'Date' ">
+		if (in.readBoolean()) {
+			<c:get select="$field/@var"/> = new Date(in.readLong());
+		} else {
+			<c:get select="$field/@var"/> = null;
+		}
+</c:when>
+<c:when test=" 'Long' ">
+		if (in.readBoolean()) {
+			<c:get select="$field/@var"/> = in.readLong();
+		} else {
+			<c:get select="$field/@var"/> = null;
+		}
+</c:when>
+<c:when test=" 'Double' ">
+		if (in.readBoolean()) {
+			<c:get select="$field/@var"/> = in.readDouble();
+		} else {
+			<c:get select="$field/@var"/> = null;
+		}
+</c:when>
+<c:when test=" 'Boolean' ">
+		if (in.readBoolean()) {
+			<c:get select="$field/@var"/> = in.readBoolean();
+		} else {
+			<c:get select="$field/@var"/> = null;
+		}
+</c:when>
+</c:choose>
+</c:iterate>	
+
+	}
+	
+	@Override
+	public String toString() {
+
+		StringBuffer sb = new StringBuffer();
+		sb.append("<c:get select="$type/@typeJava" /> [<c:iterate select="$type/field" var="field" delimiter="; "><c:get select="$field/@name"/> = " + <c:get select="$field/@var"/> + "</c:iterate>]");
+		return sb.toString();
+		
+	}
+	
+	public JSONObject toJson() throws DataException {
+	
+		JSONObject json = new JSONObject();
+
+		try { 
+ <c:iterate select="$type/field" var="field">
+ 			if (<c:get select="$field/@var"/> != null) {
+ 				json.putOpt("<c:get select="$field/@name"/>", <c:get select="$field/@var"/>);
+ 			}
+ </c:iterate>			
+ 		} catch (JSONException e) {
+ 			throw new DataException("JSON error when persisting <c:get select="$type/@typeJava" /> to JSON",e);
+ 		}
+ 		
+ 		JSONObject result = new JSONObject();
+		try { 		
+			result.put("<c:get select="$type/@typeJava" />", json);
+ 		} catch (JSONException e) {
+ 			throw new DataException("JSON error when persisting <c:get select="$type/@typeJava" /> to JSON",e);
+ 		}
+		return result;
+	}
+
+	public String toJsonString() {
+		try {
+			return toJson().toString();
+		} catch (DataException e) {
+			return "{ \"error\":\"+e.toString()+\"}";
+		}
+	}
+	
+	public static Fields asFields() {
+		return new Fields(<c:iterate select="$type/field" var="field" delimiter=", ">"<c:get select="$field/@name"/>"</c:iterate>);
+	}
+	
+	@Override
+	public int hashCode() {
+
+		<c:userRegion>// Begin hashCode logic<c:initialCode> 
+
+		return super.hashCode();
+
+		</c:initialCode>// End hashCode logic</c:userRegion> 
+
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+
+		<c:userRegion>// Begin equals logic<c:initialCode> 
+
+		if (obj instanceof <c:get select="$type/@typeJava" />) {
+			<c:get select="$type/@typeJava" /> other = (<c:get select="$type/@typeJava" />) obj;
+		
+		}
+
+		return super.equals(obj);
+
+		</c:initialCode>// End equals logic</c:userRegion> 
+
+	}
+
+	public int compareTo(<c:get select="$type/@typeJava" /> o) {
+
+		<c:userRegion>// Begin compare logic<c:initialCode> 
+
+
+		// return -1 if this < that
+		//         0 if this = that
+		//         1 if this > that
+
+		if (o instanceof <c:get select="$type/@typeJava" />) {
+			<c:get select="$type/@typeJava" /> other = (<c:get select="$type/@typeJava" />) o;
+		
+		}
+	
+		return 0;
+
+		</c:initialCode>// End compare logic</c:userRegion> 
+
+	}
+
+	public static <c:get select="$type/@typeJava" /> sample() {
+	
+		return new <c:get select="$type/@typeJava" />(<c:iterate select="$type/field" var="field" delimiter=", "><c:choose select="$field/@type" ><c:when test=" 'String' ">"Howdy"</c:when><c:when test=" 'Integer' ">0</c:when><c:when test=" 'Date' ">new Date()</c:when><c:when test=" 'Long' ">1L</c:when><c:when test=" 'Double' ">3.1415</c:when><c:when test=" 'Boolean' ">false</c:when></c:choose></c:iterate>);
+	
+	}
+
+<c:userRegion>// Begin custom methods<c:initialCode> 
+
+
+</c:initialCode>// End custom methods</c:userRegion> 
+	
+}

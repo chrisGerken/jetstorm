@@ -1,0 +1,54 @@
+package <c:get select="$topology/@mockPkg" />;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import <c:get select="$topology/@beanPkg" />.*;
+
+import backtype.storm.spout.ISpoutOutputCollector;
+
+public class MockedSpoutOutputCollector implements ISpoutOutputCollector {
+	
+<c:iterate select="$topology/spout/emits" var="emits">
+	public List<<c:get select="$emits/@type" />> emittedTo<c:get select="$emits/@stream" /> = new ArrayList<<c:get select="$emits/@type" />>();
+	public List<<c:get select="$emits/@type" />> idsFor<c:get select="$emits/@stream" /> = new ArrayList<<c:get select="$emits/@idType" />>();
+</c:iterate>
+
+	public List<Object> others = new ArrayList<Object>();
+
+	public MockedSpoutOutputCollector() {
+	}
+
+	@Override
+	public List<Integer> emit(String streamId, List<Object> tuple, Object messageId) {
+		
+		List<Integer> result = new ArrayList<Integer>();
+		
+		if (streamId == null) { return result; }
+		
+<c:iterate select="$topology/spout/emits" var="emits">
+		if (streamId.equals("<c:get select="$emits/@stream" />")) {
+			emittedTo<c:get select="$emits/@stream" />.add(new <c:get select="$emits/@type" />(new MockedTuple(streamId, tuple)));
+			if (messageId == null) {
+				messageId = <c:get select="$emits/@type" />.sample();
+			}
+			idsFor<c:get select="$emits/@stream" />.add((<c:get select="$emits/@idType" />)messageId);
+			return result;
+		}
+</c:iterate>
+		
+		others.add(tuple);
+		return result;
+		
+	}
+
+	@Override
+	public void emitDirect(int taskId, String streamId, List<Object> tuple,
+			Object messageId) {  
+	}
+
+	@Override
+	public void reportError(Throwable error) {
+	}
+
+}

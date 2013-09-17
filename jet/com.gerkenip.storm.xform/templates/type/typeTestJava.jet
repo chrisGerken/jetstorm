@@ -1,0 +1,62 @@
+package <c:get select="$topology/@beanPkg" />;
+
+<c:userRegion>// Begin imports<c:initialCode> 
+
+import static org.junit.Assert.fail;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
+import org.codehaus.jettison.json.JSONObject;
+import org.junit.Test;
+
+</c:initialCode>// End imports</c:userRegion> 
+
+public class <c:get select="$type/@typeTestJava" /> {
+
+	@Test
+	public void testJsonification() {
+		try {
+			new <c:get select="$type/@typeJava" />(new JSONObject(<c:get select="$type/@typeJava" />.sample().toJsonString()));
+		} catch (Exception e) {
+			fail("Failed JSONification");
+		}
+	}
+	
+	@Test
+	public void testTupilization() {
+		<c:get select="$type/@typeJava" />.sample().asValues();
+	}
+
+	@Test
+	public void testSerialization() {
+		
+		try {
+
+			serDeser(<c:get select="$type/@typeJava" />.sample());
+			serDeser(new <c:get select="$type/@typeJava" />());
+			
+		} catch (Throwable t) {
+			fail("Object not serializable: "+t);
+		}
+
+	}
+
+	private <c:get select="$type/@typeJava" /> serDeser(<c:get select="$type/@typeJava" /> obj) throws Throwable {
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		ObjectOutputStream oos = new ObjectOutputStream(baos);
+		oos.writeObject(obj);
+		oos.close();
+		ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(baos.toByteArray()));
+		return (<c:get select="$type/@typeJava" />) ois.readObject();
+	}
+	
+	<c:userRegion>// Begin custom methods<c:initialCode>
+	
+	
+	</c:initialCode>// End custom methods</c:userRegion>
+
+	
+}

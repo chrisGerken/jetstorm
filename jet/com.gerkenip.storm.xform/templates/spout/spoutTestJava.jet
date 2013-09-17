@@ -1,0 +1,45 @@
+package <c:get select="$topology/@spoutPkg" />;
+
+import static org.junit.Assert.fail;
+
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectOutputStream;
+import java.util.HashMap;
+
+import org.junit.Test;
+
+import backtype.storm.spout.SpoutOutputCollector;
+
+import <c:get select="$topology/@beanPkg" />.*;
+import <c:get select="$topology/@mockPkg" />.*;
+
+public class <c:get select="$spout/@spoutTestJava" /> {
+ 
+	@Test
+	public void testSerialization() {
+		
+		try {
+			new ObjectOutputStream(new ByteArrayOutputStream()).writeObject(new <c:get select="$spout/@spoutJava" />() );
+		} catch (Throwable t) {
+			fail("Class <c:get select="$spout/@spoutJava" /> is not serializable");
+		}
+
+	}
+
+	@Test
+	public void testNextTuple() {
+		
+//		<c:get select="$spout/@spoutJava" /> spout = new <c:get select="$spout/@spoutJava" />();
+
+//		MockedSpoutOutputCollector collector = new MockedSpoutOutputCollector();
+//		HashMap<String,Object> config = new HashMap<String, Object>();
+		
+//		spout.open(config,null,new SpoutOutputCollector(collector));
+//		spout.nextTuple();
+//		spout.close();
+		
+		// Validate side effects of nextTuple() call by interrogating collector
+		
+	}
+
+}

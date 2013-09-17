@@ -1,0 +1,66 @@
+package <c:get select="$topology/@logicPkg" />;
+
+	<c:userRegion>// Begin imports<c:initialCode> 
+
+import <c:get select="$topology/@beanPkg" />.*;
+import <c:get select="$topology/@boltPkg" />.<c:get select="$bolt/@iBoltJava" />;
+import <c:get select="$topology/@topologyPkg" />.<c:get select="$topology/@topologyJava" />;
+import <c:get select="$topology/@utilPkg" />.<c:get select="$topology/@loggerJava" />;
+import <c:get select="$topology/@utilPkg" />.<c:get select="$topology/@iLoggerJava" />;
+
+import backtype.storm.task.TopologyContext;
+import backtype.storm.tuple.Tuple;
+
+import java.io.Serializable;
+import java.util.Map;
+
+	</c:initialCode>// End imports</c:userRegion> 
+
+public class <c:get select="$bolt/@boltLogicJava" /> implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+		
+		<c:userRegion>// Begin declarations<c:initialCode> 
+
+    private static final <c:get select="$topology/@iLoggerJava" /> log = <c:get select="$topology/@topologyJava" />.getLogger();
+
+		</c:initialCode>// End declarations</c:userRegion> 
+<c:iterate select="$bolt/reads" var="reads" >
+		
+    public void <c:get select="$reads/@execMethod" />(<c:get select="$reads/@type" /> <c:get select="$reads/@execVar" />, <c:get select="$bolt/@iBoltJava" /> bolt) {
+
+			<c:userRegion>// Begin <c:get select="$reads/@execMethod" />() logic<c:initialCode> 
+
+
+			</c:initialCode>// End <c:get select="$reads/@execMethod" />() logic</c:userRegion> 
+
+    }
+</c:iterate>
+
+    public void prepare(Map conf, TopologyContext context, <c:get select="$bolt/@iBoltJava" /> bolt) {
+
+			<c:userRegion>// Begin prepare() logic<c:initialCode> 
+
+
+			</c:initialCode>// End prepare() logic</c:userRegion> 
+
+    }
+
+	/*
+    *  NOTE: This method is not guaranteed to get called! Do not depend on it!
+	*/
+    public void cleanup(<c:get select="$bolt/@iBoltJava" /> bolt) {
+
+			<c:userRegion>// Begin cleanup() logic<c:initialCode> 
+
+
+			</c:initialCode>// End cleanup() logic</c:userRegion> 
+
+    }
+
+<c:userRegion>// Begin custom methods<c:initialCode> 
+
+
+</c:initialCode>// End custom methods</c:userRegion> 
+
+}

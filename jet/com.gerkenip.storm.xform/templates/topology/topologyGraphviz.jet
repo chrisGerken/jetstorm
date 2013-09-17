@@ -1,0 +1,31 @@
+digraph G { 
+node [style=filled, fillcolor=plum1 ,shape=rectangle, fontsize=20, color=black];
+edge [fontsize=10, color=blue4, fontcolor=blue4];
+
+Legalese [style=filled, fillcolor=floralwhite ,fontsize=20,color=black,label="{<c:get select="$topology/@label"/>|(c) 2013 <c:get select="$topology/@provider" />}", shape=record];
+
+<c:iterate select="$topology/*/emits" var="emits">
+<c:get select="$emits/@stream"/> [style=filled, fillcolor=mintcream ,fontsize=12,color=black,label="{Stream: <c:get select="$emits/@stream"/>|{<c:get select="$emits/@type"/>|{<c:iterate select="$topology/type[@name=$emits/@type]/field" var="field" delimiter="|"><c:get select="$field/@name"/></c:iterate>}}}", shape=record];
+</c:iterate>
+<c:iterate select="$topology/spout" var="spout">
+"<c:get select="$spout/@label"/> (<c:get select="$spout/@instances"/>)"  [shape=invhouse] ;
+</c:iterate>
+<c:iterate select="$topology/bolt" var="bolt">
+"<c:get select="$bolt/@label"/> (<c:get select="$bolt/@instances"/>)"  [shape=ellipse, fillcolor=palegoldenrod] ;
+</c:iterate>
+
+<c:iterate select="$topology/*/emits" var="emits">
+"<c:get select="$emits/../@label"/> (<c:get select="$emits/../@instances"/>)" -> <c:get select="$emits/@stream"/>  [penwidth=10];
+</c:iterate>
+
+<c:iterate select="$topology/*/reads" var="reads">
+<c:get select="$reads/@stream"/> -> "<c:get select="$reads/../@label"/> (<c:get select="$reads/../@instances"/>)"  [penwidth=8];
+</c:iterate>
+
+Legalese -> "<c:get select="$topology/spout[1]/@label"/> (<c:get select="$topology/spout[1]/@instances"/>)" [style=invis, len=30]
+
+}
+
+
+
+

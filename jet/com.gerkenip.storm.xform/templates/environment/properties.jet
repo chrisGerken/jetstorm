@@ -1,0 +1,25 @@
+# properties for runtime target "<c:get select="$environment/@name" />"
+
+topology.name=<c:get select="$topology/@name" />
+topology.run.locally=<c:get select="$environment/@runLocally" />
+topology.message.timeout.secs=120
+
+<c:iterate select="$topology/spout" var="spout" >
+<c:userRegion><c:get select="$spout/@name" />.parallelismHint=<c:initialCode><c:get select="$spout/@instances" /></c:initialCode> </c:userRegion>
+</c:iterate>
+<c:iterate select="$topology/bolt" var="bolt" >
+<c:userRegion><c:get select="$bolt/@name" />.parallelismHint=<c:initialCode><c:get select="$bolt/@instances" /></c:initialCode> </c:userRegion>
+</c:iterate>
+
+event.java.logging=true
+event.grey.logging=false
+event.visualization.logging=false
+
+<c:userRegion># Begin custom properties<c:initialCode>
+
+sleep.after.submit.minutes=30
+
+topology.workers=1
+
+
+</c:initialCode># End custom properties</c:userRegion>

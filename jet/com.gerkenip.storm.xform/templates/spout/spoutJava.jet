@@ -1,0 +1,117 @@
+package <c:get select="$topology/@spoutPkg" />;
+
+import <c:get select="$topology/@beanPkg" />.*;
+import <c:get select="$topology/@logicPkg" />.*;
+import <c:get select="$topology/@utilPkg" />.*;
+
+import backtype.storm.spout.SpoutOutputCollector;
+import backtype.storm.task.TopologyContext;
+import backtype.storm.topology.IRichSpout;
+import backtype.storm.topology.OutputFieldsDeclarer;
+import backtype.storm.tuple.Fields;
+import backtype.storm.tuple.Values;
+
+import java.util.Map;  
+
+import <c:get select="$topology/@topologyPkg" />.<c:get select="$topology/@topologyJava" />;  
+
+public class <c:get select="$spout/@spoutJava" /> implements IRichSpout, <c:get select="$spout/@iSpoutJava" /> {
+
+	private static final long serialVersionUID = 1L;
+	private static Map<String, Object> config = null;
+    private static ThreadLocal<SpoutOutputCollector> collector = new ThreadLocal<SpoutOutputCollector>();
+    private volatile static boolean activated = false; 
+	private <c:get select="$spout/@spoutLogicJava" /> logic = new <c:get select="$spout/@spoutLogicJava" />();
+	private int taskId;	
+
+    private static final <c:get select="$topology/@iLoggerJava" /> log = <c:get select="$topology/@topologyJava" />.getLogger();
+
+    @Override
+    public void nextTuple() {
+
+        try {
+
+			logic.nextTuple(this);
+
+        } catch (Exception e) {
+            log.severe("<c:get select="$spout/@spoutJava" />","nextTuple",e.toString());
+        }
+    }
+
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+	@Override
+    public void open(Map config, TopologyContext topologyContext, SpoutOutputCollector collector) {
+    	<c:get select="$topology/@loggerJava" />.getInstance().configure(config);
+        <c:get select="$spout/@spoutJava" />.collector.set(collector);
+         try { taskId = topologyContext.getThisTaskId(); }
+        catch (Throwable t) { taskId = 1; }
+        logic.open(config,topologyContext,this);
+    }
+
+    @Override
+    public void declareOutputFields(OutputFieldsDeclarer declarer) {
+        declarer.declareStream("Users",new Fields("userId"));
+    }
+
+    @Override
+    public Map<String, Object> getComponentConfiguration() {
+        return config;
+    }
+<c:iterate select="$spout/emits" var="emits" >
+
+    /*
+     * Unreliably emit an instance of <c:get select="$emits/@type" /> to stream <c:get select="$emits/@stream" />.  
+     */
+	public void <c:get select="$emits/@emitMethod" />(<c:get select="$emits/@type" /> <c:get select="$emits/@emitVar" />) {
+		Values values = <c:get select="$emits/@emitVar" />.asValues();
+		collector.get().emit("<c:get select="$emits/@stream" />",values);
+	}
+
+    /*
+     * Reliably emit an instance of <c:get select="$emits/@type" /> to stream <c:get select="$emits/@stream" />.
+     * The second parameter is to be used as a message ID for
+     * notification of message ack or fail.  
+     */
+	public void <c:get select="$emits/@emitMethod" />(<c:get select="$emits/@type" /> <c:get select="$emits/@emitVar" />, <c:get select="$emits/@type" /> messageID) {
+		Values values = <c:get select="$emits/@emitVar" />.asValues();
+		collector.get().emit("<c:get select="$emits/@stream" />",values,messageID);
+	}
+</c:iterate>
+
+    @Override
+    public void close() {
+        activated = false;
+        logic.close(this);
+    }
+
+    @Override
+    public void ack(Object o) {
+        logic.ack(o,this);
+    }
+
+    @Override
+    public void fail(Object o) {
+        logic.fail(o,this);
+    }
+
+
+    @Override
+    public void activate() {
+        if (!activated) {
+            activated = true;
+	        logic.activate(this);
+        }
+    }
+
+    @Override
+    public void deactivate() {
+        activated = false;
+        logic.deactivate(this);
+    }
+	
+	@Override
+	public int getTaskId() {
+		return taskId;
+	}
+
+}

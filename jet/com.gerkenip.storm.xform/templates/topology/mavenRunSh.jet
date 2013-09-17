@@ -1,0 +1,5 @@
+mvn -e exec:java -Dexec.classpathScope=compile -Dexec.mainClass=<c:get select="$topology/@topologyPkg" />.<c:get select="$topology/@topologyJava" /> -Djava.util.logging.config.file=src/main/resources/logging.properties
+
+#To execute in production
+#storm jar <c:get select="$topology/@stormProject" />-1.0.0-SNAPSHOT-jar-with-dependencies.jar <c:get select="$topology/@topologyPkg" />.<c:get select="$topology/@topologyJava" /> prod -Djava.util.logging.config.file=prod.logging.properties
+

@@ -1,0 +1,66 @@
+package <c:get select="$topology/@mockPkg" />;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import <c:get select="$topology/@beanPkg" />.*;
+
+import backtype.storm.task.IOutputCollector;
+import backtype.storm.tuple.Tuple;
+
+public class MockedBoltOutputCollector implements IOutputCollector {
+
+	public boolean acked = false;
+	public boolean failed = false;
+	public Throwable error = null;
+
+<c:iterate select="$topology/bolt/emits" var="emits">
+	public List<<c:get select="$emits/@type" />> emittedTo<c:get select="$emits/@stream" /> = new ArrayList<<c:get select="$emits/@type" />>();
+</c:iterate>
+
+	public List<Object> others = new ArrayList<Object>();
+	
+	public MockedBoltOutputCollector() {
+
+	}
+
+	@Override
+	public List<Integer> emit(String streamId, Collection<Tuple> anchors, List<Object> tuple) {
+		
+		List<Integer> result = new ArrayList<Integer>();
+		
+		if (streamId == null) { return result; }
+		
+<c:iterate select="$topology/bolt/emits" var="emits">
+		if (streamId.equals("<c:get select="$emits/@stream" />")) {
+			emittedTo<c:get select="$emits/@stream" />.add(new <c:get select="$emits/@type" />(new MockedTuple(streamId, tuple)));
+			return result;
+		}
+</c:iterate>
+		
+		others.add(tuple);
+		return result;
+	}
+
+	@Override
+	public void emitDirect(int taskId, String streamId, Collection<Tuple> anchors, List<Object> tuple) {
+
+	}
+
+	@Override
+	public void ack(Tuple input) {
+		acked = true;
+	}
+
+	@Override
+	public void fail(Tuple input) {
+		failed = true;
+	}
+
+	@Override
+	public void reportError(Throwable error) {
+		this.error = error;
+	}
+
+}

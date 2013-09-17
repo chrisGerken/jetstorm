@@ -1,0 +1,448 @@
+<%@taglib prefix="ws" id="org.eclipse.jet.workspaceTags" %>
+
+<c:if test="not(isVariableDefined(root))">
+    <c:setVariable select="/*" var="root" />
+</c:if>
+
+*******************************
+
+
+
+*** Begin custom model updates for root (3)
+
+*** End custom model updates for root (3)
+
+
+<c:iterate select="$root/topology" var="topology">
+    <c:set select="$topology" name="artifactIdPrefix"><c:get select="translate(lower-case($topology/@label),' ','-')" /></c:set>
+    <c:set select="$topology" name="name"><c:get select="camelCase($topology/@label)" /></c:set>
+    <c:set select="$topology" name="allProject"><c:get select="$topology/@artifactIdPrefix" /></c:set>
+    <c:set select="$topology" name="stormProject"><c:get select="$topology/@artifactIdPrefix" />-storm</c:set>
+    <c:set select="$topology" name="utilPkg"><c:get select="$topology/@basePackage" />.util</c:set>
+    <c:set select="$topology" name="utilDir"><c:get select="translate($topology/@utilPkg,'.','/')" /></c:set>
+    <c:set select="$topology" name="mockPkg"><c:get select="$topology/@basePackage" />.mock</c:set>
+    <c:set select="$topology" name="mockDir"><c:get select="translate($topology/@mockPkg,'.','/')" /></c:set>
+    <c:set select="$topology" name="spoutPkg"><c:get select="$topology/@basePackage" />.spout</c:set>
+    <c:set select="$topology" name="spoutDir"><c:get select="translate($topology/@spoutPkg,'.','/')" /></c:set>
+    <c:set select="$topology" name="topologyPkg"><c:get select="$topology/@basePackage" />.topology</c:set>
+    <c:set select="$topology" name="topologyDir"><c:get select="translate($topology/@topologyPkg,'.','/')" /></c:set>
+    <c:set select="$topology" name="logicPkg"><c:get select="$topology/@basePackage" />.logic</c:set>
+    <c:set select="$topology" name="logicDir"><c:get select="translate($topology/@logicPkg,'.','/')" /></c:set>
+    <c:set select="$topology" name="beanPkg"><c:get select="$topology/@basePackage" />.bean</c:set>
+    <c:set select="$topology" name="beanDir"><c:get select="translate($topology/@beanPkg,'.','/')" /></c:set>
+    <c:set select="$topology" name="boltPkg"><c:get select="$topology/@basePackage" />.bolt</c:set>
+    <c:set select="$topology" name="boltDir"><c:get select="translate($topology/@boltPkg,'.','/')" /></c:set>
+    <c:set select="$topology" name="exceptionPkg"><c:get select="$topology/@basePackage" />.exception</c:set>
+    <c:set select="$topology" name="exceptionDir"><c:get select="translate($topology/@exceptionPkg,'.','/')" /></c:set>
+    <c:set select="$topology" name="topologyJava"><c:get select="$topology/@name" />Topology</c:set>
+    <c:set select="$topology" name="iLoggerJava">I<c:get select="$topology/@name" />Logger</c:set>
+    <c:set select="$topology" name="loggerJava"><c:get select="$topology/@name" />Logger</c:set>
+    <c:set select="$topology" name="taskHookJava">TaskHook</c:set>
+
+    *** Begin custom model updates for topology (4)
+
+    *** End custom model updates for topology (4)
+
+
+    <c:iterate select="$topology/bolt" var="bolt">
+        <c:set select="$bolt" name="name"><c:get select="camelCase($bolt/@label)" /></c:set>
+        <c:set select="$bolt" name="boltTestJava"><c:get select="$bolt/@name" />BoltTest</c:set>
+        <c:set select="$bolt" name="boltLogicJava"><c:get select="$bolt/@name" />BoltLogic</c:set>
+        <c:set select="$bolt" name="boltJava"><c:get select="$bolt/@name" />Bolt</c:set>
+        <c:set select="$bolt" name="iBoltJava">I<c:get select="$bolt/@name" />Bolt</c:set>
+        <c:set select="$bolt" name="isComponent">true</c:set>
+        <c:set select="$bolt" name="componentKind">bolt</c:set>
+
+        *** Begin custom model updates for bolt (276)
+
+        *** End custom model updates for bolt (276)
+
+
+        <c:iterate select="$bolt/emits" var="emits">
+            <c:set select="$emits" name="emitMethod">emitTo<c:get select="uppercaseFirst($emits/@stream)" /></c:set>
+            <c:set select="$emits" name="emitVar"><c:get select="lowercaseFirst($emits/@type)" /></c:set>
+
+            *** Begin custom model updates for emits (279)
+
+            *** End custom model updates for emits (279)
+
+
+            *** Begin custom model post updates for emits (279)
+
+            *** End custom model post updates for emits (279)
+
+
+        </c:iterate> 
+
+        <c:iterate select="$bolt/reads" var="reads">
+            <c:set select="$reads" name="execMethod">readFrom<c:get select="uppercaseFirst($reads/@stream)" /></c:set>
+            <c:set select="$reads" name="type"><c:get select="$topology/*/emits[@stream=$reads/@stream]/@type" /></c:set>
+            <c:set select="$reads" name="execVar"><c:get select="lowercaseFirst($reads/@type)" /></c:set>
+
+            *** Begin custom model updates for reads (280)
+
+            *** End custom model updates for reads (280)
+
+
+            <c:iterate select="$reads/fieldRef" var="fieldRef">
+
+                *** Begin custom model updates for fieldRef (282)
+
+                *** End custom model updates for fieldRef (282)
+
+
+                *** Begin custom model post updates for fieldRef (282)
+
+                *** End custom model post updates for fieldRef (282)
+
+
+            </c:iterate> 
+
+            *** Begin custom model post updates for reads (280)
+
+            *** End custom model post updates for reads (280)
+
+
+        </c:iterate> 
+
+        *** Begin custom model post updates for bolt (276)
+
+        *** End custom model post updates for bolt (276)
+
+
+    </c:iterate> 
+
+    <c:iterate select="$topology/spout" var="spout">
+        <c:set select="$spout" name="name"><c:get select="camelCase($spout/@label)" /></c:set>
+        <c:set select="$spout" name="spoutTestJava"><c:get select="$spout/@name" />SpoutTest</c:set>
+        <c:set select="$spout" name="iSpoutJava">I<c:get select="$spout/@name" />Spout</c:set>
+        <c:set select="$spout" name="spoutJava"><c:get select="$spout/@name" />Spout</c:set>
+        <c:set select="$spout" name="spoutLogicJava"><c:get select="$spout/@name" />SpoutLogic</c:set>
+        <c:set select="$spout" name="isComponent">true</c:set>
+        <c:set select="$spout" name="componentKind">spout</c:set>
+
+        *** Begin custom model updates for spout (277)
+
+        *** End custom model updates for spout (277)
+
+
+        <c:iterate select="$spout/emits" var="emits">
+            <c:set select="$emits" name="emitMethod">emitTo<c:get select="uppercaseFirst($emits/@stream)" /></c:set>
+            <c:set select="$emits" name="emitVar"><c:get select="lowercaseFirst($emits/@type)" /></c:set>
+            <c:if test="not($emits/@idType)">
+                <c:set select="$emits" name="idType"><c:get select="$emits/@type" /></c:set>
+            </c:if>
+
+            *** Begin custom model updates for emits (283)
+
+			
+            *** End custom model updates for emits (283)
+
+
+            *** Begin custom model post updates for emits (283)
+
+            *** End custom model post updates for emits (283)
+
+
+        </c:iterate> 
+
+        *** Begin custom model post updates for spout (277)
+
+        *** End custom model post updates for spout (277)
+
+
+    </c:iterate> 
+
+    <c:iterate select="$topology/type" var="type">
+        <c:set select="$type" name="typeJava"><c:get select="$type/@name" /></c:set>
+        <c:set select="$type" name="typeTestJava"><c:get select="$type/@name" />Test</c:set>
+        <c:set select="$type" name="isComponent">false</c:set>
+
+        *** Begin custom model updates for type (278)
+
+		<c:setVariable select=" 0 " var="index" />
+
+        *** End custom model updates for type (278)
+
+
+        <c:iterate select="$type/field" var="field">
+            <c:set select="$field" name="var">_<c:get select="$field/@name" /></c:set>
+            <c:set select="$field" name="getter">get<c:get select="uppercaseFirst($field/@name)" /></c:set>
+            <c:set select="$field" name="setter">set<c:get select="uppercaseFirst($field/@name)" /></c:set>
+
+            *** Begin custom model updates for field (284)
+
+			<c:set select="$field" name="index"><c:get select="$index" /></c:set>
+			<c:setVariable select=" $index + 1 " var="index" />
+
+            *** End custom model updates for field (284)
+
+
+            *** Begin custom model post updates for field (284)
+
+            *** End custom model post updates for field (284)
+
+
+        </c:iterate> 
+
+        *** Begin custom model post updates for type (278)
+
+        *** End custom model post updates for type (278)
+
+
+    </c:iterate> 
+
+    <c:iterate select="$topology/environment" var="environment">
+        <c:set select="$environment" name="properties">dev</c:set>
+        <c:set select="$environment" name="isComponent">false</c:set>
+
+        *** Begin custom model updates for environment (281)
+
+        *** End custom model updates for environment (281)
+
+
+        *** Begin custom model post updates for environment (281)
+
+        *** End custom model post updates for environment (281)
+
+
+    </c:iterate> 
+
+    *** Begin custom model post updates for topology (4)
+
+    *** End custom model post updates for topology (4)
+
+
+</c:iterate> 
+
+*** Begin custom model post updates for root (3)
+
+*** End custom model post updates for root (3)
+
+
+
+*******************************
+
+
+
+*** Begin custom pre-generation actions for root (3)
+
+*** End custom pre-generation actions for root (3)
+
+
+*** Begin custom generation updates for root (3)
+
+*** End custom generation updates for root (3)
+
+
+<c:iterate select="$root/topology" var="topology">
+
+    *** Begin custom pre-generation actions for topology (4)
+
+    *** End custom pre-generation actions for topology (4)
+
+    <ws:project name="{$topology/@allProject}" />
+    <ws:project name="{$topology/@stormProject}" />
+    <ws:folder path="{$topology/@allProject}/src/main/java" />
+    <ws:folder path="{$topology/@allProject}/src/main/resources" />
+    <ws:folder path="{$topology/@allProject}/src/test/java" />
+    <ws:folder path="{$topology/@allProject}/src/test/resources" />
+    <ws:folder path="{$topology/@stormProject}/src/main/java" />
+    <ws:folder path="{$topology/@stormProject}/src/main/resources" />
+    <ws:folder path="{$topology/@stormProject}/src/test/java" />
+    <ws:folder path="{$topology/@stormProject}/src/test/resources" />
+    <ws:file path="{$topology/@allProject}/.classpath" template="templates/topology/allClasspath.jet" replace="false" />
+
+    <ws:file path="{$topology/@allProject}/.project" template="templates/topology/allProject.jet" replace="true" />
+
+    <ws:file path="{$topology/@allProject}/pom.xml" template="templates/topology/allPomXml.jet" replace="false" />
+
+    <ws:file path="{$topology/@stormProject}/src/main/java/{$topology/@exceptionDir}/DataException.java" template="templates/topology/dataExceptionJava.jet" replace="false" />
+
+    <ws:file path="{$topology/@stormProject}/.classpath" template="templates/topology/stormClasspath.jet" replace="false" />
+
+    <ws:file path="{$topology/@stormProject}/.project" template="templates/topology/stormProject.jet" replace="true" />
+
+    <ws:file path="{$topology/@stormProject}/{$topology/@name}Topology" template="templates/topology/topologyGraphviz.jet" replace="true" />
+
+    <ws:file path="{$topology/@stormProject}/gen_graphics.sh" template="templates/topology/genGraphicsSh.jet" replace="true" />
+
+    <ws:file path="{$topology/@stormProject}/maven_run.sh" template="templates/topology/mavenRunSh.jet" replace="true" />
+
+    <ws:file path="{$topology/@stormProject}/pom.xml" template="templates/topology/stormPomXml.jet" replace="false" />
+
+    <ws:file path="{$topology/@stormProject}/topology_run.sh" template="templates/topology/runSh.jet" replace="true" />
+
+    <ws:file path="{$topology/@stormProject}/src/main/java/{$topology/@topologyDir}/{$topology/@topologyJava}.java" template="templates/topology/topologyJava.jet" replace="true" />
+
+    <ws:file path="{$topology/@stormProject}/src/main/java/{$topology/@utilDir}/AlarmClock.java" template="templates/topology/alarmClockJava.jet" replace="true" />
+
+    <ws:file path="{$topology/@stormProject}/src/main/java/{$topology/@utilDir}/{$topology/@iLoggerJava}.java" template="templates/topology/iLoggerJava.jet" replace="true" />
+
+    <ws:file path="{$topology/@stormProject}/src/main/java/{$topology/@utilDir}/{$topology/@loggerJava}.java" template="templates/topology/loggerJava.jet" replace="true" />
+
+    <ws:file path="{$topology/@stormProject}/src/main/java/{$topology/@utilDir}/{$topology/@taskHookJava}.java" template="templates/topology/taskHookJava.jet" replace="true" />
+
+    <ws:file path="{$topology/@stormProject}/src/main/resources/logging.properties" template="templates/topology/loggingProperties.jet" replace="true" />
+
+    <ws:file path="{$topology/@stormProject}/src/test/java/{$topology/@mockDir}/MockedBoltOutputCollector.java" template="templates/topology/mockedboltoutputcollectorJava.jet" replace="true" />
+
+    <ws:file path="{$topology/@stormProject}/src/test/java/{$topology/@mockDir}/MockedLocalCluster.java" template="templates/topology/mockedlocalclusterJava.jet" replace="true" />
+
+    <ws:file path="{$topology/@stormProject}/src/test/java/{$topology/@mockDir}/MockedOutputFieldsDeclarer.java" template="templates/topology/mockedoutputfieldsdeclarerJava.jet" replace="true" />
+
+    <ws:file path="{$topology/@stormProject}/src/test/java/{$topology/@mockDir}/MockedSpoutOutputCollector.java" template="templates/topology/mockedspoutoutputcollectorJava.jet" replace="true" />
+
+    <ws:file path="{$topology/@stormProject}/src/test/java/{$topology/@mockDir}/MockedTuple.java" template="templates/topology/mockedtupleJava.jet" replace="true" />
+
+
+    *** Begin custom generation updates for topology (4)
+
+    *** End custom generation updates for topology (4)
+
+
+    <c:iterate select="$topology/bolt" var="bolt">
+
+        *** Begin custom pre-generation actions for bolt (276)
+
+        *** End custom pre-generation actions for bolt (276)
+
+        <ws:file path="{$topology/@stormProject}/src/test/java/{$topology/@boltDir}/{$bolt/@boltTestJava}.java" template="templates/bolt/boltTestJava.jet" replace="true" />
+
+        <ws:file path="{$topology/@stormProject}/src/main/java/{$topology/@logicDir}/{$bolt/@boltLogicJava}.java" template="templates/bolt/boltLogicJava.jet" replace="true" />
+
+        <ws:file path="{$topology/@stormProject}/src/main/java/{$topology/@boltDir}/{$bolt/@boltJava}.java" template="templates/bolt/boltJava.jet" replace="true" />
+
+        <ws:file path="{$topology/@stormProject}/src/main/java/{$topology/@boltDir}/{$bolt/@iBoltJava}.java" template="templates/bolt/iBoltJava.jet" replace="true" />
+
+
+        *** Begin custom generation updates for bolt (276)
+
+        *** End custom generation updates for bolt (276)
+
+
+        <c:iterate select="$bolt/emits" var="emits">
+
+            *** Begin custom pre-generation actions for emits (279)
+
+            *** End custom pre-generation actions for emits (279)
+
+
+            *** Begin custom generation updates for emits (279)
+
+            *** End custom generation updates for emits (279)
+
+        </c:iterate> 
+
+        <c:iterate select="$bolt/reads" var="reads">
+
+            *** Begin custom pre-generation actions for reads (280)
+
+            *** End custom pre-generation actions for reads (280)
+
+
+            *** Begin custom generation updates for reads (280)
+
+            *** End custom generation updates for reads (280)
+
+
+            <c:iterate select="$reads/fieldRef" var="fieldRef">
+
+                *** Begin custom pre-generation actions for fieldRef (282)
+
+                *** End custom pre-generation actions for fieldRef (282)
+
+
+                *** Begin custom generation updates for fieldRef (282)
+
+                *** End custom generation updates for fieldRef (282)
+
+            </c:iterate> 
+        </c:iterate> 
+    </c:iterate> 
+
+    <c:iterate select="$topology/spout" var="spout">
+
+        *** Begin custom pre-generation actions for spout (277)
+
+        *** End custom pre-generation actions for spout (277)
+
+        <ws:file path="{$topology/@stormProject}/src/test/java/{$topology/@spoutDir}/{$spout/@spoutTestJava}.java" template="templates/spout/spoutTestJava.jet" replace="true" />
+
+        <ws:file path="{$topology/@stormProject}/src/main/java/{$topology/@spoutDir}/{$spout/@iSpoutJava}.java" template="templates/spout/iSpoutJava.jet" replace="true" />
+
+        <ws:file path="{$topology/@stormProject}/src/main/java/{$topology/@spoutDir}/{$spout/@spoutJava}.java" template="templates/spout/spoutJava.jet" replace="true" />
+
+        <ws:file path="{$topology/@stormProject}/src/main/java/{$topology/@logicDir}/{$spout/@spoutLogicJava}.java" template="templates/spout/spoutLogicJava.jet" replace="true" />
+
+
+        *** Begin custom generation updates for spout (277)
+
+        *** End custom generation updates for spout (277)
+
+
+        <c:iterate select="$spout/emits" var="emits">
+
+            *** Begin custom pre-generation actions for emits (283)
+
+            *** End custom pre-generation actions for emits (283)
+
+
+            *** Begin custom generation updates for emits (283)
+
+            *** End custom generation updates for emits (283)
+
+        </c:iterate> 
+    </c:iterate> 
+
+    <c:iterate select="$topology/type" var="type">
+
+        *** Begin custom pre-generation actions for type (278)
+
+        *** End custom pre-generation actions for type (278)
+
+        <ws:file path="{$topology/@stormProject}/src/main/java/{$topology/@beanDir}/{$type/@typeJava}.java" template="templates/type/typeJava.jet" replace="true" />
+
+        <ws:file path="{$topology/@stormProject}/src/test/java/{$topology/@beanDir}/{$type/@typeTestJava}.java" template="templates/type/typeTestJava.jet" replace="true" />
+
+
+        *** Begin custom generation updates for type (278)
+
+        *** End custom generation updates for type (278)
+
+
+        <c:iterate select="$type/field" var="field">
+
+            *** Begin custom pre-generation actions for field (284)
+
+            *** End custom pre-generation actions for field (284)
+
+
+            *** Begin custom generation updates for field (284)
+
+            *** End custom generation updates for field (284)
+
+        </c:iterate> 
+    </c:iterate> 
+
+    <c:iterate select="$topology/environment" var="environment">
+
+        *** Begin custom pre-generation actions for environment (281)
+
+        *** End custom pre-generation actions for environment (281)
+
+        <ws:file path="{$topology/@stormProject}/src/main/resources/{$environment/@name}.properties" template="templates/environment/properties.jet" replace="true" />
+
+
+        *** Begin custom generation updates for environment (281)
+
+        *** End custom generation updates for environment (281)
+
+    </c:iterate> 
+</c:iterate> 
+
+*******************************
+
+<c:if test="isVariableDefined('org.eclipse.jet.resource.project.name')">
+    <ws:file template="templates/dump.jet" path="{$org.eclipse.jet.resource.project.name}/dump.xml"/>
+</c:if>

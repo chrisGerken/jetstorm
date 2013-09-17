@@ -1,0 +1,880 @@
+
+<xform id="2" nextID="285" provider="Gerken Intellectual Properties, LLC" version="1.0.0" xformId="com.gerkenip.storm.xform">
+	<group id="4" name="topology" parentId="3" root="false">
+		<createProject id="5" locationExpr="" oLocation="" oPath="stackoverflow-analytics-all" projectExpr="{$topology/@allProject}" purpose="all">
+		</createProject>
+		<createProject id="100" locationExpr="" oLocation="" oPath="stackoverflow-analytics-storm" projectExpr="{$topology/@stormProject}" purpose="storm">
+		</createProject>
+		<createFolder folderExpr="/src/main/java" id="12" oPath="/src/main/java" projectExpr="{$topology/@allProject}" projectId="5" purpose="/src/main/java">
+		</createFolder>
+		<createFolder folderExpr="/src/main/resources" id="13" oPath="/src/main/resources" projectExpr="{$topology/@allProject}" projectId="5" purpose="/src/main/resources">
+		</createFolder>
+		<createFolder folderExpr="/src/test/java" id="15" oPath="/src/test/java" projectExpr="{$topology/@allProject}" projectId="5" purpose="/src/test/java">
+		</createFolder>
+		<createFolder folderExpr="/src/test/resources" id="16" oPath="/src/test/resources" projectExpr="{$topology/@allProject}" projectId="5" purpose="/src/test/resources">
+		</createFolder>
+		<createFolder folderExpr="/src/main/java" id="239" oPath="/src/main/java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="/src/main/java">
+		</createFolder>
+		<createFolder folderExpr="/src/main/resources" id="248" oPath="/src/main/resources" projectExpr="{$topology/@stormProject}" projectId="100" purpose="/src/main/resources">
+		</createFolder>
+		<createFolder folderExpr="/src/test/java" id="250" oPath="/src/test/java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="/src/test/java">
+		</createFolder>
+		<createFolder folderExpr="/src/test/resources" id="257" oPath="/src/test/resources" projectExpr="{$topology/@stormProject}" projectId="100" purpose="/src/test/resources">
+		</createFolder>
+		<createFile binary="false" changeableName="false" folderExpr="" id="6" nameExpr=".classpath" oPath=".classpath" projectExpr="{$topology/@allProject}" projectId="5" purpose="allClasspath" purposeAsTokenName="false" replace="false" src="com.gerkenip.storm/refimpl/art000002">
+		</createFile>
+		<createFile binary="false" changeableName="false" folderExpr="" id="7" nameExpr=".project" oPath=".project" projectExpr="{$topology/@allProject}" projectId="5" purpose="allProject" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000003">
+		</createFile>
+		<createFile binary="false" changeableName="false" folderExpr="" id="8" nameExpr="pom.xml" oPath="pom.xml" projectExpr="{$topology/@allProject}" projectId="5" purpose="allPomXml" purposeAsTokenName="false" replace="false" src="com.gerkenip.storm/refimpl/art000004">
+		</createFile>
+		<createFile binary="false" changeableName="false" folderExpr="/src/main/java/{$topology/@exceptionDir}" id="37" nameExpr="DataException.java" oPath="src/main/java/com/gerken/sofa/exception/DataException.java" projectExpr="{$topology/@stormProject}" projectId="21" purpose="dataExceptionJava" purposeAsTokenName="false" replace="false" src="com.gerkenip.storm/refimpl/art000022">
+			<javaPkg name="com.gerken.sofa.exception" purpose="exception">
+		</javaPkg>
+			<folderExpr>/src/main/java/{$topology/@exceptionDir}</folderExpr>
+			</createFile>
+		<createFile binary="false" changeableName="false" folderExpr="" id="101" nameExpr=".classpath" oPath=".classpath" projectExpr="{$topology/@stormProject}" projectId="100" purpose="stormClasspath" purposeAsTokenName="false" replace="false" src="com.gerkenip.storm/refimpl/art000054">
+		</createFile>
+		<createFile binary="false" changeableName="false" folderExpr="" id="102" nameExpr=".project" oPath=".project" projectExpr="{$topology/@stormProject}" projectId="100" purpose="stormProject" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000055">
+		</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="" id="109" nameExpr="{$topology/@name}Topology" oPath="StackoverflowAnalyticsTopology" projectExpr="{$topology/@stormProject}" projectId="100" purpose="topologyGraphviz" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000062">
+			<nameExpr>{$topology/@name}Topology</nameExpr>
+			</createFile>
+		<createFile binary="false" changeableName="false" folderExpr="" id="111" nameExpr="gen_graphics.sh" oPath="gen_graphics.sh" projectExpr="{$topology/@stormProject}" projectId="100" purpose="genGraphicsSh" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000064">
+		</createFile>
+		<createFile binary="false" changeableName="false" folderExpr="" id="112" nameExpr="maven_run.sh" oPath="maven_run.sh" projectExpr="{$topology/@stormProject}" projectId="100" purpose="mavenRunSh" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000065">
+		</createFile>
+		<createFile binary="false" changeableName="false" folderExpr="" id="113" nameExpr="pom.xml" oPath="pom.xml" projectExpr="{$topology/@stormProject}" projectId="100" purpose="stormPomXml" purposeAsTokenName="false" replace="false" src="com.gerkenip.storm/refimpl/art000066">
+		</createFile>
+		<createFile binary="false" changeableName="false" folderExpr="" id="114" nameExpr="topology_run.sh" oPath="sofa_run.sh" projectExpr="{$topology/@stormProject}" projectId="100" purpose="runSh" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000067">
+		</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/{$topology/@topologyDir}" id="150" nameExpr="{$topology/@topologyJava}.java" oPath="src/main/java/com/gerken/sofa/topology/StackoverflowAnalyticsTopology.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="topologyJava" purposeAsTokenName="true" replace="true" src="com.gerkenip.storm/refimpl/art000103">
+			<javaPkg name="com.gerken.sofa.topology" purpose="topology">
+		</javaPkg>
+			<folderExpr>/src/main/java/{$topology/@topologyDir}</folderExpr>
+			<nameExpr>{$topology/@topologyJava}.java</nameExpr>
+			</createFile>
+		<createFile binary="false" changeableName="false" folderExpr="/src/main/java/{$topology/@utilDir}" id="152" nameExpr="AlarmClock.java" oPath="src/main/java/com/gerken/sofa/util/AlarmClock.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="alarmClockJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000105">
+			<javaPkg name="com.gerken.sofa.util" purpose="util">
+		</javaPkg>
+			<folderExpr>/src/main/java/{$topology/@utilDir}</folderExpr>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/{$topology/@utilDir}" id="154" nameExpr="{$topology/@iLoggerJava}.java" oPath="src/main/java/com/gerken/sofa/util/IStackoverflowAnalyticsLogger.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="iLoggerJava" purposeAsTokenName="true" replace="true" src="com.gerkenip.storm/refimpl/art000107">
+			<javaPkg name="com.gerken.sofa.util" purpose="util">
+		</javaPkg>
+			<folderExpr>/src/main/java/{$topology/@utilDir}</folderExpr>
+			<nameExpr>{$topology/@iLoggerJava}.java</nameExpr>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/{$topology/@utilDir}" id="159" nameExpr="{$topology/@loggerJava}.java" oPath="src/main/java/com/gerken/sofa/util/StackoverflowAnalyticsLogger.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="loggerJava" purposeAsTokenName="true" replace="true" src="com.gerkenip.storm/refimpl/art000112">
+			<javaPkg name="com.gerken.sofa.util" purpose="util">
+		</javaPkg>
+			<folderExpr>/src/main/java/{$topology/@utilDir}</folderExpr>
+			<nameExpr>{$topology/@loggerJava}.java</nameExpr>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/{$topology/@utilDir}" id="161" nameExpr="{$topology/@taskHookJava}.java" oPath="src/main/java/com/gerken/sofa/util/TaskHook.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="taskHookJava" purposeAsTokenName="true" replace="true" src="com.gerkenip.storm/refimpl/art000114">
+			<javaPkg name="com.gerken.sofa.util" purpose="util">
+		</javaPkg>
+			<folderExpr>/src/main/java/{$topology/@utilDir}</folderExpr>
+			<nameExpr>{$topology/@taskHookJava}.java</nameExpr>
+			</createFile>
+		<createFile binary="false" changeableName="false" folderExpr="/src/main/resources" id="164" nameExpr="logging.properties" oPath="src/main/resources/logging.properties" projectExpr="{$topology/@stormProject}" projectId="100" purpose="loggingProperties" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000117">
+			<javaPkg name="" purpose="">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="false" folderExpr="/src/test/java/{$topology/@mockDir}" id="176" nameExpr="MockedBoltOutputCollector.java" oPath="src/test/java/com/gerken/sofa/mock/MockedBoltOutputCollector.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="mockedboltoutputcollectorJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000129">
+			<javaPkg name="com.gerken.sofa.mock" purpose="mock">
+		</javaPkg>
+			<folderExpr>/src/test/java/{$topology/@mockDir}</folderExpr>
+			</createFile>
+		<createFile binary="false" changeableName="false" folderExpr="/src/test/java/{$topology/@mockDir}" id="177" nameExpr="MockedLocalCluster.java" oPath="src/test/java/com/gerken/sofa/mock/MockedLocalCluster.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="mockedlocalclusterJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000130">
+			<javaPkg name="com.gerken.sofa.mock" purpose="mock">
+		</javaPkg>
+			<folderExpr>/src/test/java/{$topology/@mockDir}</folderExpr>
+			</createFile>
+		<createFile binary="false" changeableName="false" folderExpr="/src/test/java/{$topology/@mockDir}" id="178" nameExpr="MockedOutputFieldsDeclarer.java" oPath="src/test/java/com/gerken/sofa/mock/MockedOutputFieldsDeclarer.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="mockedoutputfieldsdeclarerJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000131">
+			<javaPkg name="com.gerken.sofa.mock" purpose="mock">
+		</javaPkg>
+			<folderExpr>/src/test/java/{$topology/@mockDir}</folderExpr>
+			</createFile>
+		<createFile binary="false" changeableName="false" folderExpr="/src/test/java/{$topology/@mockDir}" id="179" nameExpr="MockedSpoutOutputCollector.java" oPath="src/test/java/com/gerken/sofa/mock/MockedSpoutOutputCollector.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="mockedspoutoutputcollectorJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000132">
+			<javaPkg name="com.gerken.sofa.mock" purpose="mock">
+		</javaPkg>
+			<folderExpr>/src/test/java/{$topology/@mockDir}</folderExpr>
+			</createFile>
+		<createFile binary="false" changeableName="false" folderExpr="/src/test/java/{$topology/@mockDir}" id="180" nameExpr="MockedTuple.java" oPath="src/test/java/com/gerken/sofa/mock/MockedTuple.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="mockedtupleJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000133">
+			<javaPkg name="com.gerken.sofa.mock" purpose="mock">
+		</javaPkg>
+			<folderExpr>/src/test/java/{$topology/@mockDir}</folderExpr>
+			</createFile>
+		<token derived="false" desc="" formula="" name="label">
+			<desc>A multi-token displayable name for the topology</desc>
+			</token>
+		<token derived="true" desc="" formula="{translate(lower-case($topology/@label),&apos; &apos;,&apos;-&apos;)}" name="artifactIdPrefix"/>
+		<token derived="true" desc="Name of the artifact collection to be generated" formula="{camelCase($topology/@label)}" id="" name="name">
+		</token>
+		<token derived="true" desc="Token representing the new generated name for project stackoverflow-analytics-all" formula="{$topology/@artifactIdPrefix}" id="" name="allProject">
+		</token>
+		<token derived="true" desc="Token representing the new generated name for project stackoverflow-analytics-storm" formula="{$topology/@artifactIdPrefix}-storm" id="" name="stormProject">
+		</token>
+		<token derived="true" formula="{$topology/@basePackage}.util" name="utilPkg">
+			<formula>{$topology/@basePackage}.util</formula>
+			</token>
+		<token derived="true" formula="{translate($topology/@utilPkg,&apos;.&apos;,&apos;/&apos;)}" name="utilDir"/>
+		<token derived="true" formula="{$topology/@basePackage}.mock" name="mockPkg">
+			<formula>{$topology/@basePackage}.mock</formula>
+			</token>
+		<token derived="true" formula="{translate($topology/@mockPkg,&apos;.&apos;,&apos;/&apos;)}" name="mockDir"/>
+		<token derived="true" formula="{$topology/@basePackage}.spout" name="spoutPkg">
+			<formula>{$topology/@basePackage}.spout</formula>
+			</token>
+		<token derived="true" formula="{translate($topology/@spoutPkg,&apos;.&apos;,&apos;/&apos;)}" name="spoutDir"/>
+		<token derived="true" formula="{$topology/@basePackage}.topology" name="topologyPkg">
+			<formula>{$topology/@basePackage}.topology</formula>
+			</token>
+		<token derived="true" formula="{translate($topology/@topologyPkg,&apos;.&apos;,&apos;/&apos;)}" name="topologyDir"/>
+		<token derived="true" formula="{$topology/@basePackage}.logic" name="logicPkg">
+			<formula>{$topology/@basePackage}.logic</formula>
+			</token>
+		<token derived="true" formula="{translate($topology/@logicPkg,&apos;.&apos;,&apos;/&apos;)}" name="logicDir"/>
+		<token derived="true" formula="{$topology/@basePackage}.bean" name="beanPkg">
+			<formula>{$topology/@basePackage}.bean</formula>
+			</token>
+		<token derived="true" formula="{translate($topology/@beanPkg,&apos;.&apos;,&apos;/&apos;)}" name="beanDir"/>
+		<token derived="true" formula="{$topology/@basePackage}.bolt" name="boltPkg">
+			<formula>{$topology/@basePackage}.bolt</formula>
+			</token>
+		<token derived="true" formula="{translate($topology/@boltPkg,&apos;.&apos;,&apos;/&apos;)}" name="boltDir"/>
+		<token derived="true" formula="{$topology/@basePackage}.exception" name="exceptionPkg">
+			<formula>{$topology/@basePackage}.exception</formula>
+			</token>
+		<token derived="true" formula="{translate($topology/@exceptionPkg,&apos;.&apos;,&apos;/&apos;)}" name="exceptionDir"/>
+		<token derived="true" desc="variable for StackoverflowAnalyticsTopology" formula="{$topology/@name}Topology" name="topologyJava">
+			<formula>{$topology/@name}Topology</formula>
+			</token>
+		<token derived="true" desc="variable for IStackoverflowAnalyticsLogger" formula="I{$topology/@name}Logger" name="iLoggerJava">
+			<formula>I{$topology/@name}Logger</formula>
+			</token>
+		<token derived="true" desc="variable for StackoverflowAnalyticsLogger" formula="{$topology/@name}Logger" name="loggerJava">
+			<formula>{$topology/@name}Logger</formula>
+			</token>
+		<token derived="true" desc="variable for TaskHook" formula="TaskHook" name="taskHookJava"/>
+		<token derived="false" desc="" formula="" name="mavenGroupId">
+			<desc>The groupId for the maven artifacts to be created</desc>
+			</token>
+		<token derived="false" desc="" formula="" name="basePackage">
+			<desc>The name prefix for all Java packages</desc>
+			</token>
+		<token derived="false" desc="" formula="" name="provider">
+			<desc>The name of the person, prganization or company that owns this transformation tool</desc>
+			</token>
+		</group>
+	<group id="3" name="root" parentId="" root="true">
+		</group>
+	<replacement newString="{$topology/@allProject}" oldString="stackoverflow-analytics-all">
+		</replacement>
+	<replacement newString="{$topology/@dataProject}" oldString="stackoverflow-analytics-data">
+		</replacement>
+	<replacement newString="{$topology/@stormProject}" oldString="stackoverflow-analytics-storm">
+		</replacement>
+	<group id="276" name="bolt" parentId="4">
+		<createFile binary="false" changeableName="true" folderExpr="/src/test/java/{$topology/@boltDir}" id="175" nameExpr="{$bolt/@boltTestJava}.java" oPath="src/test/java/com/gerken/sofa/bolt/UserReaderBoltTest.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="boltTestJava" purposeAsTokenName="true" replace="true" src="com.gerkenip.storm/refimpl/art000128">
+			<javaPkg name="com.gerken.sofa.bolt" purpose="bolt">
+		</javaPkg>
+			<folderExpr>/src/test/java/{$topology/@boltDir}</folderExpr>
+			<nameExpr>{$bolt/@boltTestJava}.java</nameExpr>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/{$topology/@logicDir}" id="147" nameExpr="{$bolt/@boltLogicJava}.java" oPath="src/main/java/com/gerken/sofa/logic/UserReaderBoltLogic.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="boltLogicJava" purposeAsTokenName="true" replace="true" src="com.gerkenip.storm/refimpl/art000100">
+			<javaPkg name="com.gerken.sofa.logic" purpose="logic">
+		</javaPkg>
+			<folderExpr>/src/main/java/{$topology/@logicDir}</folderExpr>
+			<nameExpr>{$bolt/@boltLogicJava}.java</nameExpr>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/{$topology/@boltDir}" id="136" nameExpr="{$bolt/@boltJava}.java" oPath="src/main/java/com/gerken/sofa/bolt/UserReaderBolt.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="boltJava" purposeAsTokenName="true" replace="true" src="com.gerkenip.storm/refimpl/art000089">
+			<javaPkg name="com.gerken.sofa.bolt" purpose="bolt">
+		</javaPkg>
+			<folderExpr>/src/main/java/{$topology/@boltDir}</folderExpr>
+			<nameExpr>{$bolt/@boltJava}.java</nameExpr>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/{$topology/@boltDir}" id="126" nameExpr="{$bolt/@iBoltJava}.java" oPath="src/main/java/com/gerken/sofa/bolt/IUserReaderBolt.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="iBoltJava" purposeAsTokenName="true" replace="true" src="com.gerkenip.storm/refimpl/art000079">
+			<javaPkg name="com.gerken.sofa.bolt" purpose="bolt">
+		</javaPkg>
+			<folderExpr>/src/main/java/{$topology/@boltDir}</folderExpr>
+			<nameExpr>{$bolt/@iBoltJava}.java</nameExpr>
+			</createFile>
+		<token derived="false" desc="" formula="" name="label">
+			<desc>A multi-token, displayable name for the bolt</desc>
+			</token>
+		<token derived="true" desc="" formula="{camelCase($bolt/@label)}" name="name"/>
+		<token derived="true" desc="variable for UserReaderBoltTest" formula="{$bolt/@name}BoltTest" name="boltTestJava">
+			<formula>{$bolt/@boltTestJava}</formula>
+			</token>
+		<token derived="true" desc="variable for UserReaderBoltLogic" formula="{$bolt/@name}BoltLogic" name="boltLogicJava">
+			<formula>{$bolt/@boltLogicJava}</formula>
+			</token>
+		<token derived="true" desc="variable for UserReaderBolt" formula="{$bolt/@name}Bolt" name="boltJava">
+			<formula>{$bolt/@boltJava}</formula>
+			</token>
+		<token derived="true" desc="variable for IUserReaderBolt" formula="I{$bolt/@name}Bolt" name="iBoltJava">
+			<formula>{$bolt/@iBoltJava}</formula>
+			</token>
+		<token derived="true" desc="" formula="true" name="isComponent"/>
+		<token derived="true" desc="" formula="bolt" name="componentKind"/>
+		<token derived="false" desc="" formula="" name="instances">
+			<desc>The number of instances of this bolt to be constructed at runtime</desc>
+			</token>
+		</group>
+	<group id="277" name="spout" parentId="4">
+		<createFile binary="false" changeableName="true" folderExpr="/src/test/java/{$topology/@spoutDir}" id="181" nameExpr="{$spout/@spoutTestJava}.java" oPath="src/test/java/com/gerken/sofa/spout/UserIdReaderSpoutTest.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="spoutTestJava" purposeAsTokenName="true" replace="true" src="com.gerkenip.storm/refimpl/art000134">
+			<javaPkg name="com.gerken.sofa.spout" purpose="spout">
+		</javaPkg>
+			<nameExpr>{$spout/@spoutTestJava}.java</nameExpr>
+			<folderExpr>/src/test/java/{$topology/@spoutDir}</folderExpr>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/{$topology/@spoutDir}" id="148" nameExpr="{$spout/@iSpoutJava}.java" oPath="src/main/java/com/gerken/sofa/spout/IUserIdReaderSpout.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="iSpoutJava" purposeAsTokenName="true" replace="true" src="com.gerkenip.storm/refimpl/art000101">
+			<javaPkg name="com.gerken.sofa.spout" purpose="spout">
+		</javaPkg>
+			<folderExpr>/src/main/java/{$topology/@spoutDir}</folderExpr>
+			<nameExpr>{$spout/@iSpoutJava}.java</nameExpr>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/{$topology/@spoutDir}" id="149" nameExpr="{$spout/@spoutJava}.java" oPath="src/main/java/com/gerken/sofa/spout/UserIdReaderSpout.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="spoutJava" purposeAsTokenName="true" replace="true" src="com.gerkenip.storm/refimpl/art000102">
+			<javaPkg name="com.gerken.sofa.spout" purpose="spout">
+		</javaPkg>
+			<folderExpr>/src/main/java/{$topology/@spoutDir}</folderExpr>
+			<nameExpr>{$spout/@spoutJava}.java</nameExpr>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/{$topology/@logicDir}" id="146" nameExpr="{$spout/@spoutLogicJava}.java" oPath="src/main/java/com/gerken/sofa/logic/UserIdReaderSpoutLogic.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="spoutLogicJava" purposeAsTokenName="true" replace="true" src="com.gerkenip.storm/refimpl/art000099">
+			<javaPkg name="com.gerken.sofa.logic" purpose="logic">
+		</javaPkg>
+			<folderExpr>/src/main/java/{$topology/@logicDir}</folderExpr>
+			<nameExpr>{$spout/@spoutLogicJava}.java</nameExpr>
+			</createFile>
+		<token derived="false" desc="" formula="" name="label">
+			<desc>A multi-token, displayable name for the spout</desc>
+			</token>
+		<token derived="true" desc="" formula="{camelCase($spout/@label)}" name="name"/>
+		<token derived="true" desc="variable for UserIdReaderSpoutTest" formula="{$spout/@name}SpoutTest" name="spoutTestJava">
+			<formula>{$spout/@name}SpoutTest</formula>
+			</token>
+		<token derived="true" desc="variable for IUserIdReaderSpout" formula="I{$spout/@name}Spout" name="iSpoutJava">
+			<formula>I{$spout/@name}Spout</formula>
+			</token>
+		<token derived="true" desc="variable for UserIdReaderSpout" formula="{$spout/@name}Spout" name="spoutJava">
+			<formula>{$spout/@name}Spout</formula>
+			</token>
+		<token derived="true" desc="variable for UserIdReaderSpoutLogic" formula="{$spout/@name}SpoutLogic" name="spoutLogicJava">
+			<formula>{$spout/@name}SpoutLogic</formula>
+			</token>
+		<token derived="true" desc="" formula="true" name="isComponent"/>
+		<token derived="true" desc="" formula="spout" name="componentKind"/>
+		<token derived="false" desc="" formula="" name="instances">
+			<desc>The number of instances of this bolt to be constructed at runtime</desc>
+			</token>
+		</group>
+	<group id="278" name="type" parentId="4">
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/{$topology/@beanDir}" id="36" nameExpr="{$type/@typeJava}.java" oPath="src/main/java/com/gerken/sofa/bean/UserSpec.java" projectExpr="{$topology/@stormProject}" projectId="21" purpose="typeJava" purposeAsTokenName="true" replace="true" src="com.gerkenip.storm/refimpl/art000021">
+			<javaPkg name="com.gerken.sofa.bean" purpose="bean">
+		</javaPkg>
+			<folderExpr>/src/main/java/{$topology/@beanDir}</folderExpr>
+			<nameExpr>{$type/@name}.java</nameExpr>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/test/java/{$topology/@beanDir}" id="49" nameExpr="{$type/@typeTestJava}.java" oPath="src/test/java/com/gerken/sofa/bean/UserSpecTest.java" projectExpr="{$topology/@stormProject}" projectId="21" purpose="typeTestJava" purposeAsTokenName="true" replace="true" src="com.gerkenip.storm/refimpl/art000034">
+			<javaPkg name="com.gerken.sofa.bean" purpose="bean">
+		</javaPkg>
+			<folderExpr>/src/test/java/{$topology/@beanDir}</folderExpr>
+			<nameExpr>{$type/@typeTestJava}.java</nameExpr>
+			</createFile>
+		<token derived="true" desc="variable for UserSpec" formula="{$type/@name}" name="typeJava">
+			<formula>{$type/@name}</formula>
+			</token>
+		<token derived="true" desc="variable for UserSpecTest" formula="{$type/@name}Test" name="typeTestJava">
+			<formula>{$type/@name}Test</formula>
+			</token>
+		<token derived="false" desc="" formula="" name="name">
+			<desc>The capitalized, single-token name of the type</desc>
+			</token>
+		<token derived="true" desc="" formula="false" name="isComponent"/>
+		</group>
+	<group id="279" name="emits" parentId="276">
+		<token derived="false" desc="" formula="" name="stream">
+			<desc>The single-token name of a stream emited by the parent bolt</desc>
+			</token>
+		<token derived="false" desc="" formula="" name="type">
+			<desc>The name of a defined type that describes the shape of the fields on the stream</desc>
+			</token>
+		<desc>Declares a stream to be emitted by the parent bolt</desc>
+		<token derived="true" desc="" formula="emitTo{uppercaseFirst($emits/@stream)}" name="emitMethod"/>
+		<token derived="true" desc="" formula="{lowercaseFirst($emits/@type)}" name="emitVar"/>
+		</group>
+	<group id="280" name="reads" parentId="276">
+		<token derived="false" desc="" formula="" name="stream">
+			<desc>The name of a stream read by the parent polt.</desc>
+			</token>
+		<token derived="false" desc="" formula="" name="grouping">
+			<desc>One of "fields", "shuffle", "global", "all", "local"</desc>
+			</token>
+		<desc>Declares a stream to be read by the parent bolt</desc>
+		<token derived="true" desc="" formula="readFrom{uppercaseFirst($reads/@stream)}" name="execMethod"/>
+		<token derived="true" desc="" formula="{$topology/*/emits[@stream=$reads/@stream]/@type}" name="type"/>
+		<token derived="true" desc="" formula="{lowercaseFirst($reads/@type)}" name="execVar"/>
+		</group>
+	<ignored>
+		<createFolder folderExpr="/src" id="10" oPath="/src" projectExpr="{$topology/@allProject}" projectId="5" purpose="/src">
+		</createFolder>
+		<createFolder folderExpr="/src/main" id="11" oPath="/src/main" projectExpr="{$topology/@allProject}" projectId="5" purpose="/src/main">
+		</createFolder>
+		<createFile binary="true" changeableName="true" folderExpr="/target" id="182" nameExpr="stackoverflow-analytics-storm-1.0.0-SNAPSHOT-jar-with-dependencies.jar" oPath="target/stackoverflow-analytics-storm-1.0.0-SNAPSHOT-jar-with-dependencies.jar" projectExpr="{$topology/@stormProject}" projectId="100" purpose="stackoverflow-analytics-storm-100-snapshot-jar-with-dependenciesJar" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000135">
+		</createFile>
+		<createFile binary="true" changeableName="true" folderExpr="/target" id="183" nameExpr="stackoverflow-analytics-storm-1.0.0-SNAPSHOT.jar" oPath="target/stackoverflow-analytics-storm-1.0.0-SNAPSHOT.jar" projectExpr="{$topology/@stormProject}" projectId="100" purpose="stackoverflow-analytics-storm-100-snapshotJar" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000136">
+		</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/target/maven-archiver" id="234" nameExpr="pom.properties" oPath="target/maven-archiver/pom.properties" projectExpr="{$topology/@stormProject}" projectId="100" purpose="pomProperties" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000187">
+		</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/target/maven-status/maven-compiler-plugin/compile/default-compile" id="235" nameExpr="createdFiles.lst" oPath="target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" projectExpr="{$topology/@stormProject}" projectId="100" purpose="createdfilesLst" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000188">
+		</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/target/maven-status/maven-compiler-plugin/compile/default-compile" id="236" nameExpr="inputFiles.lst" oPath="target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" projectExpr="{$topology/@stormProject}" projectId="100" purpose="inputfilesLst" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000189">
+		</createFile>
+		<createFolder folderExpr="/target" id="17" oPath="/target" projectExpr="{$topology/@allProject}" projectId="5" purpose="/target">
+		</createFolder>
+		<createFolder folderExpr="/target/archive-tmp" id="18" oPath="/target/archive-tmp" projectExpr="{$topology/@allProject}" projectId="5" purpose="/target/archive-tmp">
+		</createFolder>
+		<createFolder folderExpr="/target/classes" id="19" oPath="/target/classes" projectExpr="{$topology/@allProject}" projectId="5" purpose="/target/classes">
+		</createFolder>
+		<createFolder folderExpr="/target/test-classes" id="20" oPath="/target/test-classes" projectExpr="{$topology/@allProject}" projectId="5" purpose="/target/test-classes">
+		</createFolder>
+		<createFolder folderExpr="/src" id="68" oPath="/src" projectExpr="{$topology/@dataProject}" projectId="21" purpose="/src">
+		</createFolder>
+		<createFolder folderExpr="/src/main" id="69" oPath="/src/main" projectExpr="{$topology/@dataProject}" projectId="21" purpose="/src/main">
+		</createFolder>
+		<createFolder folderExpr="/src/main/java/com" id="71" oPath="/src/main/java/com" projectExpr="{$topology/@dataProject}" projectId="21" purpose="/src/main/java/com">
+		</createFolder>
+		<createFolder folderExpr="/src/main/java/com/gerken" id="72" oPath="/src/main/java/com/gerken" projectExpr="{$topology/@dataProject}" projectId="21" purpose="/src/main/java/com/gerken">
+		</createFolder>
+		<createFolder folderExpr="/src/main/java/com/gerken/sofa" id="73" oPath="/src/main/java/com/gerken/sofa" projectExpr="{$topology/@dataProject}" projectId="21" purpose="/src/main/java/com/gerken/sofa">
+		</createFolder>
+		<createFolder folderExpr="/src/main/java/com/gerken/sofa/bean" id="74" oPath="/src/main/java/com/gerken/sofa/bean" projectExpr="{$topology/@dataProject}" projectId="21" purpose="/src/main/java/com/gerken/sofa/bean">
+		</createFolder>
+		<createFolder folderExpr="/src/main/java/com/gerken/sofa/exception" id="75" oPath="/src/main/java/com/gerken/sofa/exception" projectExpr="{$topology/@dataProject}" projectId="21" purpose="/src/main/java/com/gerken/sofa/exception">
+		</createFolder>
+		<createFile binary="false" changeableName="true" folderExpr="/src/test/java/com/gerken/sofa/bolt" id="166" nameExpr="NewQuestionParserBoltTest.java" oPath="src/test/java/com/gerken/sofa/bolt/NewQuestionParserBoltTest.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="newquestionparserbolttestJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000119">
+			<javaPkg name="com.gerken.sofa.bolt" purpose="boltSrcTestJavaStorm">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/test/java/com/gerken/sofa/bolt" id="167" nameExpr="NewQuestionReaderBoltTest.java" oPath="src/test/java/com/gerken/sofa/bolt/NewQuestionReaderBoltTest.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="newquestionreaderbolttestJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000120">
+			<javaPkg name="com.gerken.sofa.bolt" purpose="boltSrcTestJavaStorm">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/test/java/com/gerken/sofa/bolt" id="168" nameExpr="OpRepAnalyticsBoltTest.java" oPath="src/test/java/com/gerken/sofa/bolt/OpRepAnalyticsBoltTest.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="oprepanalyticsbolttestJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000121">
+			<javaPkg name="com.gerken.sofa.bolt" purpose="boltSrcTestJavaStorm">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/test/java/com/gerken/sofa/bolt" id="169" nameExpr="OpRepPredictorBoltTest.java" oPath="src/test/java/com/gerken/sofa/bolt/OpRepPredictorBoltTest.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="opreppredictorbolttestJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000122">
+			<javaPkg name="com.gerken.sofa.bolt" purpose="boltSrcTestJavaStorm">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/test/java/com/gerken/sofa/bolt" id="170" nameExpr="QuestionParserBoltTest.java" oPath="src/test/java/com/gerken/sofa/bolt/QuestionParserBoltTest.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="questionparserbolttestJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000123">
+			<javaPkg name="com.gerken.sofa.bolt" purpose="boltSrcTestJavaStorm">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/test/java/com/gerken/sofa/bolt" id="171" nameExpr="QuestionReaderBoltTest.java" oPath="src/test/java/com/gerken/sofa/bolt/QuestionReaderBoltTest.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="questionreaderbolttestJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000124">
+			<javaPkg name="com.gerken.sofa.bolt" purpose="boltSrcTestJavaStorm">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/test/java/com/gerken/sofa/bolt" id="172" nameExpr="ReputationPredictorBoltTest.java" oPath="src/test/java/com/gerken/sofa/bolt/ReputationPredictorBoltTest.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="reputationpredictorbolttestJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000125">
+			<javaPkg name="com.gerken.sofa.bolt" purpose="boltSrcTestJavaStorm">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/test/java/com/gerken/sofa/bolt" id="173" nameExpr="TermPredictorBoltTest.java" oPath="src/test/java/com/gerken/sofa/bolt/TermPredictorBoltTest.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="termpredictorbolttestJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000126">
+			<javaPkg name="com.gerken.sofa.bolt" purpose="boltSrcTestJavaStorm">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/test/java/com/gerken/sofa/bolt" id="174" nameExpr="TermRepStdDevBoltTest.java" oPath="src/test/java/com/gerken/sofa/bolt/TermRepStdDevBoltTest.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="termrepstddevbolttestJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000127">
+			<javaPkg name="com.gerken.sofa.bolt" purpose="boltSrcTestJavaStorm">
+		</javaPkg>
+			</createFile>
+		<createFolder folderExpr="/target" id="84" oPath="/target" projectExpr="{$topology/@dataProject}" projectId="21" purpose="/target">
+		</createFolder>
+		<createFolder folderExpr="/target/archive-tmp" id="85" oPath="/target/archive-tmp" projectExpr="{$topology/@dataProject}" projectId="21" purpose="/target/archive-tmp">
+		</createFolder>
+		<createFolder folderExpr="/target/classes" id="86" oPath="/target/classes" projectExpr="{$topology/@dataProject}" projectId="21" purpose="/target/classes">
+		</createFolder>
+		<createFolder folderExpr="/target/classes/com" id="87" oPath="/target/classes/com" projectExpr="{$topology/@dataProject}" projectId="21" purpose="/target/classes/com">
+		</createFolder>
+		<createFolder folderExpr="/target/classes/com/gerken" id="88" oPath="/target/classes/com/gerken" projectExpr="{$topology/@dataProject}" projectId="21" purpose="/target/classes/com/gerken">
+		</createFolder>
+		<createFolder folderExpr="/target/classes/com/gerken/sofa" id="89" oPath="/target/classes/com/gerken/sofa" projectExpr="{$topology/@dataProject}" projectId="21" purpose="/target/classes/com/gerken/sofa">
+		</createFolder>
+		<createFolder folderExpr="/target/classes/com/gerken/sofa/bean" id="90" oPath="/target/classes/com/gerken/sofa/bean" projectExpr="{$topology/@dataProject}" projectId="21" purpose="/target/classes/com/gerken/sofa/bean">
+		</createFolder>
+		<createFolder folderExpr="/target/classes/com/gerken/sofa/exception" id="91" oPath="/target/classes/com/gerken/sofa/exception" projectExpr="{$topology/@dataProject}" projectId="21" purpose="/target/classes/com/gerken/sofa/exception">
+		</createFolder>
+		<createFolder folderExpr="/target/generated-sources" id="92" oPath="/target/generated-sources" projectExpr="{$topology/@dataProject}" projectId="21" purpose="/target/generated-sources">
+		</createFolder>
+		<createFolder folderExpr="/target/generated-sources/annotations" id="93" oPath="/target/generated-sources/annotations" projectExpr="{$topology/@dataProject}" projectId="21" purpose="/target/generated-sources/annotations">
+		</createFolder>
+		<createFolder folderExpr="/target/maven-archiver" id="94" oPath="/target/maven-archiver" projectExpr="{$topology/@dataProject}" projectId="21" purpose="/target/maven-archiver">
+		</createFolder>
+		<createFolder folderExpr="/target/maven-status" id="95" oPath="/target/maven-status" projectExpr="{$topology/@dataProject}" projectId="21" purpose="/target/maven-status">
+		</createFolder>
+		<createFolder folderExpr="/target/maven-status/maven-compiler-plugin" id="96" oPath="/target/maven-status/maven-compiler-plugin" projectExpr="{$topology/@dataProject}" projectId="21" purpose="/target/maven-status/maven-compiler-plugin">
+		</createFolder>
+		<createFolder folderExpr="/target/maven-status/maven-compiler-plugin/compile" id="97" oPath="/target/maven-status/maven-compiler-plugin/compile" projectExpr="{$topology/@dataProject}" projectId="21" purpose="/target/maven-status/maven-compiler-plugin/compile">
+		</createFolder>
+		<createFolder folderExpr="/target/maven-status/maven-compiler-plugin/compile/default-compile" id="98" oPath="/target/maven-status/maven-compiler-plugin/compile/default-compile" projectExpr="{$topology/@dataProject}" projectId="21" purpose="/target/maven-status/maven-compiler-plugin/compile/default-compile">
+		</createFolder>
+		<createFolder folderExpr="/target/test-classes" id="99" oPath="/target/test-classes" projectExpr="{$topology/@dataProject}" projectId="21" purpose="/target/test-classes">
+		</createFolder>
+		<createFolder folderExpr="/src" id="237" oPath="/src" projectExpr="{$topology/@stormProject}" projectId="100" purpose="/src">
+		</createFolder>
+		<createFolder folderExpr="/src/main" id="238" oPath="/src/main" projectExpr="{$topology/@stormProject}" projectId="100" purpose="/src/main">
+		</createFolder>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/com/gerken/sofa/util" id="160" nameExpr="StdDevCalc.java" oPath="src/main/java/com/gerken/sofa/util/StdDevCalc.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="stddevcalcJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000113">
+			<javaPkg name="com.gerken.sofa.util" purpose="utilSrcMainJavaStorm">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/com/gerken/sofa/util" id="162" nameExpr="TermPredictor.java" oPath="src/main/java/com/gerken/sofa/util/TermPredictor.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="termpredictorJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000115">
+			<javaPkg name="com.gerken.sofa.util" purpose="utilSrcMainJavaStorm">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/resources" id="165" nameExpr="prod.properties" oPath="src/main/resources/prod.properties" projectExpr="{$topology/@stormProject}" projectId="100" purpose="prodProperties" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000118">
+			<javaPkg name="" purpose="srcMainResourcesStorm">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/com/gerken/sofa/util" id="155" nameExpr="OpRepPredictor.java" oPath="src/main/java/com/gerken/sofa/util/OpRepPredictor.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="opreppredictorJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000108">
+			<javaPkg name="com.gerken.sofa.util" purpose="utilSrcMainJavaStorm">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/com/gerken/sofa/util" id="156" nameExpr="Point.java" oPath="src/main/java/com/gerken/sofa/util/Point.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="pointJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000109">
+			<javaPkg name="com.gerken.sofa.util" purpose="utilSrcMainJavaStorm">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/com/gerken/sofa/util" id="157" nameExpr="PredictionAggregator.java" oPath="src/main/java/com/gerken/sofa/util/PredictionAggregator.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="predictionaggregatorJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000110">
+			<javaPkg name="com.gerken.sofa.util" purpose="utilSrcMainJavaStorm">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/com/gerken/sofa/util" id="158" nameExpr="RepRegressionCalc.java" oPath="src/main/java/com/gerken/sofa/util/RepRegressionCalc.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="repregressioncalcJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000111">
+			<javaPkg name="com.gerken.sofa.util" purpose="utilSrcMainJavaStorm">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/com/gerken/sofa/logic" id="137" nameExpr="NewQuestionParserBoltLogic.java" oPath="src/main/java/com/gerken/sofa/logic/NewQuestionParserBoltLogic.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="newquestionparserboltlogicJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000090">
+			<javaPkg name="com.gerken.sofa.logic" purpose="logicSrcMainJavaStorm">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/com/gerken/sofa/logic" id="138" nameExpr="NewQuestionReaderBoltLogic.java" oPath="src/main/java/com/gerken/sofa/logic/NewQuestionReaderBoltLogic.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="newquestionreaderboltlogicJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000091">
+			<javaPkg name="com.gerken.sofa.logic" purpose="logicSrcMainJavaStorm">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/com/gerken/sofa/logic" id="139" nameExpr="OpRepAnalyticsBoltLogic.java" oPath="src/main/java/com/gerken/sofa/logic/OpRepAnalyticsBoltLogic.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="oprepanalyticsboltlogicJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000092">
+			<javaPkg name="com.gerken.sofa.logic" purpose="logicSrcMainJavaStorm">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/com/gerken/sofa/logic" id="140" nameExpr="OpRepPredictorBoltLogic.java" oPath="src/main/java/com/gerken/sofa/logic/OpRepPredictorBoltLogic.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="opreppredictorboltlogicJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000093">
+			<javaPkg name="com.gerken.sofa.logic" purpose="logicSrcMainJavaStorm">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/com/gerken/sofa/logic" id="141" nameExpr="QuestionParserBoltLogic.java" oPath="src/main/java/com/gerken/sofa/logic/QuestionParserBoltLogic.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="questionparserboltlogicJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000094">
+			<javaPkg name="com.gerken.sofa.logic" purpose="logicSrcMainJavaStorm">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/com/gerken/sofa/logic" id="142" nameExpr="QuestionReaderBoltLogic.java" oPath="src/main/java/com/gerken/sofa/logic/QuestionReaderBoltLogic.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="questionreaderboltlogicJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000095">
+			<javaPkg name="com.gerken.sofa.logic" purpose="logicSrcMainJavaStorm">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/com/gerken/sofa/logic" id="143" nameExpr="ReputationPredictorBoltLogic.java" oPath="src/main/java/com/gerken/sofa/logic/ReputationPredictorBoltLogic.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="reputationpredictorboltlogicJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000096">
+			<javaPkg name="com.gerken.sofa.logic" purpose="logicSrcMainJavaStorm">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/com/gerken/sofa/logic" id="144" nameExpr="TermPredictorBoltLogic.java" oPath="src/main/java/com/gerken/sofa/logic/TermPredictorBoltLogic.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="termpredictorboltlogicJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000097">
+			<javaPkg name="com.gerken.sofa.logic" purpose="logicSrcMainJavaStorm">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/com/gerken/sofa/logic" id="145" nameExpr="TermRepStdDevBoltLogic.java" oPath="src/main/java/com/gerken/sofa/logic/TermRepStdDevBoltLogic.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="termrepstddevboltlogicJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000098">
+			<javaPkg name="com.gerken.sofa.logic" purpose="logicSrcMainJavaStorm">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/com/gerken/sofa/util" id="153" nameExpr="FormatUtil.java" oPath="src/main/java/com/gerken/sofa/util/FormatUtil.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="formatutilJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000106">
+			<javaPkg name="com.gerken.sofa.util" purpose="utilSrcMainJavaStorm">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/com/gerken/sofa/bolt" id="127" nameExpr="NewQuestionParserBolt.java" oPath="src/main/java/com/gerken/sofa/bolt/NewQuestionParserBolt.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="newquestionparserboltJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000080">
+			<javaPkg name="com.gerken.sofa.bolt" purpose="boltSrcMainJavaStorm">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/com/gerken/sofa/bolt" id="128" nameExpr="NewQuestionReaderBolt.java" oPath="src/main/java/com/gerken/sofa/bolt/NewQuestionReaderBolt.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="newquestionreaderboltJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000081">
+			<javaPkg name="com.gerken.sofa.bolt" purpose="boltSrcMainJavaStorm">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/com/gerken/sofa/bolt" id="129" nameExpr="OpRepAnalyticsBolt.java" oPath="src/main/java/com/gerken/sofa/bolt/OpRepAnalyticsBolt.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="oprepanalyticsboltJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000082">
+			<javaPkg name="com.gerken.sofa.bolt" purpose="boltSrcMainJavaStorm">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/com/gerken/sofa/bolt" id="130" nameExpr="OpRepPredictorBolt.java" oPath="src/main/java/com/gerken/sofa/bolt/OpRepPredictorBolt.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="opreppredictorboltJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000083">
+			<javaPkg name="com.gerken.sofa.bolt" purpose="boltSrcMainJavaStorm">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/com/gerken/sofa/bolt" id="131" nameExpr="QuestionParserBolt.java" oPath="src/main/java/com/gerken/sofa/bolt/QuestionParserBolt.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="questionparserboltJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000084">
+			<javaPkg name="com.gerken.sofa.bolt" purpose="boltSrcMainJavaStorm">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/com/gerken/sofa/bolt" id="132" nameExpr="QuestionReaderBolt.java" oPath="src/main/java/com/gerken/sofa/bolt/QuestionReaderBolt.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="questionreaderboltJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000085">
+			<javaPkg name="com.gerken.sofa.bolt" purpose="boltSrcMainJavaStorm">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/com/gerken/sofa/bolt" id="133" nameExpr="ReputationPredictorBolt.java" oPath="src/main/java/com/gerken/sofa/bolt/ReputationPredictorBolt.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="reputationpredictorboltJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000086">
+			<javaPkg name="com.gerken.sofa.bolt" purpose="boltSrcMainJavaStorm">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/com/gerken/sofa/bolt" id="134" nameExpr="TermPredictorBolt.java" oPath="src/main/java/com/gerken/sofa/bolt/TermPredictorBolt.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="termpredictorboltJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000087">
+			<javaPkg name="com.gerken.sofa.bolt" purpose="boltSrcMainJavaStorm">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/com/gerken/sofa/bolt" id="135" nameExpr="TermRepStdDevBolt.java" oPath="src/main/java/com/gerken/sofa/bolt/TermRepStdDevBolt.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="termrepstddevboltJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000088">
+			<javaPkg name="com.gerken.sofa.bolt" purpose="boltSrcMainJavaStorm">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/com/gerken/sofa/bolt" id="116" nameExpr="IAnswerReaderBolt.java" oPath="src/main/java/com/gerken/sofa/bolt/IAnswerReaderBolt.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="ianswerreaderboltJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000069">
+			<javaPkg name="com.gerken.sofa.bolt" purpose="boltSrcMainJavaStorm">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/com/gerken/sofa/bolt" id="117" nameExpr="INewQuestionParserBolt.java" oPath="src/main/java/com/gerken/sofa/bolt/INewQuestionParserBolt.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="inewquestionparserboltJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000070">
+			<javaPkg name="com.gerken.sofa.bolt" purpose="boltSrcMainJavaStorm">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/com/gerken/sofa/bolt" id="118" nameExpr="INewQuestionReaderBolt.java" oPath="src/main/java/com/gerken/sofa/bolt/INewQuestionReaderBolt.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="inewquestionreaderboltJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000071">
+			<javaPkg name="com.gerken.sofa.bolt" purpose="boltSrcMainJavaStorm">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/com/gerken/sofa/bolt" id="119" nameExpr="IOpRepAnalyticsBolt.java" oPath="src/main/java/com/gerken/sofa/bolt/IOpRepAnalyticsBolt.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="ioprepanalyticsboltJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000072">
+			<javaPkg name="com.gerken.sofa.bolt" purpose="boltSrcMainJavaStorm">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/com/gerken/sofa/bolt" id="120" nameExpr="IOpRepPredictorBolt.java" oPath="src/main/java/com/gerken/sofa/bolt/IOpRepPredictorBolt.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="iopreppredictorboltJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000073">
+			<javaPkg name="com.gerken.sofa.bolt" purpose="boltSrcMainJavaStorm">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/com/gerken/sofa/bolt" id="121" nameExpr="IQuestionParserBolt.java" oPath="src/main/java/com/gerken/sofa/bolt/IQuestionParserBolt.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="iquestionparserboltJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000074">
+			<javaPkg name="com.gerken.sofa.bolt" purpose="boltSrcMainJavaStorm">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/com/gerken/sofa/bolt" id="122" nameExpr="IQuestionReaderBolt.java" oPath="src/main/java/com/gerken/sofa/bolt/IQuestionReaderBolt.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="iquestionreaderboltJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000075">
+			<javaPkg name="com.gerken.sofa.bolt" purpose="boltSrcMainJavaStorm">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/com/gerken/sofa/bolt" id="123" nameExpr="IReputationPredictorBolt.java" oPath="src/main/java/com/gerken/sofa/bolt/IReputationPredictorBolt.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="ireputationpredictorboltJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000076">
+			<javaPkg name="com.gerken.sofa.bolt" purpose="boltSrcMainJavaStorm">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/com/gerken/sofa/bolt" id="124" nameExpr="ITermPredictorBolt.java" oPath="src/main/java/com/gerken/sofa/bolt/ITermPredictorBolt.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="itermpredictorboltJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000077">
+			<javaPkg name="com.gerken.sofa.bolt" purpose="boltSrcMainJavaStorm">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/com/gerken/sofa/bolt" id="125" nameExpr="ITermRepStdDevBolt.java" oPath="src/main/java/com/gerken/sofa/bolt/ITermRepStdDevBolt.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="itermrepstddevboltJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000078">
+			<javaPkg name="com.gerken.sofa.bolt" purpose="boltSrcMainJavaStorm">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="" id="115" nameExpr="tryme.jpage" oPath="tryme.jpage" projectExpr="{$topology/@stormProject}" projectId="100" purpose="trymeJpage" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000068">
+		</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="" id="110" nameExpr="StackoverflowAnalyticsTopology.png" oPath="StackoverflowAnalyticsTopology.png" projectExpr="{$topology/@stormProject}" projectId="100" purpose="stackoverflowanalyticstopologyPng" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000063">
+		</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="" id="103" nameExpr="StackoverflowAnalytics.log.0" oPath="StackoverflowAnalytics.log.0" projectExpr="{$topology/@stormProject}" projectId="100" purpose="stackoverflowanalyticsLog0" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000056">
+		</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="" id="104" nameExpr="StackoverflowAnalytics.log.0.1" oPath="StackoverflowAnalytics.log.0.1" projectExpr="{$topology/@stormProject}" projectId="100" purpose="stackoverflowanalyticsLog01" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000057">
+		</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="" id="105" nameExpr="StackoverflowAnalytics.log.1" oPath="StackoverflowAnalytics.log.1" projectExpr="{$topology/@stormProject}" projectId="100" purpose="stackoverflowanalyticsLog1" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000058">
+		</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="" id="106" nameExpr="StackoverflowAnalytics.log.2" oPath="StackoverflowAnalytics.log.2" projectExpr="{$topology/@stormProject}" projectId="100" purpose="stackoverflowanalyticsLog2" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000059">
+		</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="" id="107" nameExpr="StackoverflowAnalytics.log.3" oPath="StackoverflowAnalytics.log.3" projectExpr="{$topology/@stormProject}" projectId="100" purpose="stackoverflowanalyticsLog3" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000060">
+		</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="" id="108" nameExpr="StackoverflowAnalytics.log.4" oPath="StackoverflowAnalytics.log.4" projectExpr="{$topology/@stormProject}" projectId="100" purpose="stackoverflowanalyticsLog4" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000061">
+		</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/test/java/com/gerken/sofa/bean" id="38" nameExpr="AnswerSpecTest.java" oPath="src/test/java/com/gerken/sofa/bean/AnswerSpecTest.java" projectExpr="{$topology/@dataProject}" projectId="21" purpose="answerspectestJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000023">
+			<javaPkg name="com.gerken.sofa.bean" purpose="beanSrcTestJavaData">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/test/java/com/gerken/sofa/bean" id="39" nameExpr="EarnedTagInfoTest.java" oPath="src/test/java/com/gerken/sofa/bean/EarnedTagInfoTest.java" projectExpr="{$topology/@dataProject}" projectId="21" purpose="earnedtaginfotestJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000024">
+			<javaPkg name="com.gerken.sofa.bean" purpose="beanSrcTestJavaData">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/test/java/com/gerken/sofa/bean" id="40" nameExpr="MeaningfulTermTest.java" oPath="src/test/java/com/gerken/sofa/bean/MeaningfulTermTest.java" projectExpr="{$topology/@dataProject}" projectId="21" purpose="meaningfultermtestJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000025">
+			<javaPkg name="com.gerken.sofa.bean" purpose="beanSrcTestJavaData">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/test/java/com/gerken/sofa/bean" id="41" nameExpr="NewQuestionOpInfoTest.java" oPath="src/test/java/com/gerken/sofa/bean/NewQuestionOpInfoTest.java" projectExpr="{$topology/@dataProject}" projectId="21" purpose="newquestionopinfotestJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000026">
+			<javaPkg name="com.gerken.sofa.bean" purpose="beanSrcTestJavaData">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/test/java/com/gerken/sofa/bean" id="42" nameExpr="NewQuestionTermTest.java" oPath="src/test/java/com/gerken/sofa/bean/NewQuestionTermTest.java" projectExpr="{$topology/@dataProject}" projectId="21" purpose="newquestiontermtestJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000027">
+			<javaPkg name="com.gerken.sofa.bean" purpose="beanSrcTestJavaData">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/test/java/com/gerken/sofa/bean" id="43" nameExpr="NewQuestionTest.java" oPath="src/test/java/com/gerken/sofa/bean/NewQuestionTest.java" projectExpr="{$topology/@dataProject}" projectId="21" purpose="newquestiontestJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000028">
+			<javaPkg name="com.gerken.sofa.bean" purpose="beanSrcTestJavaData">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/test/java/com/gerken/sofa/bean" id="44" nameExpr="OpRepBestFitTest.java" oPath="src/test/java/com/gerken/sofa/bean/OpRepBestFitTest.java" projectExpr="{$topology/@dataProject}" projectId="21" purpose="oprepbestfittestJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000029">
+			<javaPkg name="com.gerken.sofa.bean" purpose="beanSrcTestJavaData">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/test/java/com/gerken/sofa/bean" id="45" nameExpr="QuestionSpecTest.java" oPath="src/test/java/com/gerken/sofa/bean/QuestionSpecTest.java" projectExpr="{$topology/@dataProject}" projectId="21" purpose="questionspectestJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000030">
+			<javaPkg name="com.gerken.sofa.bean" purpose="beanSrcTestJavaData">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/test/java/com/gerken/sofa/bean" id="46" nameExpr="RepStatTest.java" oPath="src/test/java/com/gerken/sofa/bean/RepStatTest.java" projectExpr="{$topology/@dataProject}" projectId="21" purpose="repstattestJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000031">
+			<javaPkg name="com.gerken.sofa.bean" purpose="beanSrcTestJavaData">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/test/java/com/gerken/sofa/bean" id="47" nameExpr="ReputationPredictionTest.java" oPath="src/test/java/com/gerken/sofa/bean/ReputationPredictionTest.java" projectExpr="{$topology/@dataProject}" projectId="21" purpose="reputationpredictiontestJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000032">
+			<javaPkg name="com.gerken.sofa.bean" purpose="beanSrcTestJavaData">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/test/java/com/gerken/sofa/bean" id="48" nameExpr="TermStatTest.java" oPath="src/test/java/com/gerken/sofa/bean/TermStatTest.java" projectExpr="{$topology/@dataProject}" projectId="21" purpose="termstattestJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000033">
+			<javaPkg name="com.gerken.sofa.bean" purpose="beanSrcTestJavaData">
+		</javaPkg>
+			</createFile>
+		<createFile binary="true" changeableName="true" folderExpr="/target" id="50" nameExpr="stackoverflow-analytics-data-1.0.0-SNAPSHOT-jar-with-dependencies.jar" oPath="target/stackoverflow-analytics-data-1.0.0-SNAPSHOT-jar-with-dependencies.jar" projectExpr="{$topology/@dataProject}" projectId="21" purpose="stackoverflow-analytics-data-100-snapshot-jar-with-dependenciesJar" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000035">
+		</createFile>
+		<createFile binary="true" changeableName="true" folderExpr="/target" id="51" nameExpr="stackoverflow-analytics-data-1.0.0-SNAPSHOT.jar" oPath="target/stackoverflow-analytics-data-1.0.0-SNAPSHOT.jar" projectExpr="{$topology/@dataProject}" projectId="21" purpose="stackoverflow-analytics-data-100-snapshotJar" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000036">
+		</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/target/maven-archiver" id="65" nameExpr="pom.properties" oPath="target/maven-archiver/pom.properties" projectExpr="{$topology/@dataProject}" projectId="21" purpose="pomProperties" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000050">
+		</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/target/maven-status/maven-compiler-plugin/compile/default-compile" id="66" nameExpr="createdFiles.lst" oPath="target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" projectExpr="{$topology/@dataProject}" projectId="21" purpose="createdfilesLst" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000051">
+		</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/target/maven-status/maven-compiler-plugin/compile/default-compile" id="67" nameExpr="inputFiles.lst" oPath="target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" projectExpr="{$topology/@dataProject}" projectId="21" purpose="inputfilesLst" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000052">
+		</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/com/gerken/sofa/bean" id="25" nameExpr="AnswerSpec.java" oPath="src/main/java/com/gerken/sofa/bean/AnswerSpec.java" projectExpr="{$topology/@dataProject}" projectId="21" purpose="answerspecJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000010">
+			<javaPkg name="com.gerken.sofa.bean" purpose="beanSrcMainJavaData">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/com/gerken/sofa/bean" id="26" nameExpr="EarnedTagInfo.java" oPath="src/main/java/com/gerken/sofa/bean/EarnedTagInfo.java" projectExpr="{$topology/@dataProject}" projectId="21" purpose="earnedtaginfoJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000011">
+			<javaPkg name="com.gerken.sofa.bean" purpose="beanSrcMainJavaData">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/com/gerken/sofa/bean" id="27" nameExpr="MeaningfulTerm.java" oPath="src/main/java/com/gerken/sofa/bean/MeaningfulTerm.java" projectExpr="{$topology/@dataProject}" projectId="21" purpose="meaningfultermJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000012">
+			<javaPkg name="com.gerken.sofa.bean" purpose="beanSrcMainJavaData">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/com/gerken/sofa/bean" id="28" nameExpr="NewQuestion.java" oPath="src/main/java/com/gerken/sofa/bean/NewQuestion.java" projectExpr="{$topology/@dataProject}" projectId="21" purpose="newquestionJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000013">
+			<javaPkg name="com.gerken.sofa.bean" purpose="beanSrcMainJavaData">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/com/gerken/sofa/bean" id="29" nameExpr="NewQuestionOpInfo.java" oPath="src/main/java/com/gerken/sofa/bean/NewQuestionOpInfo.java" projectExpr="{$topology/@dataProject}" projectId="21" purpose="newquestionopinfoJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000014">
+			<javaPkg name="com.gerken.sofa.bean" purpose="beanSrcMainJavaData">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/com/gerken/sofa/bean" id="30" nameExpr="NewQuestionTerm.java" oPath="src/main/java/com/gerken/sofa/bean/NewQuestionTerm.java" projectExpr="{$topology/@dataProject}" projectId="21" purpose="newquestiontermJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000015">
+			<javaPkg name="com.gerken.sofa.bean" purpose="beanSrcMainJavaData">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/com/gerken/sofa/bean" id="31" nameExpr="OpRepBestFit.java" oPath="src/main/java/com/gerken/sofa/bean/OpRepBestFit.java" projectExpr="{$topology/@dataProject}" projectId="21" purpose="oprepbestfitJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000016">
+			<javaPkg name="com.gerken.sofa.bean" purpose="beanSrcMainJavaData">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/com/gerken/sofa/bean" id="32" nameExpr="QuestionSpec.java" oPath="src/main/java/com/gerken/sofa/bean/QuestionSpec.java" projectExpr="{$topology/@dataProject}" projectId="21" purpose="questionspecJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000017">
+			<javaPkg name="com.gerken.sofa.bean" purpose="beanSrcMainJavaData">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/com/gerken/sofa/bean" id="33" nameExpr="RepStat.java" oPath="src/main/java/com/gerken/sofa/bean/RepStat.java" projectExpr="{$topology/@dataProject}" projectId="21" purpose="repstatJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000018">
+			<javaPkg name="com.gerken.sofa.bean" purpose="beanSrcMainJavaData">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/com/gerken/sofa/bean" id="34" nameExpr="ReputationPrediction.java" oPath="src/main/java/com/gerken/sofa/bean/ReputationPrediction.java" projectExpr="{$topology/@dataProject}" projectId="21" purpose="reputationpredictionJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000019">
+			<javaPkg name="com.gerken.sofa.bean" purpose="beanSrcMainJavaData">
+		</javaPkg>
+			</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/com/gerken/sofa/bean" id="35" nameExpr="TermStat.java" oPath="src/main/java/com/gerken/sofa/bean/TermStat.java" projectExpr="{$topology/@dataProject}" projectId="21" purpose="termstatJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000020">
+			<javaPkg name="com.gerken.sofa.bean" purpose="beanSrcMainJavaData">
+		</javaPkg>
+			</createFile>
+		<createFolder folderExpr="/target" id="258" oPath="/target" projectExpr="{$topology/@stormProject}" projectId="100" purpose="/target">
+		</createFolder>
+		<createFolder folderExpr="/target/archive-tmp" id="259" oPath="/target/archive-tmp" projectExpr="{$topology/@stormProject}" projectId="100" purpose="/target/archive-tmp">
+		</createFolder>
+		<createFolder folderExpr="/target/classes" id="260" oPath="/target/classes" projectExpr="{$topology/@stormProject}" projectId="100" purpose="/target/classes">
+		</createFolder>
+		<createFolder folderExpr="/target/classes/com" id="261" oPath="/target/classes/com" projectExpr="{$topology/@stormProject}" projectId="100" purpose="/target/classes/com">
+		</createFolder>
+		<createFolder folderExpr="/target/classes/com/gerken" id="262" oPath="/target/classes/com/gerken" projectExpr="{$topology/@stormProject}" projectId="100" purpose="/target/classes/com/gerken">
+		</createFolder>
+		<createFolder folderExpr="/target/classes/com/gerken/sofa" id="263" oPath="/target/classes/com/gerken/sofa" projectExpr="{$topology/@stormProject}" projectId="100" purpose="/target/classes/com/gerken/sofa">
+		</createFolder>
+		<createFolder folderExpr="/target/classes/com/gerken/sofa/bolt" id="264" oPath="/target/classes/com/gerken/sofa/bolt" projectExpr="{$topology/@stormProject}" projectId="100" purpose="/target/classes/com/gerken/sofa/bolt">
+		</createFolder>
+		<createFolder folderExpr="/target/classes/com/gerken/sofa/logic" id="265" oPath="/target/classes/com/gerken/sofa/logic" projectExpr="{$topology/@stormProject}" projectId="100" purpose="/target/classes/com/gerken/sofa/logic">
+		</createFolder>
+		<createFolder folderExpr="/target/classes/com/gerken/sofa/spout" id="266" oPath="/target/classes/com/gerken/sofa/spout" projectExpr="{$topology/@stormProject}" projectId="100" purpose="/target/classes/com/gerken/sofa/spout">
+		</createFolder>
+		<createFolder folderExpr="/target/classes/com/gerken/sofa/topology" id="267" oPath="/target/classes/com/gerken/sofa/topology" projectExpr="{$topology/@stormProject}" projectId="100" purpose="/target/classes/com/gerken/sofa/topology">
+		</createFolder>
+		<createFolder folderExpr="/target/classes/com/gerken/sofa/util" id="268" oPath="/target/classes/com/gerken/sofa/util" projectExpr="{$topology/@stormProject}" projectId="100" purpose="/target/classes/com/gerken/sofa/util">
+		</createFolder>
+		<createFolder folderExpr="/target/generated-sources" id="269" oPath="/target/generated-sources" projectExpr="{$topology/@stormProject}" projectId="100" purpose="/target/generated-sources">
+		</createFolder>
+		<createFolder folderExpr="/target/generated-sources/annotations" id="270" oPath="/target/generated-sources/annotations" projectExpr="{$topology/@stormProject}" projectId="100" purpose="/target/generated-sources/annotations">
+		</createFolder>
+		<createFolder folderExpr="/target/maven-archiver" id="271" oPath="/target/maven-archiver" projectExpr="{$topology/@stormProject}" projectId="100" purpose="/target/maven-archiver">
+		</createFolder>
+		<createFolder folderExpr="/target/maven-status" id="272" oPath="/target/maven-status" projectExpr="{$topology/@stormProject}" projectId="100" purpose="/target/maven-status">
+		</createFolder>
+		<createFolder folderExpr="/target/maven-status/maven-compiler-plugin" id="273" oPath="/target/maven-status/maven-compiler-plugin" projectExpr="{$topology/@stormProject}" projectId="100" purpose="/target/maven-status/maven-compiler-plugin">
+		</createFolder>
+		<createFolder folderExpr="/target/maven-status/maven-compiler-plugin/compile" id="274" oPath="/target/maven-status/maven-compiler-plugin/compile" projectExpr="{$topology/@stormProject}" projectId="100" purpose="/target/maven-status/maven-compiler-plugin/compile">
+		</createFolder>
+		<createFolder folderExpr="/target/maven-status/maven-compiler-plugin/compile/default-compile" id="275" oPath="/target/maven-status/maven-compiler-plugin/compile/default-compile" projectExpr="{$topology/@stormProject}" projectId="100" purpose="/target/maven-status/maven-compiler-plugin/compile/default-compile">
+		</createFolder>
+		<createFolder folderExpr="/target/test-classes" id="276" oPath="/target/test-classes" projectExpr="{$topology/@stormProject}" projectId="100" purpose="/target/test-classes">
+		</createFolder>
+		<createFile binary="true" changeableName="true" folderExpr="/target" id="9" nameExpr="stackoverflow-analytics-all-1.0.0-SNAPSHOT-jar-with-dependencies.jar" oPath="target/stackoverflow-analytics-all-1.0.0-SNAPSHOT-jar-with-dependencies.jar" projectExpr="{$topology/@allProject}" projectId="5" purpose="stackoverflow-analytics-all-100-snapshot-jar-with-dependenciesJar" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000005">
+		</createFile>
+		<createFolder folderExpr="/src/test/java/com" id="251" oPath="/src/test/java/com" projectExpr="{$topology/@stormProject}" projectId="100" purpose="/src/test/java/com">
+		</createFolder>
+		<createFolder folderExpr="/src/test/java/com/gerken" id="252" oPath="/src/test/java/com/gerken" projectExpr="{$topology/@stormProject}" projectId="100" purpose="/src/test/java/com/gerken">
+		</createFolder>
+		<createFolder folderExpr="/src/test/java/com/gerken/sofa" id="253" oPath="/src/test/java/com/gerken/sofa" projectExpr="{$topology/@stormProject}" projectId="100" purpose="/src/test/java/com/gerken/sofa">
+		</createFolder>
+		<createFolder folderExpr="/src/test/java/com/gerken/sofa/bolt" id="254" oPath="/src/test/java/com/gerken/sofa/bolt" projectExpr="{$topology/@stormProject}" projectId="100" purpose="/src/test/java/com/gerken/sofa/bolt">
+		</createFolder>
+		<createFolder folderExpr="/src/test/java/com/gerken/sofa/mock" id="255" oPath="/src/test/java/com/gerken/sofa/mock" projectExpr="{$topology/@stormProject}" projectId="100" purpose="/src/test/java/com/gerken/sofa/mock">
+		</createFolder>
+		<createFolder folderExpr="/src/test/java/com/gerken/sofa/spout" id="256" oPath="/src/test/java/com/gerken/sofa/spout" projectExpr="{$topology/@stormProject}" projectId="100" purpose="/src/test/java/com/gerken/sofa/spout">
+		</createFolder>
+		<createFolder folderExpr="/src/test" id="249" oPath="/src/test" projectExpr="{$topology/@stormProject}" projectId="100" purpose="/src/test">
+		</createFolder>
+		<createFolder folderExpr="/src/test/java/com" id="79" oPath="/src/test/java/com" projectExpr="{$topology/@dataProject}" projectId="21" purpose="/src/test/java/com">
+		</createFolder>
+		<createFolder folderExpr="/src/test/java/com/gerken" id="80" oPath="/src/test/java/com/gerken" projectExpr="{$topology/@dataProject}" projectId="21" purpose="/src/test/java/com/gerken">
+		</createFolder>
+		<createFolder folderExpr="/src/test/java/com/gerken/sofa" id="81" oPath="/src/test/java/com/gerken/sofa" projectExpr="{$topology/@dataProject}" projectId="21" purpose="/src/test/java/com/gerken/sofa">
+		</createFolder>
+		<createFolder folderExpr="/src/test/java/com/gerken/sofa/bean" id="82" oPath="/src/test/java/com/gerken/sofa/bean" projectExpr="{$topology/@dataProject}" projectId="21" purpose="/src/test/java/com/gerken/sofa/bean">
+		</createFolder>
+		<createFolder folderExpr="/src/test" id="14" oPath="/src/test" projectExpr="{$topology/@allProject}" projectId="5" purpose="/src/test">
+		</createFolder>
+		<createFolder folderExpr="/src/test" id="77" oPath="/src/test" projectExpr="{$topology/@dataProject}" projectId="21" purpose="/src/test">
+		</createFolder>
+		<createFolder folderExpr="/src/main/java/com" id="240" oPath="/src/main/java/com" projectExpr="{$topology/@stormProject}" projectId="100" purpose="/src/main/java/com">
+		</createFolder>
+		<createFolder folderExpr="/src/main/java/com/gerken" id="241" oPath="/src/main/java/com/gerken" projectExpr="{$topology/@stormProject}" projectId="100" purpose="/src/main/java/com/gerken">
+		</createFolder>
+		<createFolder folderExpr="/src/main/java/com/gerken/sofa" id="242" oPath="/src/main/java/com/gerken/sofa" projectExpr="{$topology/@stormProject}" projectId="100" purpose="/src/main/java/com/gerken/sofa">
+		</createFolder>
+		<createFolder folderExpr="/src/main/java/com/gerken/sofa/bolt" id="243" oPath="/src/main/java/com/gerken/sofa/bolt" projectExpr="{$topology/@stormProject}" projectId="100" purpose="/src/main/java/com/gerken/sofa/bolt">
+		</createFolder>
+		<createFolder folderExpr="/src/main/java/com/gerken/sofa/logic" id="244" oPath="/src/main/java/com/gerken/sofa/logic" projectExpr="{$topology/@stormProject}" projectId="100" purpose="/src/main/java/com/gerken/sofa/logic">
+		</createFolder>
+		<createFolder folderExpr="/src/main/java/com/gerken/sofa/spout" id="245" oPath="/src/main/java/com/gerken/sofa/spout" projectExpr="{$topology/@stormProject}" projectId="100" purpose="/src/main/java/com/gerken/sofa/spout">
+		</createFolder>
+		<createFolder folderExpr="/src/main/java/com/gerken/sofa/topology" id="246" oPath="/src/main/java/com/gerken/sofa/topology" projectExpr="{$topology/@stormProject}" projectId="100" purpose="/src/main/java/com/gerken/sofa/topology">
+		</createFolder>
+		<createFolder folderExpr="/src/main/java/com/gerken/sofa/util" id="247" oPath="/src/main/java/com/gerken/sofa/util" projectExpr="{$topology/@stormProject}" projectId="100" purpose="/src/main/java/com/gerken/sofa/util">
+		</createFolder>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/com/gerken/sofa/util" id="151" nameExpr="AggregatePrediction.java" oPath="src/main/java/com/gerken/sofa/util/AggregatePrediction.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="aggregatepredictionJava" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000104">
+			<javaPkg name="com.gerken.sofa.util" purpose="utilSrcMainJavaStorm">
+		</javaPkg>
+			</createFile>
+		<token derived="false" desc="" formula="" name="idType">
+			<desc>The name of the defined type of the message ID.  Defaults to the stream type</desc>
+			</token>
+		<token derived="true" desc="Token representing the new generated name for project stackoverflow-analytics-data" formula="{$topology/@artifactIdPrefix}-data" id="" name="dataProject">
+		</token>
+		<createProject id="21" locationExpr="" oLocation="" oPath="stackoverflow-analytics-data" projectExpr="{$topology/@dataProject}" purpose="data">
+		</createProject>
+		<createFolder folderExpr="/src/main/java" id="70" oPath="/src/main/java" projectExpr="{$topology/@dataProject}" projectId="21" purpose="/src/main/java">
+		</createFolder>
+		<createFolder folderExpr="/src/main/resources" id="76" oPath="/src/main/resources" projectExpr="{$topology/@dataProject}" projectId="21" purpose="/src/main/resources">
+		</createFolder>
+		<createFolder folderExpr="/src/test/java" id="78" oPath="/src/test/java" projectExpr="{$topology/@dataProject}" projectId="21" purpose="/src/test/java">
+		</createFolder>
+		<createFolder folderExpr="/src/test/resources" id="83" oPath="/src/test/resources" projectExpr="{$topology/@dataProject}" projectId="21" purpose="/src/test/resources">
+		</createFolder>
+		<createFile binary="false" changeableName="false" folderExpr="" id="22" nameExpr=".classpath" oPath=".classpath" projectExpr="{$topology/@dataProject}" projectId="21" purpose="dataClasspath" purposeAsTokenName="false" replace="false" src="com.gerkenip.storm/refimpl/art000007">
+		</createFile>
+		<createFile binary="false" changeableName="false" folderExpr="" id="23" nameExpr=".project" oPath=".project" projectExpr="{$topology/@dataProject}" projectId="21" purpose="dataProject" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000008">
+		</createFile>
+		<createFile binary="false" changeableName="false" folderExpr="" id="24" nameExpr="pom.xml" oPath="pom.xml" projectExpr="{$topology/@dataProject}" projectId="21" purpose="dataPomXml" purposeAsTokenName="false" replace="false" src="com.gerkenip.storm/refimpl/art000009">
+		</createFile>
+		</ignored>
+	<group id="281" name="environment" parentId="4">
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/resources" id="163" nameExpr="{$environment/@name}.properties" oPath="src/main/resources/dev.properties" projectExpr="{$topology/@stormProject}" projectId="100" purpose="properties" purposeAsTokenName="true" replace="true" src="com.gerkenip.storm/refimpl/art000116">
+			<javaPkg name="" purpose="">
+		</javaPkg>
+			<nameExpr>{$environment/@name}.properties</nameExpr>
+			</createFile>
+		<token derived="true" desc="variable for dev" formula="dev" name="properties"/>
+		<token derived="false" desc="" formula="" name="name">
+			<desc>The single-token name of the environment</desc>
+			</token>
+		<desc>A run-time target execution environment for the topology</desc>
+		<token derived="true" desc="" formula="false" name="isComponent"/>
+		<token derived="false" desc="" formula="" name="runLocally">
+			<desc>Indicates whether execution is in a LocalCluster (true) or full cluster (false)</desc>
+			</token>
+		<token derived="false" desc="" formula="" name="default">
+			<desc>True only if if the target environment is the default environment if none is specified during execution</desc>
+			</token>
+		</group>
+	<replacement newString="{$topology/@utilPkg}" oldString="com.gerken.sofa.util"/>
+	<replacement newString="{$topology/@utilDir}" oldString="com/gerken/sofa/util"/>
+	<replacement newString="{$topology/@mockPkg}" oldString="com.gerken.sofa.mock"/>
+	<replacement newString="{$topology/@mockDir}" oldString="com/gerken/sofa/mock"/>
+	<replacement newString="{$topology/@spoutPkg}" oldString="com.gerken.sofa.spout"/>
+	<replacement newString="{$topology/@spoutDir}" oldString="com/gerken/sofa/spout"/>
+	<replacement newString="{$topology/@topologyPkg}" oldString="com.gerken.sofa.topology"/>
+	<replacement newString="{$topology/@topologyDir}" oldString="com/gerken/sofa/topology"/>
+	<replacement newString="{$topology/@logicPkg}" oldString="com.gerken.sofa.logic"/>
+	<replacement newString="{$topology/@logicDir}" oldString="com/gerken/sofa/logic"/>
+	<replacement newString="{$topology/@beanPkg}" oldString="com.gerken.sofa.bean"/>
+	<replacement newString="{$topology/@beanDir}" oldString="com/gerken/sofa/bean"/>
+	<replacement newString="{$topology/@boltPkg}" oldString="com.gerken.sofa.bolt"/>
+	<replacement newString="{$topology/@boltDir}" oldString="com/gerken/sofa/bolt"/>
+	<replacement newString="{$topology/@exceptionPkg}" oldString="com.gerken.sofa.exception"/>
+	<replacement newString="{$topology/@exceptionDir}" oldString="com/gerken/sofa/exception"/>
+	<replacement newString="{$topology/@topologyJava}" oldString="StackoverflowAnalyticsTopology"/>
+	<replacement newString="{$topology/@iLoggerJava}" oldString="IStackoverflowAnalyticsLogger"/>
+	<replacement newString="{$topology/@loggerJava}" oldString="StackoverflowAnalyticsLogger"/>
+	<replacement newString="{$topology/@taskHookJava}" oldString="TaskHook"/>
+	<replacement newString="{$bolt/@boltTestJava}" oldString="UserReaderBoltTest"/>
+	<replacement newString="{$bolt/@boltLogicJava}" oldString="UserReaderBoltLogic"/>
+	<replacement newString="{$bolt/@boltJava}" oldString="UserReaderBolt"/>
+	<replacement newString="{$bolt/@iBoltJava}" oldString="IUserReaderBolt"/>
+	<replacement newString="{$spout/@spoutTestJava}" oldString="UserIdReaderSpoutTest"/>
+	<replacement newString="{$spout/@iSpoutJava}" oldString="IUserIdReaderSpout"/>
+	<replacement newString="{$spout/@spoutJava}" oldString="UserIdReaderSpout"/>
+	<replacement newString="{$spout/@spoutLogicJava}" oldString="UserIdReaderSpoutLogic"/>
+	<replacement newString="{$type/@typeJava}" oldString="UserSpec"/>
+	<replacement newString="{$type/@typeTestJava}" oldString="UserSpecTest"/>
+	<replacement newString="{$environment/@properties}" oldString="dev"/>
+	<replacement newString="{$bolt/@name}" oldString="UserReader"/>
+	<replacement newString="{$spout/@name}" oldString="UserIdReader"/>
+	<replacement newString="{$type/@name}" oldString="UserSpec"/>
+	<replacement newString="{$environment/@name}" oldString="dev"/>
+	<replacement newString="{$topology/@name}" oldString="StackoverflowAnalytics"/>
+	<replacement newString="{$topology/@basePackage}" oldString="com.gerken.sofa"/>
+	<group id="282" name="fieldRef" parentId="280">
+		<desc>Declares a field in the referenced stream whose values will be used to direct tuples to the correct bolt.  Only used for fields grouping.</desc>
+		<token derived="false" desc="" formula="" name="name">
+			<desc>The name of the fields whose value is used to direct tuples on this stream</desc>
+			</token>
+		</group>
+	<group id="283" name="emits" parentId="277">
+		<token derived="false" desc="" formula="" name="type">
+			<desc>The name of a defined type that describes the shape of the fields on the stream</desc>
+			</token>
+		<token derived="true" desc="" formula="emitTo{uppercaseFirst($emits/@stream)}" name="emitMethod"/>
+		<token derived="true" desc="" formula="{lowercaseFirst($emits/@type)}" name="emitVar"/>
+		<token derived="true" desc="" formula="{$emits/@type}" name="idType" optional="true">
+			<desc>The type of the message ID for reliable emits.  Defaults to the type.</desc>
+			</token>
+		<token derived="false" desc="" formula="" name="stream">
+			<desc>The unique name of the stream</desc>
+			</token>
+		</group>
+	<group id="284" name="field" parentId="278">
+		<token derived="false" desc="" formula="" name="name">
+			<desc>The single-token name of the property</desc>
+			</token>
+		<token derived="false" desc="" formula="" name="type">
+			<desc>One of String, Integer, Long, Double, Boolean, Date</desc>
+			</token>
+		<token derived="true" desc="" formula="_{$field/@name}" name="var"/>
+		<token derived="true" desc="" formula="get{uppercaseFirst($field/@name)}" name="getter"/>
+		<token derived="true" desc="" formula="set{uppercaseFirst($field/@name)}" name="setter"/>
+		</group>
+	</xform>

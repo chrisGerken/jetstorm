@@ -1,0 +1,28 @@
+package <c:get select="$topology/@spoutPkg" />;
+
+import <c:get select="$topology/@beanPkg" />.*;
+
+import java.util.Map;
+
+public interface <c:get select="$spout/@iSpoutJava" /> {
+
+    public Map<String, Object> getComponentConfiguration();
+<c:iterate select="$spout/emits" var="emits" >
+
+    /*
+     * Unreliably emit an instance of <c:get select="$emits/@type" /> to stream <c:get select="$emits/@stream" />.  
+     */
+	public void <c:get select="$emits/@emitMethod" />(<c:get select="$emits/@type" /> <c:get select="$emits/@emitVar" />);
+
+
+    /*
+     * Reliably emit an instance of <c:get select="$emits/@type" /> to stream <c:get select="$emits/@stream" />.
+     * The second parameter is to be used as a message ID for
+     * notification of message ack or fail.  
+     */
+	public void <c:get select="$emits/@emitMethod" />(<c:get select="$emits/@type" /> <c:get select="$emits/@emitVar" />, <c:get select="$emits/@type" /> messageID);
+</c:iterate>
+
+	public int getTaskId();
+
+}

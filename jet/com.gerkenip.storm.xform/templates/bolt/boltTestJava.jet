@@ -1,0 +1,65 @@
+package <c:get select="$topology/@boltPkg" />;
+
+	// Begin imports 
+
+import static org.junit.Assert.fail;
+
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectOutputStream;
+import java.util.HashMap;
+
+import org.junit.Test;
+
+import backtype.storm.task.OutputCollector;
+
+import <c:get select="$topology/@beanPkg" />.*;
+import <c:get select="$topology/@mockPkg" />.*;
+
+	// End imports 
+
+public class <c:get select="$bolt/@boltTestJava" />  {
+	
+		// Begin declarations 
+
+		// End declarations 
+
+	@Test
+	public void testSerialization() {
+		
+		try {
+			new ObjectOutputStream(new ByteArrayOutputStream()).writeObject(new <c:get select="$bolt/@boltJava" />() );
+		} catch (Throwable t) {
+			fail("Class <c:get select="$bolt/@boltLogicJava" /> is not serializable");
+		}
+
+	}
+<c:iterate select="$bolt/reads" var="reads" >
+
+	@Test
+	public void testReadFrom<c:get select="$reads/@stream" />() {
+
+		// Begin testReadFrom<c:get select="$reads/@stream" /> logic 
+
+//		HashMap<String,Object> config = new HashMap<String,Object>();
+//		MockedBoltOutputCollector collector = new MockedBoltOutputCollector();
+//		
+//		MockedTuple tuple = new MockedTuple("<c:get select="$reads/@stream" />", <c:get select="$reads/@type" />.sample().asValues()); 
+//		<c:get select="$bolt/@boltJava" /> bolt = new <c:get select="$bolt/@boltJava" />();
+
+//		bolt.prepare(config,null,new OutputCollector(collector));
+//		bolt.execute(tuple);
+//		bolt.cleanup()
+
+			// Validate execution side effects by interrogating collector
+					
+		// End testReadFrom<c:get select="$reads/@stream" /> logic 
+
+	}
+</c:iterate>
+
+// Begin custom methods 
+
+
+// End custom methods 
+
+}

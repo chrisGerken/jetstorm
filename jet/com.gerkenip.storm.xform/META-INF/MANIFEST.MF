@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: com.gerkenip.storm.xform
+Bundle-SymbolicName: com.gerkenip.storm.xform;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Vendor: 
+Require-Bundle: org.eclipse.jet
+Bundle-ClassPath: .,bin/
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6

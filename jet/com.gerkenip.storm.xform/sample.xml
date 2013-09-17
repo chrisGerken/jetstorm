@@ -1,0 +1,66 @@
+
+<root>
+
+    <!--  label : A multi-token displayable name for the topology -->
+    <!--  mavenGroupId : The groupId for the maven artifacts to be created -->
+    <!--  basePackage : The name prefix for all Java packages -->
+    <!--  provider : The name of the person, prganization or company that owns this transformation tool -->
+    <topology  label=""  mavenGroupId=""  basePackage=""  provider="">
+
+        <!--  label : A multi-token, displayable name for the bolt -->
+        <!--  instances : The number of instances of this bolt to be constructed at runtime -->
+        <bolt  label=""  instances="">
+
+            <!--  stream : The single-token name of a stream emited by the parent bolt -->
+            <!--  type : The name of a defined type that describes the shape of the fields on the stream -->
+            <emits  stream=""  type="">
+
+            </emits>
+
+            <!--  stream : The name of a stream read by the parent polt. -->
+            <!--  grouping : One of "fields", "shuffle", "global", "all", "local" -->
+            <reads  stream=""  grouping="">
+
+                <!--  name : The name of the fields whose value is used to direct tuples on this stream -->
+                <fieldRef  name="">
+
+                </fieldRef>
+
+            </reads>
+
+        </bolt>
+
+        <!--  label : A multi-token, displayable name for the spout -->
+        <!--  instances : The number of instances of this bolt to be constructed at runtime -->
+        <spout  label=""  instances="">
+
+            <!--  type : The name of a defined type that describes the shape of the fields on the stream -->
+            <!--  idType : The type of the message ID for reliable emits.  Defaults to the type. -->
+            <!--  stream : The unique name of the stream -->
+            <emits  type=""  stream="">
+
+            </emits>
+
+        </spout>
+
+        <!--  name : The capitalized, single-token name of the type -->
+        <type  name="">
+
+            <!--  name : The single-token name of the property -->
+            <!--  type : One of String, Integer, Long, Double, Boolean, Date -->
+            <field  name=""  type="">
+
+            </field>
+
+        </type>
+
+        <!--  name : The single-token name of the environment -->
+        <!--  runLocally : Indicates whether execution is in a LocalCluster (true) or full cluster (false) -->
+        <!--  default : True only if if the target environment is the default environment if none is specified during execution -->
+        <environment  name=""  runLocally=""  default="">
+
+        </environment>
+
+    </topology>
+
+</root>
