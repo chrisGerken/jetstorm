@@ -1,0 +1,180 @@
+
+<!--comment -->
+
+<root>
+
+	<topology label="Stackoverflow Analytics" basePkg="com.gerken.sofa">
+
+		<spout label="User Id Reader" count="1">
+			<emits stream="Users" type="UserSpec" />
+		</spout>
+
+		<bolt label="User Reader" count="1">
+			<reads stream="Users" grouping="shuffle" />
+			<emits stream="Answers" type="AnswerSpec" />
+			<emits stream="Tags"    type="EarnedTagInfo" />
+		</bolt>
+
+		<bolt label="Question Reader" count="1">
+			<reads stream="Answers" grouping="shuffle" />
+			<emits stream="Questions" type="QuestionSpec" />
+		</bolt>
+
+		<bolt label="Question Parser" count="1">
+			<reads stream="Questions" grouping="shuffle" />
+			<emits stream="TermStats" type="TermStat" />
+			<emits stream="RepStats" type="RepStat" />
+		</bolt>
+
+		<bolt label="OP Rep Analytics" count="1">
+			<reads stream="RepStats" grouping="fields">
+				<field ref="questionTag" />
+			</reads>
+			<emits stream="OpRepBestFits" type="OpRepBestFit" />
+		</bolt>
+
+		<bolt label="Term Rep Std Dev" count="1">
+			<reads stream="TermStats" grouping="fields">
+				<field ref="questionTerm" />
+				<field ref="questionTag" />
+			</reads>
+			<emits stream="MeaningfulTerms" type="MeaningfulTerm" />
+		</bolt>
+
+		<bolt label="Term Predictor" count="3">
+			<reads stream="MeaningfulTerms" grouping="fields">
+				<field ref="userId" />
+				<field ref="term" />
+			</reads>
+			<reads stream="NewQuestionTerms" grouping="fields">
+				<field ref="userId" />
+				<field ref="term" />
+			</reads>
+			<emits stream="PredictionsByTerms" type="ReputationPrediction" />
+		</bolt>
+
+		<bolt label="OP Rep Predictor" count="1">
+			<reads stream="OpRepBestFits" grouping="fields">
+				<field ref="userId" />
+			</reads>
+			<reads stream="NewQuestionOpInfos" grouping="fields">
+				<field ref="userId" />
+			</reads>
+			<emits stream="PredictionsByOpRep" type="ReputationPrediction" />
+		</bolt>
+
+		<bolt label="New Question Reader" count="1">
+			<reads stream="Tags" grouping="shuffle" />
+			<emits stream="NewQuestions" type="NewQuestion" />
+		</bolt>
+
+		<bolt label="New Question Parser" count="1">
+			<reads stream="NewQuestions" grouping="shuffle" />
+			<emits stream="NewQuestionTerms" type="NewQuestionTerm" />
+			<emits stream="NewQuestionOpInfos" type="NewQuestionOpInfo" />
+		</bolt>
+
+		<bolt label="Reputation Predictor" count="1">
+			<reads stream="PredictionsByTerms" grouping="fields">
+				<field ref="userId" />
+			</reads>
+			<reads stream="PredictionsByOpRep" grouping="fields">
+				<field ref="userId" />
+			</reads>
+		</bolt>
+
+		<type name="AnswerSpec">
+			<field name="answerId" type="Long" />
+			<field name="userId" type="String" />
+			<field name="questionId" type="Long" />
+			<field name="userAnswerRep" type="Integer" />
+			<field name="userTotalRep" type="Integer" />
+		</type>
+
+		<type name="EarnedTagInfo">
+			<field name="userId" 		type="String" />
+			<field name="tag" 			type="String" />
+			<field name="count" 		type="Integer" />
+		</type>
+
+		<type name="NewQuestion">
+			<field name="questionId" 	type="Long" />
+			<field name="questionText" 	type="String" />
+			<field name="questionTags" 	type="String" />
+			<field name="ownerId" 		type="String" />
+			<field name="ownerRep" 		type="Integer" />
+			<field name="userId" 		type="String" />
+		</type>
+
+		<type name="NewQuestionOpInfo">
+			<field name="questionId" 	type="Long" />
+			<field name="questionTags" 	type="String" />
+			<field name="ownerId" 		type="String" />
+			<field name="ownerRep" 		type="Integer" />
+			<field name="userId" 		type="String" />
+		</type>
+
+		<type name="NewQuestionTerm">
+			<field name="term" 			type="String" />
+			<field name="tag" 			type="String" />
+			<field name="questionId" 	type="Long" />
+			<field name="count" 		type="Integer" />
+			<field name="userId" 		type="String" />
+		</type>
+
+		<type name="MeaningfulTerm">
+			<field name="term" 			type="String" />
+			<field name="tag" 			type="String" />
+			<field name="positive" 		type="Boolean" />
+			<field name="negative" 		type="Boolean" />
+			<field name="expectedRep"	type="Double" />
+			<field name="userId" 		type="String" />
+		</type>
+
+		<type name="OpRepBestFit">
+			<field name="userId" 		type="String" />
+			<field name="tag" 			type="String" />
+			<field name="coefficients"	type="String" />
+		</type>
+
+		<type name="QuestionSpec">
+			<field name="questionId" type="Long" />
+			<field name="ownerId" type="String" />
+			<field name="ownerRep" type="Integer" />
+			<field name="questionText" type="String" />
+			<field name="questionTags" type="String" />
+			<field name="answerId" type="Long" />
+			<field name="answerRep" type="Integer" />
+			<field name="userId" type="String" />
+		</type>
+
+		<type name="RepStat">
+			<field name="opRep" 		type="Integer" />
+			<field name="questionTag" 	type="String" />
+			<field name="answerRep" 	type="Integer" />
+			<field name="userId" 		type="String" />
+		</type>
+
+		<type name="ReputationPrediction">
+			<field name="rep" 			type="Double" />
+			<field name="questionId" 	type="Long" />
+			<field name="userId" 		type="String" />
+			<field name="metric" 		type="String" />
+		</type>
+
+		<type name="TermStat">
+			<field name="questionTerm" type="String" />
+			<field name="questionTag" type="String" />
+			<field name="answerRep" type="Integer" />
+			<field name="userId" type="String" />
+		</type>
+
+		<type name="UserSpec">
+			<field name="userId" type="String" />
+		</type>
+
+		<!-- type: One of String, Integer, Long, Float, Double, Date -->
+
+	</topology>
+
+</root>

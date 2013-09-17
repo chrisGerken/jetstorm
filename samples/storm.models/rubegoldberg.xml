@@ -1,0 +1,61 @@
+
+<!--comment -->
+
+<root>
+
+	<topology label="Rube Goldberg Printer" basePackage="com.gerkenip.rgp"   mavenGroupId="com.gerkenip"    provider="Rube">
+
+       <environment  name="dev"  	runLocally="true"  default="true" />
+       <environment  name="prod"  	runLocally="false" default="false" />
+
+		<spout label="Message Provider" instances="1">
+			<emits stream="Messages" type="Message" />
+		</spout>
+
+		<bolt label="Message Anonymizer" instances="1">
+			<reads stream="Messages" 	grouping="shuffle" />
+			<emits stream="Anonymous"  	type="AnonymizedMessage" />
+			<emits stream="Totals" 		type="ExpectedCount" />
+		</bolt>
+
+		<bolt label="Message Repeater" instances="1">
+			<reads stream="Totals" 				grouping="shuffle" />
+			<emits stream="MessageReferences" 	type="MessageReference" />
+		</bolt>
+
+		<bolt label="Reference Counter" instances="1">
+			<reads stream="MessageReferences" grouping="fields" >
+				<fieldRef name="id" />
+			</reads>
+			<reads stream="Totals" grouping="fields" >
+				<fieldRef name="id" />
+			</reads>
+			<emits stream="Approvals"  	type="MessageReference" />
+		</bolt>
+
+		<bolt label="Message Printer" instances="1">
+			<reads stream="Approvals" 			grouping="shuffle" />
+		</bolt>
+
+		<type name="Message">
+			<field name="messageText" 	type="String" />
+			<field name="count"  		type="Integer" />
+		</type>
+
+		<type name="AnonymizedMessage">
+			<field name="text" 		type="String" />
+			<field name="id"  		type="Long" />
+		</type>
+
+		<type name="ExpectedCount">
+			<field name="id"	 		type="Long" />
+			<field name="totalSent"  	type="Integer" />
+		</type>
+
+		<type name="MessageReference">
+			<field name="id"	 		type="String" />
+		</type>
+
+	</topology>
+
+</root>
