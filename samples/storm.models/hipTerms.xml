@@ -1,0 +1,57 @@
+<root>
+
+    <topology  label="Hip Tweeters"  mavenGroupId="com.mycorp"  basePackage="com.mycorp.hip"  provider="My Corp, Inc.">
+
+        <spout  label="Live Tweets"  instances="4">
+            <emits  stream="LiveTweets"  type="LiveTweet" />
+        </spout>
+
+        <spout  label="Trending Terms"  instances="1">
+            <emits  stream="TrendingTerms"  type="TrendingTerm" />
+        </spout>
+
+        <bolt  label="Tweet Parser"  instances="8">
+            <reads  stream="LiveTweets"      grouping="shuffle" />
+            <emits  stream="RecentTweeters"  type="RecentTweeter" />
+            <emits  stream="RecentTerms"     type="RecentTerm" />
+        </bolt>
+
+        <bolt  label="Term Joiner"  instances="3">
+            <reads  stream="RecentTerms"      grouping="fields" >
+                <fieldRef name="term" />
+            </reads>
+            <reads  stream="TrendingTerms"      grouping="fields" >
+                <fieldRef name="term" />
+            </reads>
+        </bolt>
+
+        <type  name="LiveTweet">
+            <field  name="tweetId"   type="String" />
+            <field  name="handle"    type="String" />
+            <field  name="content"   type="String" />
+            <field  name="time"      type="Date" />
+            <field  name="retweets"  type="Integer" />
+        </type>
+
+        <type  name="TrendingTerm">
+            <field  name="term"      type="String" />
+            <field  name="time"      type="Date" />
+        </type>
+
+        <type  name="RecentTweeter">
+            <field  name="handle"    type="String" />
+            <field  name="time"      type="Date" />
+        </type>
+
+        <type  name="RecentTerm">
+            <field  name="handle"    type="String" />
+            <field  name="term"      type="String" />
+            <field  name="time"      type="Date" />
+        </type>
+
+        <environment  name="dev"  runLocally="true"  default="true" />
+        <environment  name="prod"  runLocally="false"  default="false" />
+
+    </topology>
+
+</root>

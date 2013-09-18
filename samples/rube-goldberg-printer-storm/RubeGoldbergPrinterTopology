@@ -21,11 +21,11 @@ Approvals [style=filled, fillcolor=mintcream ,fontsize=12,color=black,label="{St
 "Message Repeater (1)" -> MessageReferences  [penwidth=10];
 "Reference Counter (1)" -> Approvals  [penwidth=10];
 
-Messages -> "Message Anonymizer (1)"  [penwidth=8];
-Totals -> "Message Repeater (1)"  [penwidth=8];
-MessageReferences -> "Reference Counter (1)"  [penwidth=8];
-Totals -> "Reference Counter (1)"  [penwidth=8];
-Approvals -> "Message Printer (1)"  [penwidth=8];
+Messages -> "Message Anonymizer (1)"  [penwidth=8, label="    grouping: shuffle"];
+Totals -> "Message Repeater (1)"  [penwidth=8, label="    grouping: shuffle"];
+MessageReferences -> "Reference Counter (1)"  [penwidth=8, label="    grouping: fields(id)"];
+Totals -> "Reference Counter (1)"  [penwidth=8, label="    grouping: fields(id)"];
+Approvals -> "Message Printer (1)"  [penwidth=8, label="    grouping: shuffle"];
 
 Legalese -> "Message Provider (1)" [style=invis, len=30]
 
