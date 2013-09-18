@@ -21,5 +21,6 @@ sleep.after.submit.minutes=30
 
 topology.workers=1
 
+backlog.monitor.enabled=false
 
 </c:initialCode># End custom properties</c:userRegion>
