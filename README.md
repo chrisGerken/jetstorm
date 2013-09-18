@@ -1,7 +1,7 @@
 jetstorm
 ========
 
-An Eclipse tool to apply several Storm design patterns, creating an entire storm topology implementations (ex business logic)
+An Eclipse tool to apply several Storm design patterns, creating an entire storm topology implementation (ex business logic)
 
 Input to the tool is a simple XML model listing the spouts, the bolts and the streams that connect them.
 
