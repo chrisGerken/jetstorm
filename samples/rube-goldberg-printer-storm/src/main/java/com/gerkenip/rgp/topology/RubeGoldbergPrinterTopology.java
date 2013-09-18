@@ -66,9 +66,11 @@ public class RubeGoldbergPrinterTopology {
 
         config = loadConfig(target);
        	
-        List<String> hooksList= new ArrayList<String>();
-        hooksList.add(TaskHook.class.getName());
-        config.put(Config.TOPOLOGY_AUTO_TASK_HOOKS, hooksList);
+        if ("true".equals(config.get("backlog.monitor.enabled").toString())) {
+            List<String> hooksList= new ArrayList<String>();
+            hooksList.add(TaskHook.class.getName());
+            config.put(Config.TOPOLOGY_AUTO_TASK_HOOKS, hooksList);
+        }
         
        	if (isRunLocally()) {
        		submitTopologyLocal();
