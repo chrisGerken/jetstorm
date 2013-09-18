@@ -15,5 +15,6 @@ The tool, implemented as an Eclipse-based JET transform, applies the following p
 - Specific test cases for common development errors (e.g. serialization, logic)
 - Mocked storm classes (Collector, Tuple, FieldsDeclarer) for easier implementation of test cases that validate correct side effects for Spout and Bolt logic
 - An input file for graphiz that visualizes the complete topology for easier communication of the topology to other team members and non-technical stakeholders
+- A second maven project, a module, to help manage maven builds when other maven projects are developed in conjunction with the first. 
 
 There are well-defined places in the generated code where changes made after generation will be retained through subsequent generations.  This means that you can make several kinds of changes to your topology and regenerate the code, keeping any business logic already typed in. 
