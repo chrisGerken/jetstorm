@@ -1,15 +1,13 @@
 package <c:get select="$topology/@utilPkg" />;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
+import backtype.storm.Config;
 import backtype.storm.hooks.ITaskHook;
 import backtype.storm.hooks.info.BoltAckInfo;
 import backtype.storm.hooks.info.BoltExecuteInfo;
@@ -19,7 +17,9 @@ import backtype.storm.hooks.info.SpoutAckInfo;
 import backtype.storm.hooks.info.SpoutFailInfo;
 import backtype.storm.task.TopologyContext;
 
-public class <c:get select="$topology/@taskHookJava" /> implements ITaskHook {
+import com.gerken.monitor.MonitorServer;
+
+public class TaskHook implements ITaskHook {
 
 	private static HashMap<String, Integer> backlog = new HashMap<String, Integer>();
 	private static HashSet<String> streams = new HashSet<String>();
@@ -27,33 +27,46 @@ public class <c:get select="$topology/@taskHookJava" /> implements ITaskHook {
 	private static long timeBucketBegin = 0;
 	private static long timeBucketSize = 1000;
 	private static long firstBegin = 0;
-	private static String backlogFileName = "/home/chrisgerken/sofaBacklog.csv";
-	
-	public <c:get select="$topology/@taskHookJava" />() {
 
-<c:iterate select="$topology/*/emits" var="emits" >
-		touchTuples("<c:get select="$emits/@stream" />");
-</c:iterate>
+	private static MonitorServer monitor = new MonitorServer(8087);
+	
+	private boolean enabled = false;
+	
+	public TaskHook() {
 
 	}
 
 	@Override
 	public void prepare(Map conf, TopologyContext context) {
+		String id = context.getThisComponentId();
+
+		if (id.startsWith("__")) { return; }
 		
+//		Set<String> outputs = context.getComponentStreams(id);
+//		for (String out : outputs) {
+//			System.out.println("\t o: "+out);
+//		}
+//		Map<GlobalStreamId, Grouping> inputs = context.getSources(id);
+//		for (GlobalStreamId gsi : inputs.keySet()) {
+//			System.out.println("\t 1: "+gsi.get_componentId()+" via "+gsi.get_streamId());
+//		}
+
+		enabled = true;
 	}
 
 	@Override
 	public void cleanup() {
-
+		
 	}
 
 	@Override
 	public void emit(EmitInfo info) {
+		if (!enabled) { return; }
 		String stream = info.stream;
-		incrementTuples(stream);
+		incrementTuples(stream,info.outTasks.size());
 	}
 
-	private static void touchTuples(String stream) {
+	private static void incrementTuples(String stream, int increase) {
 		synchronized (backlog) {
 			if (!streams.contains(stream)) {
 				streams.add(stream);
@@ -63,21 +76,7 @@ public class <c:get select="$topology/@taskHookJava" /> implements ITaskHook {
 			if (count == null) {
 				count = new Integer(0);
 			}
-			backlog.put(stream, count);
-		}
-	}
-
-	private static void incrementTuples(String stream) {
-		synchronized (backlog) {
-			if (!streams.contains(stream)) {
-				streams.add(stream);
-				streamOrder.add(stream);
-			}
-			Integer count = backlog.get(stream);
-			if (count == null) {
-				count = new Integer(0);
-			}
-			count = count + 1;
+			count = count + increase;
 			backlog.put(stream, count);
 			write();
 		}
@@ -107,35 +106,17 @@ public class <c:get select="$topology/@taskHookJava" /> implements ITaskHook {
 		if (timeBucketBegin == 0) {
 			timeBucketBegin = (now / timeBucketSize) * timeBucketSize;
 			firstBegin = timeBucketBegin;
-			StringBuffer sb = new StringBuffer();
-			sb.append("Time");
-			Iterator<String> names = streamOrder.iterator();
-			while (names.hasNext()) {
-				sb.append(" ,"+names.next());
-			}
-			try {
-				FileWriter fw = new FileWriter(backlogFileName,false);
-				fw.write(sb.toString()+"\n");
-				fw.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			monitor.series(now,timeBucketSize);
 			return;
 		}
 		
 		while (now > timeBucketBegin) {
+			long t = (timeBucketBegin-firstBegin) / timeBucketSize;
 			Iterator<String> names = streamOrder.iterator();
-			StringBuffer sb = new StringBuffer();
-			sb.append(String.valueOf(timeBucketBegin-firstBegin));
 			while (names.hasNext()) {
-				sb.append(" ,"+backlog.get(names.next()));
-			}
-			try {
-				FileWriter fw = new FileWriter(backlogFileName,true);
-				fw.write(sb.toString()+"\n");
-				fw.close();
-			} catch (IOException e) {
-				e.printStackTrace();
+				String stream = names.next();
+				long count = backlog.get(stream);
+				monitor.set(stream, t, count);
 			}
 			timeBucketBegin = timeBucketBegin + timeBucketSize;
 		}
@@ -157,6 +138,7 @@ public class <c:get select="$topology/@taskHookJava" /> implements ITaskHook {
 
 	@Override
 	public void boltExecute(BoltExecuteInfo info) {
+		if (!enabled) { return; }
 		String stream = info.tuple.getSourceStreamId();
 		decrementTuples(stream);
 	}
@@ -171,6 +153,14 @@ public class <c:get select="$topology/@taskHookJava" /> implements ITaskHook {
 	public void boltFail(BoltFailInfo info) {
 		// TODO Auto-generated method stub
 
+	}
+
+	public static void registerTo(Config newConfig) {
+        if ("true".equals(newConfig.get("backlog.monitor.enabled").toString())) {
+            List<String> hooksList= new ArrayList<String>();
+            hooksList.add(TaskHook.class.getName());
+            newConfig.put(Config.TOPOLOGY_AUTO_TASK_HOOKS, hooksList);
+        }
 	}
 
 }

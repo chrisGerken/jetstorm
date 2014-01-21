@@ -50,7 +50,9 @@ public class <c:get select="$spout/@spoutJava" /> implements IRichSpout, <c:get 
 
     @Override
     public void declareOutputFields(OutputFieldsDeclarer declarer) {
-        declarer.declareStream("Users",new Fields("userId"));
+<c:iterate select="$spout/emits" var="emits" >    
+        declarer.declareStream("<c:get select="$emits/@stream" />", <c:get select="$emits/@type" />.asFields());
+</c:iterate>	
     }
 
     @Override

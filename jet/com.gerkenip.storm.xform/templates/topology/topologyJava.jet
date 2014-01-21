@@ -1,6 +1,8 @@
 package <c:get select="$topology/@topologyPkg" />;
 
 	<c:userRegion>// Begin imports<c:initialCode>
+
+import com.gerken.gumbo.storm.TaskHook;
 	
 import <c:get select="$topology/@spoutPkg" />.*;
 import <c:get select="$topology/@boltPkg" />.*;
@@ -66,10 +68,8 @@ public class <c:get select="$topology/@topologyJava" /> {
 
         config = loadConfig(target);
        	
-        if ("true".equals(config.get("backlog.monitor.enabled").toString())) {
-            List<String> hooksList= new ArrayList<String>();
-            hooksList.add(TaskHook.class.getName());
-            config.put(Config.TOPOLOGY_AUTO_TASK_HOOKS, hooksList);
+        if ("true".equals(config.get("storm.monitor.enabled").toString())) {
+        	TaskHook.registerTo(config);
         }
         
        	if (isRunLocally()) {
@@ -135,7 +135,7 @@ public class <c:get select="$topology/@topologyJava" /> {
 				Object value = props.get(prop);
 				try {
 					// see if it's an Integer
-					int intValue = Integer.parseInt(String.valueOf(value));
+					int intValue = Integer.parseInt(String.valueOf(value).trim());
 					config.put(prop.toString(), intValue);
 				} catch (NumberFormatException e) {
 					config.put(prop.toString(), value);					
@@ -165,7 +165,7 @@ public class <c:get select="$topology/@topologyJava" /> {
 <c:if test="$component/@componentKind='bolt'">
         parallelismHint = (Integer)config.get("<c:get select="$component/@name" />.parallelismHint");
         boltDeclarer = builder.setBolt("<c:get select="$component/@name" />", new <c:get select="$component/@boltJava" />(), parallelismHint);
-<c:iterate select="$component/execs" var="execs">
+<c:iterate select="$component/reads" var="reads">
 <c:setVariable select="$topology/*/emits[@stream=$reads/@stream]" var="emits" />
 <c:choose select="$reads/@grouping" >
 <c:when test=" 'all' ">
