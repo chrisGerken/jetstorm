@@ -1,1 +1,2 @@
 dot -Tpng -O ./<c:get select="$topology/@topologyJava" />
+dot -Tpng -O ./<c:get select="$topology/@name" />TopologySummary

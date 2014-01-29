@@ -2,7 +2,7 @@ digraph G {
 node [style=filled, fillcolor=plum1 ,shape=rectangle, fontsize=20, color=black];
 edge [fontsize=10, color=blue4, fontcolor=blue4];
 
-Legalese [style=filled, fillcolor=floralwhite ,fontsize=20,color=black,label="{<c:get select="$topology/@label"/>|(c) 2013 <c:get select="$topology/@provider" />}", shape=record];
+Legalese [style=filled, fillcolor=floralwhite ,fontsize=20,color=black,label="{<c:get select="$topology/@label"/>|(c) 2014 <c:get select="$topology/@provider" />}", shape=record];
 
 <c:iterate select="$topology/*/emits" var="emits">
 <c:get select="$emits/@stream"/> [style=filled, fillcolor=mintcream ,fontsize=12,color=black,label="{Stream: <c:get select="$emits/@stream"/>|{<c:get select="$emits/@type"/>|{<c:iterate select="$topology/type[@name=$emits/@type]/field" var="field" delimiter="|"><c:get select="$field/@name"/></c:iterate>}}}", shape=record];

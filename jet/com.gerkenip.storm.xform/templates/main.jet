@@ -295,6 +295,8 @@
 
     <ws:file path="{$topology/@stormProject}/src/test/java/{$topology/@mockDir}/MockedTuple.java" template="templates/topology/mockedtupleJava.jet" replace="true" />
 
+    <ws:file path="{$topology/@stormProject}/{$topology/@name}TopologySummary" template="templates/topology/topologySummaryGraphviz.jet" replace="true" />
+
 
     *** Begin custom generation updates for topology (4)
 

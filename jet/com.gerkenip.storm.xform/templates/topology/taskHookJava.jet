@@ -156,7 +156,7 @@ public class TaskHook implements ITaskHook {
 	}
 
 	public static void registerTo(Config newConfig) {
-        if ("true".equals(newConfig.get("backlog.monitor.enabled").toString())) {
+        if ("true".equals(newConfig.get("storm.monitor.enabled").toString())) {
             List<String> hooksList= new ArrayList<String>();
             hooksList.add(TaskHook.class.getName());
             newConfig.put(Config.TOPOLOGY_AUTO_TASK_HOOKS, hooksList);
