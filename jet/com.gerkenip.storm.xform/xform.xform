@@ -70,12 +70,6 @@
 			<folderExpr>/src/main/java/{$topology/@utilDir}</folderExpr>
 			<nameExpr>{$topology/@loggerJava}.java</nameExpr>
 			</createFile>
-		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/{$topology/@utilDir}" id="161" nameExpr="{$topology/@taskHookJava}.java" oPath="src/main/java/com/gerken/sofa/util/TaskHook.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="taskHookJava" purposeAsTokenName="true" replace="true" src="com.gerkenip.storm/refimpl/art000114">
-			<javaPkg name="com.gerken.sofa.util" purpose="util">
-		</javaPkg>
-			<folderExpr>/src/main/java/{$topology/@utilDir}</folderExpr>
-			<nameExpr>{$topology/@taskHookJava}.java</nameExpr>
-			</createFile>
 		<createFile binary="false" changeableName="false" folderExpr="/src/main/resources" id="164" nameExpr="logging.properties" oPath="src/main/resources/logging.properties" projectExpr="{$topology/@stormProject}" projectId="100" purpose="loggingProperties" purposeAsTokenName="false" replace="true" src="com.gerkenip.storm/refimpl/art000117">
 			<javaPkg name="" purpose="">
 		</javaPkg>
@@ -791,6 +785,12 @@
 		</createFile>
 		<createFile binary="false" changeableName="false" folderExpr="" id="24" nameExpr="pom.xml" oPath="pom.xml" projectExpr="{$topology/@dataProject}" projectId="21" purpose="dataPomXml" purposeAsTokenName="false" replace="false" src="com.gerkenip.storm/refimpl/art000009">
 		</createFile>
+		<createFile binary="false" changeableName="true" folderExpr="/src/main/java/{$topology/@utilDir}" id="161" nameExpr="{$topology/@taskHookJava}.java" oPath="src/main/java/com/gerken/sofa/util/TaskHook.java" projectExpr="{$topology/@stormProject}" projectId="100" purpose="taskHookJava" purposeAsTokenName="true" replace="true" src="com.gerkenip.storm/refimpl/art000114">
+			<javaPkg name="com.gerken.sofa.util" purpose="util">
+		</javaPkg>
+			<folderExpr>/src/main/java/{$topology/@utilDir}</folderExpr>
+			<nameExpr>{$topology/@taskHookJava}.java</nameExpr>
+			</createFile>
 		</ignored>
 	<group id="281" name="environment" parentId="4">
 		<createFile binary="false" changeableName="true" folderExpr="/src/main/resources" id="163" nameExpr="{$environment/@name}.properties" oPath="src/main/resources/dev.properties" projectExpr="{$topology/@stormProject}" projectId="100" purpose="properties" purposeAsTokenName="true" replace="true" src="com.gerkenip.storm/refimpl/art000116">

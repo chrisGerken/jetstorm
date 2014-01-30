@@ -281,8 +281,6 @@
 
     <ws:file path="{$topology/@stormProject}/src/main/java/{$topology/@utilDir}/{$topology/@loggerJava}.java" template="templates/topology/loggerJava.jet" replace="true" />
 
-    <ws:file path="{$topology/@stormProject}/src/main/java/{$topology/@utilDir}/{$topology/@taskHookJava}.java" template="templates/topology/taskHookJava.jet" replace="true" />
-
     <ws:file path="{$topology/@stormProject}/src/main/resources/logging.properties" template="templates/topology/loggingProperties.jet" replace="true" />
 
     <ws:file path="{$topology/@stormProject}/src/test/java/{$topology/@mockDir}/MockedBoltOutputCollector.java" template="templates/topology/mockedboltoutputcollectorJava.jet" replace="true" />
