@@ -110,7 +110,7 @@ public class <c:get select="$topology/@topologyJava" /> {
 			} catch (NumberFormatException e) {
 				sleepMinutes = 1;
 			}
-			new AlarmClock(sleepMinutes * 60000,5*60000).go();
+			AlarmClock.go(sleepMinutes * 60000,5*60000);
 			
 			getLocalCluster().killTopology(topologyName);
 			getLocalCluster().shutdown();
