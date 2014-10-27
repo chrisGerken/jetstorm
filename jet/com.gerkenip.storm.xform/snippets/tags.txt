@@ -31,6 +31,7 @@ Tokens for topology
 	<c:get select="$topology/@mavenGroupId" />
 	<c:get select="$topology/@basePackage" />
 	<c:get select="$topology/@provider" />
+	<c:get select="$topology/@monitorProject" />
 
 
 Tokens for root

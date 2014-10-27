@@ -38,6 +38,7 @@
     <c:set select="$topology" name="iLoggerJava">I<c:get select="$topology/@name" />Logger</c:set>
     <c:set select="$topology" name="loggerJava"><c:get select="$topology/@name" />Logger</c:set>
     <c:set select="$topology" name="taskHookJava">TaskHook</c:set>
+    <c:set select="$topology" name="monitorProject"><c:get select="$topology/@artifactIdPrefix" />-monitor</c:set>
 
     *** Begin custom model updates for topology (4)
 
@@ -243,6 +244,7 @@
 
     <ws:project name="{$topology/@allProject}" />
     <ws:project name="{$topology/@stormProject}" />
+    <ws:project name="{$topology/@monitorProject}" />
     <ws:folder path="{$topology/@allProject}/src/main/java" />
     <ws:folder path="{$topology/@allProject}/src/main/resources" />
     <ws:folder path="{$topology/@allProject}/src/test/java" />
@@ -294,6 +296,16 @@
     <ws:file path="{$topology/@stormProject}/src/test/java/{$topology/@mockDir}/MockedTuple.java" template="templates/topology/mockedtupleJava.jet" replace="true" />
 
     <ws:file path="{$topology/@stormProject}/{$topology/@name}TopologySummary" template="templates/topology/topologySummaryGraphviz.jet" replace="true" />
+
+    <ws:file path="{$topology/@monitorProject}/.project" template="templates/topology/monitorProject.jet" replace="true" />
+
+    <ws:file path="{$topology/@monitorProject}/StormMonitor.html" template="templates/topology/monitorHtml.jet" replace="true" />
+
+    <ws:copyFile target="{$topology/@monitorProject}/js/Chart.min.js" src="templates/topology/chartJs" replace="true" />
+
+    <ws:copyFile target="{$topology/@monitorProject}/js/jquery.min.js" src="templates/topology/jqueryJs" replace="true" />
+
+    <ws:copyFile target="{$topology/@monitorProject}/js/gerken.storm.monitor.js" src="templates/topology/monitorJs" replace="true" />
 
 
     *** Begin custom generation updates for topology (4)

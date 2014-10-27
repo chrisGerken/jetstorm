@@ -9,7 +9,6 @@ import <c:get select="$topology/@boltPkg" />.*;
 import <c:get select="$topology/@utilPkg" />.AlarmClock;
 import <c:get select="$topology/@utilPkg" />.<c:get select="$topology/@loggerJava" />;
 import <c:get select="$topology/@utilPkg" />.<c:get select="$topology/@iLoggerJava" />;
-import <c:get select="$topology/@utilPkg" />.<c:get select="$topology/@taskHookJava" />;
 
 import backtype.storm.Config;
 import backtype.storm.ILocalCluster;
