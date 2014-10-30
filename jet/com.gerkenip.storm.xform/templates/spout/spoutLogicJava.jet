@@ -101,7 +101,6 @@ public class <c:get select="$spout/@spoutLogicJava" /> implements Serializable {
 
 <c:userRegion>// Begin custom methods<c:initialCode> 
 
-
 </c:initialCode>// End custom methods</c:userRegion> 
 
 }
