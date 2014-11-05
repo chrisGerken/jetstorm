@@ -299,7 +299,7 @@
 
     <ws:file path="{$topology/@monitorProject}/.project" template="templates/topology/monitorProject.jet" replace="true" />
 
-    <ws:file path="{$topology/@monitorProject}/StormMonitor.html" template="templates/topology/monitorHtml.jet" replace="true" />
+    <ws:file path="{$topology/@monitorProject}/StormMonitor.html" template="templates/topology/monitorHtml.jet" replace="false" />
 
     <ws:copyFile target="{$topology/@monitorProject}/js/Chart.min.js" src="templates/topology/chartJs" replace="true" />
 
