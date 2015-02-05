@@ -1,0 +1,5 @@
+mvn -e exec:java -Dexec.classpathScope=compile -Dexec.mainClass=com.gerken.sofa.topology.StackoverflowAnalyticsTopology -Djava.util.logging.config.file=src/main/resources/logging.properties
+
+#To execute in production
+#storm jar stackoverflow-analytics-storm-1.0.0-SNAPSHOT-jar-with-dependencies.jar com.gerken.sofa.topology.StackoverflowAnalyticsTopology prod -Djava.util.logging.config.file=prod.logging.properties
+

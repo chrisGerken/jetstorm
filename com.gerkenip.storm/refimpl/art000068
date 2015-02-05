@@ -1,0 +1,4 @@
+
+Long now = System.currentTimeMillis() / 1000;
+now = now - 60 * 60 * 24;
+System.out.println(new java.util.Date(now*1000));

@@ -60,10 +60,6 @@ public class <c:get select="$bolt/@boltLogicJava" /> implements Serializable {
 
 <c:userRegion>// Begin custom methods<c:initialCode> 
 
-	public void sleep(long msec) {
-		try { Thread.sleep(msec); } catch (Throwable t) {  }
-	}
-
 </c:initialCode>// End custom methods</c:userRegion> 
 
 }

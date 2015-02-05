@@ -1,0 +1,117 @@
+package com.gerken.sofa.logic;
+
+	// Begin imports 
+
+import com.gerken.sofa.bean.*;
+import com.gerken.sofa.bolt.IAnswerReaderBolt;
+import com.gerken.sofa.bolt.ITermRepStdDevBolt;
+import com.gerken.sofa.topology.StackoverflowAnalyticsTopology;
+import com.gerken.sofa.util.StackoverflowAnalyticsLogger;
+import com.gerken.sofa.util.IStackoverflowAnalyticsLogger;
+import com.gerken.sofa.util.StdDevCalc;
+
+import backtype.storm.task.TopologyContext;
+import backtype.storm.tuple.Tuple;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
+	// End imports 
+
+public class TermRepStdDevBoltLogic implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+		
+		// Begin declarations 
+
+    private static final IStackoverflowAnalyticsLogger log = StackoverflowAnalyticsTopology.getLogger();
+    private HashMap<String, StdDevCalc> map = new HashMap<String, StdDevCalc>();
+    
+		// End declarations 
+		
+    public void readFromTermStats(TermStat termStat, ITermRepStdDevBolt bolt) {
+
+			// Begin readFromTermStats() logic 
+
+		String term = termStat.getQuestionTerm();
+		String tag = termStat.getQuestionTag();
+    	String key = tag + "::" + term;
+    	Double score = (double) termStat.getAnswerRep();
+    	
+    	StdDevCalc calc = map.get(key);
+    	if (calc == null) {
+    		calc = new StdDevCalc(key);
+    		map.put(key,calc);
+    	}
+
+    	boolean wasPositive = calc.getMean() > calc.getStdDev();
+    	boolean wasNegative = calc.getMean() < calc.getStdDev();
+    	
+    	calc.add(score);
+
+    	boolean isPositive = calc.getMean() > calc.getStdDev();
+    	boolean isNegative = calc.getMean() < calc.getStdDev();
+    	boolean isNeutral = !isPositive & !isNegative;
+    	
+    	if (isPositive) {
+ //       	System.out.println(calc.toString());
+    	}
+    	if ((wasPositive&isNegative) | (isPositive&wasNegative)) {
+    		double expectedRep = calc.getConfMin();
+    		String userId = termStat.getUserId();
+    		MeaningfulTerm meaningfulTerm = new MeaningfulTerm(term, tag, isPositive, isNegative, calc.getMean(), userId);
+    		bolt.emitToMeaningfulTermsWithoutAnchor(meaningfulTerm);
+    	}
+    	
+    	// End readFromTermStats() logic 
+
+    }
+
+    public void prepare(Map conf, TopologyContext context, ITermRepStdDevBolt bolt) {
+
+			// Begin prepare() logic 
+
+
+			// End prepare() logic 
+
+    }
+
+	/*
+    *  NOTE: This method is not guaranteed to get called! Do not depend on it!
+	*/
+    public void cleanup(ITermRepStdDevBolt bolt) {
+
+			// Begin cleanup() logic 
+
+
+			// End cleanup() logic 
+
+    }
+
+// Begin custom methods 
+
+    public void report() {
+    	StdDevCalc sd[] = new StdDevCalc[map.size()];
+    	map.values().toArray(sd);
+    	Arrays.sort(sd);
+
+    	FileWriter fw = null;
+		try {
+			fw = new FileWriter("/home/chrisgerken/Documents/sofdev.txt");
+			for (int i = 0; i < sd.length; i++) {
+				fw.write(sd[i].toString()+"\n");
+			}
+		} catch (IOException e1) { 
+			
+		} finally {
+	    	try { fw.close(); } catch (Exception e) { } 
+		}
+    }
+    
+// End custom methods 
+
+}

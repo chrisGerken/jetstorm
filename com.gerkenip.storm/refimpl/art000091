@@ -1,0 +1,94 @@
+package com.gerken.sofa.logic;
+
+	// Begin imports 
+
+import com.gerken.sofa.bean.*;
+import com.gerken.sofa.bolt.INewQuestionReaderBolt;
+import com.gerken.sofa.topology.StackoverflowAnalyticsTopology;
+import com.gerken.sofa.util.FormatUtil;
+import com.gerken.sofa.util.StackoverflowAnalyticsLogger;
+import com.gerken.sofa.util.IStackoverflowAnalyticsLogger;
+import com.gerkenip.stackoverflow.model.Question;
+import com.gerkenip.stackoverflow.model.Tag;
+import com.gerkenip.stackoverflow.model.User;
+
+import backtype.storm.task.TopologyContext;
+import backtype.storm.tuple.Tuple;
+
+import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Map;
+
+	// End imports 
+
+public class NewQuestionReaderBoltLogic implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+		
+		// Begin declarations 
+
+    private static final IStackoverflowAnalyticsLogger log = StackoverflowAnalyticsTopology.getLogger();
+    private HashSet<Long> uniques = new HashSet<Long>();
+    
+		// End declarations 
+		
+    public void readFromTags(EarnedTagInfo earnedTagInfo, INewQuestionReaderBolt bolt) {
+
+			// Begin readFromTags() logic 
+
+    	String userId = earnedTagInfo.getUserId();
+    	String tag = earnedTagInfo.getTag();
+    	int count = earnedTagInfo.getCount();
+
+    	long since = System.currentTimeMillis() / 1000;
+    	since = since - 60 * 60 * 24;
+
+    	if (count > 20) {
+    		Question question[] = Question.get(tag, since);
+    		for (int j = 0; j < question.length; j++) {
+    			Long questionId = question[j].getId();
+    			if (!uniques.contains(questionId)) {
+        			String questionText = question[j].getBody();
+        			String questionTags = FormatUtil.flatten(question[j].getTags());
+        			String ownerId = question[j].getOwnerId();
+        			int ownerRep = question[j].getOwnerReputation();
+        			if (ownerRep > 0) {
+            			NewQuestion newQuestion = new NewQuestion(questionId, questionText, questionTags, ownerId, ownerRep, userId);
+            			bolt.emitToNewQuestionsWithoutAnchor(newQuestion);
+        			}
+    				uniques.add(questionId);
+    			}
+    		}
+    	}
+    	
+			// End readFromTags() logic 
+
+    }
+
+    public void prepare(Map conf, TopologyContext context, INewQuestionReaderBolt bolt) {
+
+			// Begin prepare() logic 
+
+
+			// End prepare() logic 
+
+    }
+
+	/*
+    *  NOTE: This method is not guaranteed to get called! Do not depend on it!
+	*/
+    public void cleanup(INewQuestionReaderBolt bolt) {
+
+			// Begin cleanup() logic 
+
+
+			// End cleanup() logic 
+
+    }
+
+// Begin custom methods 
+
+
+// End custom methods 
+
+}

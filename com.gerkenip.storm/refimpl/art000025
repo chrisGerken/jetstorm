@@ -1,0 +1,57 @@
+package com.gerken.sofa.bean;
+
+// Begin imports 
+
+import static org.junit.Assert.fail;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
+import org.codehaus.jettison.json.JSONObject;
+import org.junit.Test;
+
+// End imports 
+
+public class MeaningfulTermTest {
+
+	@Test
+	public void testJsonification() {
+		try {
+			new MeaningfulTerm(new JSONObject(MeaningfulTerm.sample().toJsonString()));
+		} catch (Exception e) {
+			fail("Failed JSONification");
+		}
+	}
+	
+	@Test
+	public void testTupilization() {
+		MeaningfulTerm.sample().asValues();
+	}
+
+	@Test
+	public void testSerialization() {
+		
+		try {
+
+			serDeser(MeaningfulTerm.sample());
+			serDeser(new MeaningfulTerm());
+			
+		} catch (Throwable t) {
+			fail("Object not serializable: "+t);
+		}
+
+	}
+
+	private MeaningfulTerm serDeser(MeaningfulTerm obj) throws Throwable {
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		ObjectOutputStream oos = new ObjectOutputStream(baos);
+		oos.writeObject(obj);
+		oos.close();
+		ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(baos.toByteArray()));
+		return (MeaningfulTerm) ois.readObject();
+	}
+
+	
+}

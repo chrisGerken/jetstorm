@@ -1,0 +1,103 @@
+package com.gerken.sofa.logic;
+
+	// Begin imports 
+
+import com.gerken.sofa.bean.*;
+import com.gerken.sofa.bolt.ITermPredictorBolt;
+import com.gerken.sofa.topology.StackoverflowAnalyticsTopology;
+import com.gerken.sofa.util.StackoverflowAnalyticsLogger;
+import com.gerken.sofa.util.IStackoverflowAnalyticsLogger;
+import com.gerken.sofa.util.TermPredictor;
+
+import backtype.storm.task.TopologyContext;
+import backtype.storm.tuple.Tuple;
+
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+
+	// End imports 
+
+public class TermPredictorBoltLogic implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+		
+		// Begin declarations 
+
+    private static final IStackoverflowAnalyticsLogger log = StackoverflowAnalyticsTopology.getLogger();
+    
+    private HashMap<String, TermPredictor> predictors = new HashMap<String, TermPredictor>();
+    
+		// End declarations 
+		
+    public void readFromMeaningfulTerms(MeaningfulTerm meaningfulTerm, ITermPredictorBolt bolt) {
+
+			// Begin readFromMeaningfulTerms() logic 
+
+    	String userId = meaningfulTerm.getUserId();
+    	TermPredictor predictor = predictors.get(userId);
+    	if (predictor == null) {
+    		predictor = new TermPredictor();
+    		predictors.put(userId,predictor);
+    	}
+    	predictor.add(meaningfulTerm);
+     	
+    	ReputationPrediction pred[] = predictor.predict(userId);
+    	
+    	for (int i = 0; i < pred.length; i++) {
+    		bolt.emitToPredictionsByTermsWithoutAnchor(pred[i]);
+    	}
+    	
+			// End readFromMeaningfulTerms() logic 
+
+    }
+		
+    public void readFromNewQuestionTerms(NewQuestionTerm newQuestionTerm, ITermPredictorBolt bolt) {
+
+			// Begin readFromNewQuestionTerms() logic 
+
+    	String userId = newQuestionTerm.getUserId();
+    	TermPredictor predictor = predictors.get(userId);
+    	if (predictor == null) {
+    		predictor = new TermPredictor();
+    		predictors.put(userId,predictor);
+    	}
+    	predictor.add(newQuestionTerm);
+     	
+    	ReputationPrediction pred[] = predictor.predict(userId);
+    	
+    	for (int i = 0; i < pred.length; i++) {
+        	bolt.emitToPredictionsByTermsWithoutAnchor(pred[i]);
+    	}
+    	
+			// End readFromNewQuestionTerms() logic 
+
+    }
+
+    public void prepare(Map conf, TopologyContext context, ITermPredictorBolt bolt) {
+
+			// Begin prepare() logic 
+
+
+			// End prepare() logic 
+
+    }
+
+	/*
+    *  NOTE: This method is not guaranteed to get called! Do not depend on it!
+	*/
+    public void cleanup(ITermPredictorBolt bolt) {
+
+			// Begin cleanup() logic 
+
+
+			// End cleanup() logic 
+
+    }
+
+// Begin custom methods 
+
+
+// End custom methods 
+
+}

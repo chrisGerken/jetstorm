@@ -1,0 +1,26 @@
+package com.gerken.sofa.util;
+
+import java.util.StringTokenizer;
+
+public class FormatUtil {
+
+	public static String flatten(String[] str) {
+		String result = "";
+		String delim = "";
+		for (int i = 0; i < str.length; i++) {
+			result = result + delim + str[i];
+			delim = "\t";
+		}
+		return result;
+	}
+
+	public static String[] split(String str) {
+		StringTokenizer st = new StringTokenizer(str, "\t");
+		String result[] = new String[st.countTokens()];
+		for (int i = 0; i < result.length; i++) {
+			result[i] = st.nextToken();
+		}
+		return result;
+	}
+	
+}

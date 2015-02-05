@@ -1,0 +1,76 @@
+package com.gerken.sofa.util;
+
+import java.util.HashMap;
+import java.util.Set;
+
+public class AggregatePrediction implements Comparable<AggregatePrediction> {
+
+	private long questionId;
+	private HashMap<String, Double> scores = new HashMap<String, Double>();
+	private HashMap<String, Integer> ranks = new HashMap<String, Integer>();
+	public static String currentMetric;
+	
+	public AggregatePrediction(long questionId) {
+		this.questionId = questionId;
+	}
+
+	public void setRank(String metric, int rank) {
+		Integer best = getRank("Best");
+		if ((best == null) || (best > rank)) {
+			ranks.put("Best", rank);
+		}
+		ranks.put(metric, rank);
+	}
+
+	public Integer getRank(String metric) {
+		return ranks.get(metric);
+	}
+
+	public void setScore(String metric, double score) {
+		scores.put(metric, score);
+	}
+
+	public Double score(String metric) {
+		return scores.get(metric);
+	}
+	
+	public boolean hasMetric(String metric) {
+		return score(metric) != null;
+	}
+	
+	public Set<String> getMetrics() {
+		return scores.keySet();
+	}
+	
+	@Override
+	public int compareTo(AggregatePrediction o) {
+		if (o instanceof AggregatePrediction) {
+			AggregatePrediction other = (AggregatePrediction) o;
+			if (currentMetric.equals("Best")) {
+				if (other.getRank("Best") < getRank("Best")) { return  1; }
+				if (other.getRank("Best") > getRank("Best")) { return -1; }
+				return 0;
+			}
+			
+			if (other.hasMetric(currentMetric) && hasMetric(currentMetric)) { 
+				if (other.score(currentMetric) < score(currentMetric)) { return -1; }
+				if (other.score(currentMetric) > score(currentMetric)) { return  1; }
+				return 0;
+			}
+			if (other.hasMetric(currentMetric)) { 
+				return -1;
+			}
+			return 1;
+		}
+		return 0;
+	}
+
+	public long getQuestionId() {
+		return questionId;
+	}
+
+	public void removeBestRank() {
+		ranks.remove("Best");
+	}
+
+}

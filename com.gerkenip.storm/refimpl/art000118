@@ -1,0 +1,29 @@
+# production environment properties
+
+topology.name=Fred
+topology.workers=2
+topology.run.locallly=false
+topology.message.timeout.secs=300
+
+UserIdReader.parallelismHint=1
+UserReader.parallelismHint=1
+QuestionReader.parallelismHint=1
+QuestionParser.parallelismHint=1
+OpRepAnalytics.parallelismHint=1
+TermRepStdDev.parallelismHint=1
+TermPredictor.parallelismHint=3
+OpRepPredictor.parallelismHint=1
+NewQuestionReader.parallelismHint=1
+NewQuestionParser.parallelismHint=1
+ReputationPredictor.parallelismHint=1
+
+event.java.logging=false
+event.grey.logging=true
+event.visualization.logging=false
+
+
+# Begin custom properties
+
+
+
+# End custom properties

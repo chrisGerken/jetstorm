@@ -1,0 +1,102 @@
+package com.gerken.sofa.util;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+
+import com.gerken.sofa.bean.MeaningfulTerm;
+import com.gerken.sofa.bean.NewQuestionTerm;
+import com.gerken.sofa.bean.ReputationPrediction;
+
+public class TermPredictor {
+
+	private HashMap<String, HashSet<String>> goodTerms = new HashMap<String, HashSet<String>>();
+	private ArrayList<NewQuestionTerm> newTerms = new ArrayList<NewQuestionTerm>();
+	
+	public TermPredictor() {
+
+	}
+
+	public void add(MeaningfulTerm mterm) {
+		String term = mterm.getTerm();
+		String tag = mterm.getTag();
+		HashSet<String> terms = goodTerms.get(tag);
+		if (terms==null) {
+			terms = new HashSet<String>();
+			goodTerms.put(tag, terms);
+		}
+		if (mterm.getPositive()==mterm.getNegative()) {
+			// no value
+			if (terms.contains(term)) {
+				terms.remove(term);
+			}
+		} else if (mterm.getNegative()){
+			// no value
+			if (terms.contains(term)) {
+				terms.remove(term);
+			}
+		} else {
+			// good term
+			terms.add(term);
+		}
+	}
+
+	public void add(NewQuestionTerm nqterm) {
+		newTerms.add(nqterm);
+	}
+	
+	public void report() {
+		System.out.println("\n\n");
+		Iterator<String> tags = goodTerms.keySet().iterator();
+		while (tags.hasNext()) {
+			StringBuffer sb = new StringBuffer();
+			String tag = tags.next();
+			sb.append(tag+" : ");
+			HashSet<String> terms = goodTerms.get(tag);
+			Iterator<String> iter = terms.iterator();
+			while (iter.hasNext()) {
+				sb.append(iter.next()+"  ");
+			}
+			System.out.println(sb.toString());
+		}
+
+	}
+
+	public ReputationPrediction[] predict(String userId) {
+		ArrayList<ReputationPrediction> preds = new ArrayList<ReputationPrediction>();
+		HashMap<Long, Integer> scores = new HashMap<Long, Integer>();
+		
+		Iterator<NewQuestionTerm> iter = newTerms.iterator();
+		while (iter.hasNext()) {
+			NewQuestionTerm nqt = iter.next();
+			String term = nqt.getTerm();
+			String tag = nqt.getTag();
+			Long qid = nqt.getQuestionId();
+			
+			HashSet<String> terms = goodTerms.get(tag);
+			if ((terms != null) && (terms.contains(term))) {
+				Integer score = scores.get(qid);
+				if (score == null) {
+					score = 0;
+				}
+				score++;
+				scores.put(qid, score);
+			}
+		}
+		
+		Iterator<Long> ids = scores.keySet().iterator();
+		while (ids.hasNext()) {
+			Long questionId = ids.next();
+			Integer score = scores.get(questionId);
+			Double rep = (double) (score); 
+			ReputationPrediction pred = new ReputationPrediction(rep, questionId, userId, "TermPredictor");
+			preds.add(pred);
+		}
+		
+		ReputationPrediction pred[] = new ReputationPrediction[preds.size()];
+		preds.toArray(pred);
+		return pred;
+	}
+
+}

@@ -1,0 +1,30 @@
+package com.gerken.sofa.util;
+
+import org.apache.commons.math.stat.ranking.NaNStrategy;
+
+public class Point {
+
+	private double x;
+	private double y;
+	
+	public Point(double x, double y) {
+		this.x = x;
+		this.y = y;
+		if ((Double.isNaN(x)) | (Double.isNaN(x))) {
+			System.out.println("NaN found");
+		}
+	}
+
+	public double getX() {
+		return x;
+	}
+
+	public double getY() {
+		return y;
+	}
+	
+	public String toString() {
+		return "("+x+","+y+")";
+	}
+
+}

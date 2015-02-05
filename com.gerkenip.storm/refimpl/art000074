@@ -1,0 +1,36 @@
+package com.gerken.sofa.bolt;
+
+import backtype.storm.tuple.Tuple;
+
+import com.gerken.sofa.bean.*;
+
+public interface IQuestionParserBolt {
+
+	/*
+	 *  Emits an instance of TermStat to stream TermStats
+	 */
+	public void emitToTermStats(TermStat termStat);
+	
+	/*
+	 *  Emits an instance of TermStat to stream TermStats
+	 */
+	public void emitToTermStatsWithoutAnchor(TermStat termStat);
+
+
+	/*
+	 *  Emits an instance of RepStat to stream RepStats
+	 */
+	public void emitToRepStats(RepStat repStat);
+	
+	/*
+	 *  Emits an instance of RepStat to stream RepStats
+	 */
+	public void emitToRepStatsWithoutAnchor(RepStat repStat);
+
+    public void ack();
+
+    public void fail();
+
+	public int getTaskId();
+
+}

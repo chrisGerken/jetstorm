@@ -1,0 +1,57 @@
+package com.gerken.sofa.bean;
+
+// Begin imports 
+
+import static org.junit.Assert.fail;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
+import org.codehaus.jettison.json.JSONObject;
+import org.junit.Test;
+
+// End imports 
+
+public class NewQuestionTermTest {
+
+	@Test
+	public void testJsonification() {
+		try {
+			new NewQuestionTerm(new JSONObject(NewQuestionTerm.sample().toJsonString()));
+		} catch (Exception e) {
+			fail("Failed JSONification");
+		}
+	}
+	
+	@Test
+	public void testTupilization() {
+		NewQuestionTerm.sample().asValues();
+	}
+
+	@Test
+	public void testSerialization() {
+		
+		try {
+
+			serDeser(NewQuestionTerm.sample());
+			serDeser(new NewQuestionTerm());
+			
+		} catch (Throwable t) {
+			fail("Object not serializable: "+t);
+		}
+
+	}
+
+	private NewQuestionTerm serDeser(NewQuestionTerm obj) throws Throwable {
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		ObjectOutputStream oos = new ObjectOutputStream(baos);
+		oos.writeObject(obj);
+		oos.close();
+		ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(baos.toByteArray()));
+		return (NewQuestionTerm) ois.readObject();
+	}
+
+	
+}

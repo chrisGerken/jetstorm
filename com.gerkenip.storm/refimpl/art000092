@@ -1,0 +1,80 @@
+package com.gerken.sofa.logic;
+
+	// Begin imports 
+
+import com.gerken.sofa.bean.*;
+import com.gerken.sofa.bolt.IOpRepAnalyticsBolt;
+import com.gerken.sofa.topology.StackoverflowAnalyticsTopology;
+import com.gerken.sofa.util.RepRegressionCalc;
+import com.gerken.sofa.util.StackoverflowAnalyticsLogger;
+import com.gerken.sofa.util.IStackoverflowAnalyticsLogger;
+
+import backtype.storm.task.TopologyContext;
+import backtype.storm.tuple.Tuple;
+
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+
+	// End imports 
+
+public class OpRepAnalyticsBoltLogic implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+		
+		// Begin declarations 
+
+    private static final IStackoverflowAnalyticsLogger log = StackoverflowAnalyticsTopology.getLogger();
+    private HashMap<String, RepRegressionCalc> calcs = new HashMap<String, RepRegressionCalc>();
+    
+		// End declarations 
+		
+    public void readFromRepStats(RepStat repStat, IOpRepAnalyticsBolt bolt) {
+
+			// Begin readFromRepStats() logic 
+
+    	String userId = repStat.getUserId();
+    	RepRegressionCalc calc = calcs.get(userId);
+    	if (calc == null) {
+    		calc = new RepRegressionCalc();
+    		calcs.put(userId, calc);
+    	}
+    	calc.add(repStat.getQuestionTag(),repStat.getOpRep(),repStat.getAnswerRep());
+    	
+    	OpRepBestFit orbf[] = calc.bestFits(userId);
+    	
+    	for (int i = 0; i <orbf.length; i++) {
+        	bolt.emitToOpRepBestFitsWithoutAnchor(orbf[i]);
+    	}
+    	
+			// End readFromRepStats() logic 
+
+    }
+
+    public void prepare(Map conf, TopologyContext context, IOpRepAnalyticsBolt bolt) {
+
+			// Begin prepare() logic 
+
+
+			// End prepare() logic 
+
+    }
+
+	/*
+    *  NOTE: This method is not guaranteed to get called! Do not depend on it!
+	*/
+    public void cleanup(IOpRepAnalyticsBolt bolt) {
+
+			// Begin cleanup() logic 
+
+
+			// End cleanup() logic 
+
+    }
+
+// Begin custom methods 
+
+
+// End custom methods 
+
+}

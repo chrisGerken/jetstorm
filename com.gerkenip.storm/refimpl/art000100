@@ -1,0 +1,86 @@
+package com.gerken.sofa.logic;
+
+	// Begin imports 
+
+import com.gerken.sofa.bean.*;
+import com.gerken.sofa.bolt.IUserReaderBolt;
+import com.gerken.sofa.topology.StackoverflowAnalyticsTopology;
+import com.gerken.sofa.util.StackoverflowAnalyticsLogger;
+import com.gerken.sofa.util.IStackoverflowAnalyticsLogger;
+import com.gerkenip.stackoverflow.model.Answer;
+import com.gerkenip.stackoverflow.model.Tag;
+import com.gerkenip.stackoverflow.model.User;
+
+import backtype.storm.task.TopologyContext;
+import backtype.storm.tuple.Tuple;
+
+import java.io.Serializable;
+import java.util.Map;
+
+	// End imports 
+
+public class UserReaderBoltLogic implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+		
+		// Begin declarations 
+
+    private static final IStackoverflowAnalyticsLogger log = StackoverflowAnalyticsTopology.getLogger();
+
+		// End declarations 
+		
+    public void readFromUsers(UserSpec userSpec, IUserReaderBolt bolt) {
+
+			// Begin readFromUsers() logic 
+
+    	User user = User.get(userSpec.getUserId());
+    	Answer answer[] = user.getAnswers();
+    	
+    	for (int i = 0; i < answer.length; i++) {
+    		
+    		long answerId = answer[i].getAnswerId();
+    		String userId = userSpec.getUserId();
+    		long questionId = answer[i].getQuestionId();
+    		int userAnswerRep = answer[i].calculateRepEarned();
+    		int userTotalRep = user.getReputation();
+    		AnswerSpec answerSpec = new AnswerSpec(answerId, userId, questionId, userAnswerRep, userTotalRep);
+    		bolt.emitToAnswersWithoutAnchor(answerSpec);
+    		
+    	}
+    	
+    	Tag tag[] = user.getTags();
+    	for (int i = 0; i < tag.length; i++) {
+    		EarnedTagInfo earnedTagInfo = new EarnedTagInfo(userSpec.getUserId(), tag[i].getName(), tag[i].getCount());
+        	bolt.emitToTagsWithoutAnchor(earnedTagInfo);
+    	}
+			// End readFromUsers() logic 
+
+    }
+
+    public void prepare(Map conf, TopologyContext context, IUserReaderBolt bolt) {
+
+			// Begin prepare() logic 
+
+
+			// End prepare() logic 
+
+    }
+
+	/*
+    *  NOTE: This method is not guaranteed to get called! Do not depend on it!
+	*/
+    public void cleanup(IUserReaderBolt bolt) {
+
+			// Begin cleanup() logic 
+
+
+			// End cleanup() logic 
+
+    }
+
+// Begin custom methods 
+
+
+// End custom methods 
+
+}

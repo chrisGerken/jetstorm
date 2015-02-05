@@ -1,0 +1,25 @@
+package com.gerken.sofa.bolt;
+
+import backtype.storm.tuple.Tuple;
+
+import com.gerken.sofa.bean.*;
+
+public interface IOpRepPredictorBolt {
+
+	/*
+	 *  Emits an instance of ReputationPrediction to stream PredictionsByOpRep
+	 */
+	public void emitToPredictionsByOpRep(ReputationPrediction reputationPrediction);
+	
+	/*
+	 *  Emits an instance of ReputationPrediction to stream PredictionsByOpRep
+	 */
+	public void emitToPredictionsByOpRepWithoutAnchor(ReputationPrediction reputationPrediction);
+
+    public void ack();
+
+    public void fail();
+
+	public int getTaskId();
+
+}

@@ -1,0 +1,89 @@
+package com.gerken.sofa.logic;
+
+	// Begin imports 
+
+import com.gerken.sofa.bean.*;
+import com.gerken.sofa.bolt.IQuestionParserBolt;
+import com.gerken.sofa.topology.StackoverflowAnalyticsTopology;
+import com.gerken.sofa.util.StackoverflowAnalyticsLogger;
+import com.gerken.sofa.util.IStackoverflowAnalyticsLogger;
+import com.gerkenip.stackoverflow.util.TextCleaner;
+
+import backtype.storm.task.TopologyContext;
+import backtype.storm.tuple.Tuple;
+
+import java.io.Serializable;
+import java.util.Map;
+import java.util.StringTokenizer;
+
+	// End imports 
+
+public class QuestionParserBoltLogic implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+		
+		// Begin declarations 
+
+    private static final IStackoverflowAnalyticsLogger log = StackoverflowAnalyticsTopology.getLogger();
+
+		// End declarations 
+		
+    public void readFromQuestions(QuestionSpec questionSpec, IQuestionParserBolt bolt) {
+
+			// Begin readFromQuestions() logic 
+
+    	int opRep = questionSpec.getOwnerRep();
+    	int answerRep = questionSpec.getAnswerRep();
+    	String userId = questionSpec.getUserId();
+    	String tags = questionSpec.getQuestionTags();
+    	StringTokenizer st = new StringTokenizer(tags, "\t");
+    	String tag[] = new String[st.countTokens()];
+    	int i = 0;
+    	while (st.hasMoreTokens()) {
+    		tag[i] = st.nextToken();
+    		if (opRep > 0) {
+            	RepStat repStat = new RepStat(opRep, tag[i], answerRep, userId);
+            	bolt.emitToRepStatsWithoutAnchor(repStat);
+    		}
+    		i++;
+    	}
+    	
+    	String term[] = new TextCleaner().clean(questionSpec.getQuestionText());
+    	for (int t = 0; t < term.length; t++) {
+    		for (i = 0; i < tag.length; i++) {
+    	    	TermStat termStat = new TermStat(term[t], tag[i], questionSpec.getAnswerRep(), userId);
+    	    	bolt.emitToTermStatsWithoutAnchor(termStat);
+    		}
+    	}
+    	
+			// End readFromQuestions() logic 
+
+    }
+
+    public void prepare(Map conf, TopologyContext context, IQuestionParserBolt bolt) {
+
+			// Begin prepare() logic 
+
+
+			// End prepare() logic 
+
+    }
+
+	/*
+    *  NOTE: This method is not guaranteed to get called! Do not depend on it!
+	*/
+    public void cleanup(IQuestionParserBolt bolt) {
+
+			// Begin cleanup() logic 
+
+
+			// End cleanup() logic 
+
+    }
+
+// Begin custom methods 
+
+
+// End custom methods 
+
+}

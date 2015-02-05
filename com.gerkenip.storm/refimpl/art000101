@@ -1,0 +1,26 @@
+package com.gerken.sofa.spout;
+
+import com.gerken.sofa.bean.*;
+
+import java.util.Map;
+
+public interface IUserIdReaderSpout {
+
+    public Map<String, Object> getComponentConfiguration();
+
+    /*
+     * Unreliably emit an instance of UserSpec to stream Users.  
+     */
+	public void emitToUsers(UserSpec userSpec);
+
+
+    /*
+     * Reliably emit an instance of UserSpec to stream Users.
+     * The second parameter is to be used as a message ID for
+     * notification of message ack or fail.  
+     */
+	public void emitToUsers(UserSpec userSpec, UserSpec messageID);
+
+	public int getTaskId();
+
+}

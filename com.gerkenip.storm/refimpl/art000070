@@ -1,0 +1,36 @@
+package com.gerken.sofa.bolt;
+
+import backtype.storm.tuple.Tuple;
+
+import com.gerken.sofa.bean.*;
+
+public interface INewQuestionParserBolt {
+
+	/*
+	 *  Emits an instance of NewQuestionTerm to stream NewQuestionTerms
+	 */
+	public void emitToNewQuestionTerms(NewQuestionTerm newQuestionTerm);
+	
+	/*
+	 *  Emits an instance of NewQuestionTerm to stream NewQuestionTerms
+	 */
+	public void emitToNewQuestionTermsWithoutAnchor(NewQuestionTerm newQuestionTerm);
+
+
+	/*
+	 *  Emits an instance of NewQuestionOpInfo to stream NewQuestionOpInfos
+	 */
+	public void emitToNewQuestionOpInfos(NewQuestionOpInfo newQuestionOpInfo);
+	
+	/*
+	 *  Emits an instance of NewQuestionOpInfo to stream NewQuestionOpInfos
+	 */
+	public void emitToNewQuestionOpInfosWithoutAnchor(NewQuestionOpInfo newQuestionOpInfo);
+
+    public void ack();
+
+    public void fail();
+
+	public int getTaskId();
+
+}

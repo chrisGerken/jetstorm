@@ -1,0 +1,20 @@
+2013-09-06 11:30:37 SEVERE   AnswerReaderBolt execute Error executing Tuple 
+java.lang.NullPointerException
+	at com.gerkenip.elasticsearch.EsClient.putDocument(EsClient.java:87)
+	at com.gerkenip.stackoverflow.SofAccess.cacheDocument(SofAccess.java:51)
+	at com.gerkenip.stackoverflow.model.AbstractModelObject.cache(AbstractModelObject.java:130)
+	at com.gerkenip.stackoverflow.model.Answer.cache(Answer.java:32)
+	at com.gerkenip.stackoverflow.model.User.getAnswers(User.java:61)
+	at com.gerken.sofa.logic.AnswerReaderBoltLogic.readFromUsers(AnswerReaderBoltLogic.java:36)
+	at com.gerken.sofa.bolt.AnswerReaderBolt.execute(AnswerReaderBolt.java:61)
+	at backtype.storm.daemon.executor$fn__4050$tuple_action_fn__4052.invoke(executor.clj:566)
+	at backtype.storm.daemon.executor$mk_task_receiver$fn__3976.invoke(executor.clj:345)
+	at backtype.storm.disruptor$clojure_handler$reify__1606.onEvent(disruptor.clj:43)
+	at backtype.storm.utils.DisruptorQueue.consumeBatchToCursor(DisruptorQueue.java:79)
+	at backtype.storm.utils.DisruptorQueue.consumeBatchWhenAvailable(DisruptorQueue.java:58)
+	at backtype.storm.disruptor$consume_batch_when_available.invoke(disruptor.clj:62)
+	at backtype.storm.daemon.executor$fn__4050$fn__4059$fn__4106.invoke(executor.clj:658)
+	at backtype.storm.util$async_loop$fn__465.invoke(util.clj:377)
+	at clojure.lang.AFn.run(AFn.java:24)
+	at java.lang.Thread.run(Thread.java:724)
+ 

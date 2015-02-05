@@ -1,0 +1,13 @@
+/home/chrisgerken/workspaces/indigo/first/stackoverflow-analytics-data/src/main/java/com/gerken/sofa/bean/NewQuestionOpInfo.java
+/home/chrisgerken/workspaces/indigo/first/stackoverflow-analytics-data/src/main/java/com/gerken/sofa/bean/OpRepBestFit.java
+/home/chrisgerken/workspaces/indigo/first/stackoverflow-analytics-data/src/main/java/com/gerken/sofa/bean/RepStat.java
+/home/chrisgerken/workspaces/indigo/first/stackoverflow-analytics-data/src/main/java/com/gerken/sofa/bean/TermStat.java
+/home/chrisgerken/workspaces/indigo/first/stackoverflow-analytics-data/src/main/java/com/gerken/sofa/bean/UserSpec.java
+/home/chrisgerken/workspaces/indigo/first/stackoverflow-analytics-data/src/main/java/com/gerken/sofa/bean/ReputationPrediction.java
+/home/chrisgerken/workspaces/indigo/first/stackoverflow-analytics-data/src/main/java/com/gerken/sofa/bean/AnswerSpec.java
+/home/chrisgerken/workspaces/indigo/first/stackoverflow-analytics-data/src/main/java/com/gerken/sofa/exception/DataException.java
+/home/chrisgerken/workspaces/indigo/first/stackoverflow-analytics-data/src/main/java/com/gerken/sofa/bean/EarnedTagInfo.java
+/home/chrisgerken/workspaces/indigo/first/stackoverflow-analytics-data/src/main/java/com/gerken/sofa/bean/NewQuestion.java
+/home/chrisgerken/workspaces/indigo/first/stackoverflow-analytics-data/src/main/java/com/gerken/sofa/bean/NewQuestionTerm.java
+/home/chrisgerken/workspaces/indigo/first/stackoverflow-analytics-data/src/main/java/com/gerken/sofa/bean/QuestionSpec.java
+/home/chrisgerken/workspaces/indigo/first/stackoverflow-analytics-data/src/main/java/com/gerken/sofa/bean/MeaningfulTerm.java

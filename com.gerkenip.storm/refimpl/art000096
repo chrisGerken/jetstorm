@@ -1,0 +1,91 @@
+package com.gerken.sofa.logic;
+
+	// Begin imports 
+
+import com.gerken.sofa.bean.*;
+import com.gerken.sofa.bolt.IReputationPredictorBolt;
+import com.gerken.sofa.topology.StackoverflowAnalyticsTopology;
+import com.gerken.sofa.util.PredictionAggregator;
+import com.gerken.sofa.util.StackoverflowAnalyticsLogger;
+import com.gerken.sofa.util.IStackoverflowAnalyticsLogger;
+
+import backtype.storm.task.TopologyContext;
+import backtype.storm.tuple.Tuple;
+
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+
+	// End imports 
+
+public class ReputationPredictorBoltLogic implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+		
+		// Begin declarations 
+
+    private static final IStackoverflowAnalyticsLogger log = StackoverflowAnalyticsTopology.getLogger();
+    
+    private HashMap<String, PredictionAggregator> pas = new HashMap<String, PredictionAggregator>();
+    
+		// End declarations 
+		
+    public void readFromPredictionsByTerms(ReputationPrediction reputationPrediction, IReputationPredictorBolt bolt) {
+
+			// Begin readFromPredictionsByTerms() logic 
+
+    	read(reputationPrediction, bolt);
+    	
+			// End readFromPredictionsByTerms() logic 
+
+    }
+		
+    public void readFromPredictionsByOpRep(ReputationPrediction reputationPrediction, IReputationPredictorBolt bolt) {
+
+			// Begin readFromPredictionsByOpRep() logic 
+
+    	read(reputationPrediction, bolt);
+    	
+			// End readFromPredictionsByOpRep() logic 
+
+    }
+
+    public void prepare(Map conf, TopologyContext context, IReputationPredictorBolt bolt) {
+
+			// Begin prepare() logic 
+
+
+			// End prepare() logic 
+
+    }
+
+	/*
+    *  NOTE: This method is not guaranteed to get called! Do not depend on it!
+	*/
+    public void cleanup(IReputationPredictorBolt bolt) {
+
+			// Begin cleanup() logic 
+
+
+			// End cleanup() logic 
+
+    }
+
+// Begin custom methods 
+
+    public void read(ReputationPrediction reputationPrediction, IReputationPredictorBolt bolt) {
+
+    	String userId = reputationPrediction.getUserId();
+    	PredictionAggregator pa = pas.get(userId);
+    	if (pa == null) {
+    		pa = new PredictionAggregator(userId);
+    		pas.put(userId, pa);
+    	}
+    	pa.add(reputationPrediction);
+    	pa.report();
+    	
+    }
+
+// End custom methods 
+
+}

@@ -1,0 +1,63 @@
+package com.gerken.sofa.bolt;
+
+	// Begin imports 
+
+import static org.junit.Assert.fail;
+
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectOutputStream;
+import java.util.HashMap;
+
+import org.junit.Test;
+
+import backtype.storm.task.OutputCollector;
+
+import com.gerken.sofa.bean.*;
+import com.gerken.sofa.mock.*;
+
+	// End imports 
+
+public class NewQuestionReaderBoltTest  {
+	
+		// Begin declarations 
+
+		// End declarations 
+
+	@Test
+	public void testSerialization() {
+		
+		try {
+			new ObjectOutputStream(new ByteArrayOutputStream()).writeObject(new NewQuestionReaderBolt() );
+		} catch (Throwable t) {
+			fail("Class NewQuestionReaderBoltLogic is not serializable");
+		}
+
+	}
+
+	@Test
+	public void testReadFromTags() {
+
+		// Begin testReadFromTags logic 
+
+//		HashMap<String,Object> config = new HashMap<String,Object>();
+//		MockedBoltOutputCollector collector = new MockedBoltOutputCollector();
+//		
+//		MockedTuple tuple = new MockedTuple("Tags", EarnedTagInfo.sample().asValues()); 
+//		NewQuestionReaderBolt bolt = new NewQuestionReaderBolt();
+
+//		bolt.prepare(config,null,new OutputCollector(collector));
+//		bolt.execute(tuple);
+//		bolt.cleanup()
+
+			// Validate execution side effects by interrogating collector
+					
+		// End testReadFromTags logic 
+
+	}
+
+// Begin custom methods 
+
+
+// End custom methods 
+
+}

@@ -1,0 +1,277 @@
+<referenceImplementation exemplarID="com.gerkenip.storm" nextID="189" pathSeparator="/" refImplProjectName="com.gerkenip.storm" refImplFolder="refimpl" >
+	<project name="stackoverflow-analytics-all" id="art000001" location="">
+	<file path=".classpath" oEntry="art000002" refimpl="refimpl/art000002" entry="_classpath" folder="" file=".classpath" />
+	<file path=".project" oEntry="art000003" refimpl="refimpl/art000003" entry="_project" folder="" file=".project" />
+	<file path="pom.xml" oEntry="art000004" refimpl="refimpl/art000004" entry="pom_xml" folder="" file="pom.xml" />
+	<file path="target/stackoverflow-analytics-all-1.0.0-SNAPSHOT-jar-with-dependencies.jar" oEntry="art000005" refimpl="refimpl/art000005" entry="stackoverflow-analytics-all-1_0_0-SNAPSHOT-jar-with-dependencies_jar" folder="/target" file="stackoverflow-analytics-all-1.0.0-SNAPSHOT-jar-with-dependencies.jar" />
+	<folder path="src" />
+	<folder path="src/main" />
+	<folder path="src/main/java" />
+	<folder path="src/main/resources" />
+	<folder path="src/test" />
+	<folder path="src/test/java" />
+	<folder path="src/test/resources" />
+	<folder path="target" />
+	<folder path="target/archive-tmp" />
+	<folder path="target/classes" />
+	<folder path="target/test-classes" />
+	</project>
+	<project name="stackoverflow-analytics-data" id="art000006" location="">
+	<file path=".classpath" oEntry="art000007" refimpl="refimpl/art000007" entry="_classpath" folder="" file=".classpath" />
+	<file path=".project" oEntry="art000008" refimpl="refimpl/art000008" entry="_project" folder="" file=".project" />
+	<file path="pom.xml" oEntry="art000009" refimpl="refimpl/art000009" entry="pom_xml" folder="" file="pom.xml" />
+	<file path="src/main/java/com/gerken/sofa/bean/AnswerSpec.java" oEntry="art000010" refimpl="refimpl/art000010" entry="AnswerSpec_java" folder="/src/main/java/com/gerken/sofa/bean" file="AnswerSpec.java" />
+	<file path="src/main/java/com/gerken/sofa/bean/EarnedTagInfo.java" oEntry="art000011" refimpl="refimpl/art000011" entry="EarnedTagInfo_java" folder="/src/main/java/com/gerken/sofa/bean" file="EarnedTagInfo.java" />
+	<file path="src/main/java/com/gerken/sofa/bean/MeaningfulTerm.java" oEntry="art000012" refimpl="refimpl/art000012" entry="MeaningfulTerm_java" folder="/src/main/java/com/gerken/sofa/bean" file="MeaningfulTerm.java" />
+	<file path="src/main/java/com/gerken/sofa/bean/NewQuestion.java" oEntry="art000013" refimpl="refimpl/art000013" entry="NewQuestion_java" folder="/src/main/java/com/gerken/sofa/bean" file="NewQuestion.java" />
+	<file path="src/main/java/com/gerken/sofa/bean/NewQuestionOpInfo.java" oEntry="art000014" refimpl="refimpl/art000014" entry="NewQuestionOpInfo_java" folder="/src/main/java/com/gerken/sofa/bean" file="NewQuestionOpInfo.java" />
+	<file path="src/main/java/com/gerken/sofa/bean/NewQuestionTerm.java" oEntry="art000015" refimpl="refimpl/art000015" entry="NewQuestionTerm_java" folder="/src/main/java/com/gerken/sofa/bean" file="NewQuestionTerm.java" />
+	<file path="src/main/java/com/gerken/sofa/bean/OpRepBestFit.java" oEntry="art000016" refimpl="refimpl/art000016" entry="OpRepBestFit_java" folder="/src/main/java/com/gerken/sofa/bean" file="OpRepBestFit.java" />
+	<file path="src/main/java/com/gerken/sofa/bean/QuestionSpec.java" oEntry="art000017" refimpl="refimpl/art000017" entry="QuestionSpec_java" folder="/src/main/java/com/gerken/sofa/bean" file="QuestionSpec.java" />
+	<file path="src/main/java/com/gerken/sofa/bean/RepStat.java" oEntry="art000018" refimpl="refimpl/art000018" entry="RepStat_java" folder="/src/main/java/com/gerken/sofa/bean" file="RepStat.java" />
+	<file path="src/main/java/com/gerken/sofa/bean/ReputationPrediction.java" oEntry="art000019" refimpl="refimpl/art000019" entry="ReputationPrediction_java" folder="/src/main/java/com/gerken/sofa/bean" file="ReputationPrediction.java" />
+	<file path="src/main/java/com/gerken/sofa/bean/TermStat.java" oEntry="art000020" refimpl="refimpl/art000020" entry="TermStat_java" folder="/src/main/java/com/gerken/sofa/bean" file="TermStat.java" />
+	<file path="src/main/java/com/gerken/sofa/bean/UserSpec.java" oEntry="art000021" refimpl="refimpl/art000021" entry="UserSpec_java" folder="/src/main/java/com/gerken/sofa/bean" file="UserSpec.java" />
+	<file path="src/main/java/com/gerken/sofa/exception/DataException.java" oEntry="art000022" refimpl="refimpl/art000022" entry="DataException_java" folder="/src/main/java/com/gerken/sofa/exception" file="DataException.java" />
+	<file path="src/test/java/com/gerken/sofa/bean/AnswerSpecTest.java" oEntry="art000023" refimpl="refimpl/art000023" entry="AnswerSpecTest_java" folder="/src/test/java/com/gerken/sofa/bean" file="AnswerSpecTest.java" />
+	<file path="src/test/java/com/gerken/sofa/bean/EarnedTagInfoTest.java" oEntry="art000024" refimpl="refimpl/art000024" entry="EarnedTagInfoTest_java" folder="/src/test/java/com/gerken/sofa/bean" file="EarnedTagInfoTest.java" />
+	<file path="src/test/java/com/gerken/sofa/bean/MeaningfulTermTest.java" oEntry="art000025" refimpl="refimpl/art000025" entry="MeaningfulTermTest_java" folder="/src/test/java/com/gerken/sofa/bean" file="MeaningfulTermTest.java" />
+	<file path="src/test/java/com/gerken/sofa/bean/NewQuestionOpInfoTest.java" oEntry="art000026" refimpl="refimpl/art000026" entry="NewQuestionOpInfoTest_java" folder="/src/test/java/com/gerken/sofa/bean" file="NewQuestionOpInfoTest.java" />
+	<file path="src/test/java/com/gerken/sofa/bean/NewQuestionTermTest.java" oEntry="art000027" refimpl="refimpl/art000027" entry="NewQuestionTermTest_java" folder="/src/test/java/com/gerken/sofa/bean" file="NewQuestionTermTest.java" />
+	<file path="src/test/java/com/gerken/sofa/bean/NewQuestionTest.java" oEntry="art000028" refimpl="refimpl/art000028" entry="NewQuestionTest_java" folder="/src/test/java/com/gerken/sofa/bean" file="NewQuestionTest.java" />
+	<file path="src/test/java/com/gerken/sofa/bean/OpRepBestFitTest.java" oEntry="art000029" refimpl="refimpl/art000029" entry="OpRepBestFitTest_java" folder="/src/test/java/com/gerken/sofa/bean" file="OpRepBestFitTest.java" />
+	<file path="src/test/java/com/gerken/sofa/bean/QuestionSpecTest.java" oEntry="art000030" refimpl="refimpl/art000030" entry="QuestionSpecTest_java" folder="/src/test/java/com/gerken/sofa/bean" file="QuestionSpecTest.java" />
+	<file path="src/test/java/com/gerken/sofa/bean/RepStatTest.java" oEntry="art000031" refimpl="refimpl/art000031" entry="RepStatTest_java" folder="/src/test/java/com/gerken/sofa/bean" file="RepStatTest.java" />
+	<file path="src/test/java/com/gerken/sofa/bean/ReputationPredictionTest.java" oEntry="art000032" refimpl="refimpl/art000032" entry="ReputationPredictionTest_java" folder="/src/test/java/com/gerken/sofa/bean" file="ReputationPredictionTest.java" />
+	<file path="src/test/java/com/gerken/sofa/bean/TermStatTest.java" oEntry="art000033" refimpl="refimpl/art000033" entry="TermStatTest_java" folder="/src/test/java/com/gerken/sofa/bean" file="TermStatTest.java" />
+	<file path="src/test/java/com/gerken/sofa/bean/UserSpecTest.java" oEntry="art000034" refimpl="refimpl/art000034" entry="UserSpecTest_java" folder="/src/test/java/com/gerken/sofa/bean" file="UserSpecTest.java" />
+	<file path="target/stackoverflow-analytics-data-1.0.0-SNAPSHOT-jar-with-dependencies.jar" oEntry="art000035" refimpl="refimpl/art000035" entry="stackoverflow-analytics-data-1_0_0-SNAPSHOT-jar-with-dependencies_jar" folder="/target" file="stackoverflow-analytics-data-1.0.0-SNAPSHOT-jar-with-dependencies.jar" />
+	<file path="target/stackoverflow-analytics-data-1.0.0-SNAPSHOT.jar" oEntry="art000036" refimpl="refimpl/art000036" entry="stackoverflow-analytics-data-1_0_0-SNAPSHOT_jar" folder="/target" file="stackoverflow-analytics-data-1.0.0-SNAPSHOT.jar" />
+	<file path="target/classes/com/gerken/sofa/bean/AnswerSpec.class" oEntry="art000037" refimpl="refimpl/art000037" entry="AnswerSpec_class" folder="/target/classes/com/gerken/sofa/bean" file="AnswerSpec.class" />
+	<file path="target/classes/com/gerken/sofa/bean/EarnedTagInfo.class" oEntry="art000038" refimpl="refimpl/art000038" entry="EarnedTagInfo_class" folder="/target/classes/com/gerken/sofa/bean" file="EarnedTagInfo.class" />
+	<file path="target/classes/com/gerken/sofa/bean/MeaningfulTerm.class" oEntry="art000039" refimpl="refimpl/art000039" entry="MeaningfulTerm_class" folder="/target/classes/com/gerken/sofa/bean" file="MeaningfulTerm.class" />
+	<file path="target/classes/com/gerken/sofa/bean/NewQuestion.class" oEntry="art000040" refimpl="refimpl/art000040" entry="NewQuestion_class" folder="/target/classes/com/gerken/sofa/bean" file="NewQuestion.class" />
+	<file path="target/classes/com/gerken/sofa/bean/NewQuestionOpInfo.class" oEntry="art000041" refimpl="refimpl/art000041" entry="NewQuestionOpInfo_class" folder="/target/classes/com/gerken/sofa/bean" file="NewQuestionOpInfo.class" />
+	<file path="target/classes/com/gerken/sofa/bean/NewQuestionTerm.class" oEntry="art000042" refimpl="refimpl/art000042" entry="NewQuestionTerm_class" folder="/target/classes/com/gerken/sofa/bean" file="NewQuestionTerm.class" />
+	<file path="target/classes/com/gerken/sofa/bean/OpRepBestFit.class" oEntry="art000043" refimpl="refimpl/art000043" entry="OpRepBestFit_class" folder="/target/classes/com/gerken/sofa/bean" file="OpRepBestFit.class" />
+	<file path="target/classes/com/gerken/sofa/bean/QuestionSpec.class" oEntry="art000044" refimpl="refimpl/art000044" entry="QuestionSpec_class" folder="/target/classes/com/gerken/sofa/bean" file="QuestionSpec.class" />
+	<file path="target/classes/com/gerken/sofa/bean/RepStat.class" oEntry="art000045" refimpl="refimpl/art000045" entry="RepStat_class" folder="/target/classes/com/gerken/sofa/bean" file="RepStat.class" />
+	<file path="target/classes/com/gerken/sofa/bean/ReputationPrediction.class" oEntry="art000046" refimpl="refimpl/art000046" entry="ReputationPrediction_class" folder="/target/classes/com/gerken/sofa/bean" file="ReputationPrediction.class" />
+	<file path="target/classes/com/gerken/sofa/bean/TermStat.class" oEntry="art000047" refimpl="refimpl/art000047" entry="TermStat_class" folder="/target/classes/com/gerken/sofa/bean" file="TermStat.class" />
+	<file path="target/classes/com/gerken/sofa/bean/UserSpec.class" oEntry="art000048" refimpl="refimpl/art000048" entry="UserSpec_class" folder="/target/classes/com/gerken/sofa/bean" file="UserSpec.class" />
+	<file path="target/classes/com/gerken/sofa/exception/DataException.class" oEntry="art000049" refimpl="refimpl/art000049" entry="DataException_class" folder="/target/classes/com/gerken/sofa/exception" file="DataException.class" />
+	<file path="target/maven-archiver/pom.properties" oEntry="art000050" refimpl="refimpl/art000050" entry="pom_properties" folder="/target/maven-archiver" file="pom.properties" />
+	<file path="target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" oEntry="art000051" refimpl="refimpl/art000051" entry="createdFiles_lst" folder="/target/maven-status/maven-compiler-plugin/compile/default-compile" file="createdFiles.lst" />
+	<file path="target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" oEntry="art000052" refimpl="refimpl/art000052" entry="inputFiles_lst" folder="/target/maven-status/maven-compiler-plugin/compile/default-compile" file="inputFiles.lst" />
+	<folder path="src" />
+	<folder path="src/main" />
+	<folder path="src/main/java" />
+	<folder path="src/main/java/com" />
+	<folder path="src/main/java/com/gerken" />
+	<folder path="src/main/java/com/gerken/sofa" />
+	<folder path="src/main/java/com/gerken/sofa/bean" />
+	<folder path="src/main/java/com/gerken/sofa/exception" />
+	<folder path="src/main/resources" />
+	<folder path="src/test" />
+	<folder path="src/test/java" />
+	<folder path="src/test/java/com" />
+	<folder path="src/test/java/com/gerken" />
+	<folder path="src/test/java/com/gerken/sofa" />
+	<folder path="src/test/java/com/gerken/sofa/bean" />
+	<folder path="src/test/resources" />
+	<folder path="target" />
+	<folder path="target/archive-tmp" />
+	<folder path="target/classes" />
+	<folder path="target/classes/com" />
+	<folder path="target/classes/com/gerken" />
+	<folder path="target/classes/com/gerken/sofa" />
+	<folder path="target/classes/com/gerken/sofa/bean" />
+	<folder path="target/classes/com/gerken/sofa/exception" />
+	<folder path="target/generated-sources" />
+	<folder path="target/generated-sources/annotations" />
+	<folder path="target/maven-archiver" />
+	<folder path="target/maven-status" />
+	<folder path="target/maven-status/maven-compiler-plugin" />
+	<folder path="target/maven-status/maven-compiler-plugin/compile" />
+	<folder path="target/maven-status/maven-compiler-plugin/compile/default-compile" />
+	<folder path="target/test-classes" />
+	</project>
+	<project name="stackoverflow-analytics-storm" id="art000053" location="">
+	<file path=".classpath" oEntry="art000054" refimpl="refimpl/art000054" entry="_classpath" folder="" file=".classpath" />
+	<file path=".project" oEntry="art000055" refimpl="refimpl/art000055" entry="_project" folder="" file=".project" />
+	<file path="StackoverflowAnalytics.log.0" oEntry="art000056" refimpl="refimpl/art000056" entry="StackoverflowAnalytics_log_0" folder="" file="StackoverflowAnalytics.log.0" />
+	<file path="StackoverflowAnalytics.log.0.1" oEntry="art000057" refimpl="refimpl/art000057" entry="StackoverflowAnalytics_log_0_1" folder="" file="StackoverflowAnalytics.log.0.1" />
+	<file path="StackoverflowAnalytics.log.1" oEntry="art000058" refimpl="refimpl/art000058" entry="StackoverflowAnalytics_log_1" folder="" file="StackoverflowAnalytics.log.1" />
+	<file path="StackoverflowAnalytics.log.2" oEntry="art000059" refimpl="refimpl/art000059" entry="StackoverflowAnalytics_log_2" folder="" file="StackoverflowAnalytics.log.2" />
+	<file path="StackoverflowAnalytics.log.3" oEntry="art000060" refimpl="refimpl/art000060" entry="StackoverflowAnalytics_log_3" folder="" file="StackoverflowAnalytics.log.3" />
+	<file path="StackoverflowAnalytics.log.4" oEntry="art000061" refimpl="refimpl/art000061" entry="StackoverflowAnalytics_log_4" folder="" file="StackoverflowAnalytics.log.4" />
+	<file path="StackoverflowAnalyticsTopology" oEntry="art000062" refimpl="refimpl/art000062" entry="StackoverflowAnalyticsTopology" folder="" file="StackoverflowAnalyticsTopology" />
+	<file path="StackoverflowAnalyticsTopology.png" oEntry="art000063" refimpl="refimpl/art000063" entry="StackoverflowAnalyticsTopology_png" folder="" file="StackoverflowAnalyticsTopology.png" />
+	<file path="gen_graphics.sh" oEntry="art000064" refimpl="refimpl/art000064" entry="gen_graphics_sh" folder="" file="gen_graphics.sh" />
+	<file path="maven_run.sh" oEntry="art000065" refimpl="refimpl/art000065" entry="maven_run_sh" folder="" file="maven_run.sh" />
+	<file path="pom.xml" oEntry="art000066" refimpl="refimpl/art000066" entry="pom_xml" folder="" file="pom.xml" />
+	<file path="sofa_run.sh" oEntry="art000067" refimpl="refimpl/art000067" entry="sofa_run_sh" folder="" file="sofa_run.sh" />
+	<file path="tryme.jpage" oEntry="art000068" refimpl="refimpl/art000068" entry="tryme_jpage" folder="" file="tryme.jpage" />
+	<file path="src/main/java/com/gerken/sofa/bolt/IAnswerReaderBolt.java" oEntry="art000069" refimpl="refimpl/art000069" entry="IAnswerReaderBolt_java" folder="/src/main/java/com/gerken/sofa/bolt" file="IAnswerReaderBolt.java" />
+	<file path="src/main/java/com/gerken/sofa/bolt/INewQuestionParserBolt.java" oEntry="art000070" refimpl="refimpl/art000070" entry="INewQuestionParserBolt_java" folder="/src/main/java/com/gerken/sofa/bolt" file="INewQuestionParserBolt.java" />
+	<file path="src/main/java/com/gerken/sofa/bolt/INewQuestionReaderBolt.java" oEntry="art000071" refimpl="refimpl/art000071" entry="INewQuestionReaderBolt_java" folder="/src/main/java/com/gerken/sofa/bolt" file="INewQuestionReaderBolt.java" />
+	<file path="src/main/java/com/gerken/sofa/bolt/IOpRepAnalyticsBolt.java" oEntry="art000072" refimpl="refimpl/art000072" entry="IOpRepAnalyticsBolt_java" folder="/src/main/java/com/gerken/sofa/bolt" file="IOpRepAnalyticsBolt.java" />
+	<file path="src/main/java/com/gerken/sofa/bolt/IOpRepPredictorBolt.java" oEntry="art000073" refimpl="refimpl/art000073" entry="IOpRepPredictorBolt_java" folder="/src/main/java/com/gerken/sofa/bolt" file="IOpRepPredictorBolt.java" />
+	<file path="src/main/java/com/gerken/sofa/bolt/IQuestionParserBolt.java" oEntry="art000074" refimpl="refimpl/art000074" entry="IQuestionParserBolt_java" folder="/src/main/java/com/gerken/sofa/bolt" file="IQuestionParserBolt.java" />
+	<file path="src/main/java/com/gerken/sofa/bolt/IQuestionReaderBolt.java" oEntry="art000075" refimpl="refimpl/art000075" entry="IQuestionReaderBolt_java" folder="/src/main/java/com/gerken/sofa/bolt" file="IQuestionReaderBolt.java" />
+	<file path="src/main/java/com/gerken/sofa/bolt/IReputationPredictorBolt.java" oEntry="art000076" refimpl="refimpl/art000076" entry="IReputationPredictorBolt_java" folder="/src/main/java/com/gerken/sofa/bolt" file="IReputationPredictorBolt.java" />
+	<file path="src/main/java/com/gerken/sofa/bolt/ITermPredictorBolt.java" oEntry="art000077" refimpl="refimpl/art000077" entry="ITermPredictorBolt_java" folder="/src/main/java/com/gerken/sofa/bolt" file="ITermPredictorBolt.java" />
+	<file path="src/main/java/com/gerken/sofa/bolt/ITermRepStdDevBolt.java" oEntry="art000078" refimpl="refimpl/art000078" entry="ITermRepStdDevBolt_java" folder="/src/main/java/com/gerken/sofa/bolt" file="ITermRepStdDevBolt.java" />
+	<file path="src/main/java/com/gerken/sofa/bolt/IUserReaderBolt.java" oEntry="art000079" refimpl="refimpl/art000079" entry="IUserReaderBolt_java" folder="/src/main/java/com/gerken/sofa/bolt" file="IUserReaderBolt.java" />
+	<file path="src/main/java/com/gerken/sofa/bolt/NewQuestionParserBolt.java" oEntry="art000080" refimpl="refimpl/art000080" entry="NewQuestionParserBolt_java" folder="/src/main/java/com/gerken/sofa/bolt" file="NewQuestionParserBolt.java" />
+	<file path="src/main/java/com/gerken/sofa/bolt/NewQuestionReaderBolt.java" oEntry="art000081" refimpl="refimpl/art000081" entry="NewQuestionReaderBolt_java" folder="/src/main/java/com/gerken/sofa/bolt" file="NewQuestionReaderBolt.java" />
+	<file path="src/main/java/com/gerken/sofa/bolt/OpRepAnalyticsBolt.java" oEntry="art000082" refimpl="refimpl/art000082" entry="OpRepAnalyticsBolt_java" folder="/src/main/java/com/gerken/sofa/bolt" file="OpRepAnalyticsBolt.java" />
+	<file path="src/main/java/com/gerken/sofa/bolt/OpRepPredictorBolt.java" oEntry="art000083" refimpl="refimpl/art000083" entry="OpRepPredictorBolt_java" folder="/src/main/java/com/gerken/sofa/bolt" file="OpRepPredictorBolt.java" />
+	<file path="src/main/java/com/gerken/sofa/bolt/QuestionParserBolt.java" oEntry="art000084" refimpl="refimpl/art000084" entry="QuestionParserBolt_java" folder="/src/main/java/com/gerken/sofa/bolt" file="QuestionParserBolt.java" />
+	<file path="src/main/java/com/gerken/sofa/bolt/QuestionReaderBolt.java" oEntry="art000085" refimpl="refimpl/art000085" entry="QuestionReaderBolt_java" folder="/src/main/java/com/gerken/sofa/bolt" file="QuestionReaderBolt.java" />
+	<file path="src/main/java/com/gerken/sofa/bolt/ReputationPredictorBolt.java" oEntry="art000086" refimpl="refimpl/art000086" entry="ReputationPredictorBolt_java" folder="/src/main/java/com/gerken/sofa/bolt" file="ReputationPredictorBolt.java" />
+	<file path="src/main/java/com/gerken/sofa/bolt/TermPredictorBolt.java" oEntry="art000087" refimpl="refimpl/art000087" entry="TermPredictorBolt_java" folder="/src/main/java/com/gerken/sofa/bolt" file="TermPredictorBolt.java" />
+	<file path="src/main/java/com/gerken/sofa/bolt/TermRepStdDevBolt.java" oEntry="art000088" refimpl="refimpl/art000088" entry="TermRepStdDevBolt_java" folder="/src/main/java/com/gerken/sofa/bolt" file="TermRepStdDevBolt.java" />
+	<file path="src/main/java/com/gerken/sofa/bolt/UserReaderBolt.java" oEntry="art000089" refimpl="refimpl/art000089" entry="UserReaderBolt_java" folder="/src/main/java/com/gerken/sofa/bolt" file="UserReaderBolt.java" />
+	<file path="src/main/java/com/gerken/sofa/logic/NewQuestionParserBoltLogic.java" oEntry="art000090" refimpl="refimpl/art000090" entry="NewQuestionParserBoltLogic_java" folder="/src/main/java/com/gerken/sofa/logic" file="NewQuestionParserBoltLogic.java" />
+	<file path="src/main/java/com/gerken/sofa/logic/NewQuestionReaderBoltLogic.java" oEntry="art000091" refimpl="refimpl/art000091" entry="NewQuestionReaderBoltLogic_java" folder="/src/main/java/com/gerken/sofa/logic" file="NewQuestionReaderBoltLogic.java" />
+	<file path="src/main/java/com/gerken/sofa/logic/OpRepAnalyticsBoltLogic.java" oEntry="art000092" refimpl="refimpl/art000092" entry="OpRepAnalyticsBoltLogic_java" folder="/src/main/java/com/gerken/sofa/logic" file="OpRepAnalyticsBoltLogic.java" />
+	<file path="src/main/java/com/gerken/sofa/logic/OpRepPredictorBoltLogic.java" oEntry="art000093" refimpl="refimpl/art000093" entry="OpRepPredictorBoltLogic_java" folder="/src/main/java/com/gerken/sofa/logic" file="OpRepPredictorBoltLogic.java" />
+	<file path="src/main/java/com/gerken/sofa/logic/QuestionParserBoltLogic.java" oEntry="art000094" refimpl="refimpl/art000094" entry="QuestionParserBoltLogic_java" folder="/src/main/java/com/gerken/sofa/logic" file="QuestionParserBoltLogic.java" />
+	<file path="src/main/java/com/gerken/sofa/logic/QuestionReaderBoltLogic.java" oEntry="art000095" refimpl="refimpl/art000095" entry="QuestionReaderBoltLogic_java" folder="/src/main/java/com/gerken/sofa/logic" file="QuestionReaderBoltLogic.java" />
+	<file path="src/main/java/com/gerken/sofa/logic/ReputationPredictorBoltLogic.java" oEntry="art000096" refimpl="refimpl/art000096" entry="ReputationPredictorBoltLogic_java" folder="/src/main/java/com/gerken/sofa/logic" file="ReputationPredictorBoltLogic.java" />
+	<file path="src/main/java/com/gerken/sofa/logic/TermPredictorBoltLogic.java" oEntry="art000097" refimpl="refimpl/art000097" entry="TermPredictorBoltLogic_java" folder="/src/main/java/com/gerken/sofa/logic" file="TermPredictorBoltLogic.java" />
+	<file path="src/main/java/com/gerken/sofa/logic/TermRepStdDevBoltLogic.java" oEntry="art000098" refimpl="refimpl/art000098" entry="TermRepStdDevBoltLogic_java" folder="/src/main/java/com/gerken/sofa/logic" file="TermRepStdDevBoltLogic.java" />
+	<file path="src/main/java/com/gerken/sofa/logic/UserIdReaderSpoutLogic.java" oEntry="art000099" refimpl="refimpl/art000099" entry="UserIdReaderSpoutLogic_java" folder="/src/main/java/com/gerken/sofa/logic" file="UserIdReaderSpoutLogic.java" />
+	<file path="src/main/java/com/gerken/sofa/logic/UserReaderBoltLogic.java" oEntry="art000100" refimpl="refimpl/art000100" entry="UserReaderBoltLogic_java" folder="/src/main/java/com/gerken/sofa/logic" file="UserReaderBoltLogic.java" />
+	<file path="src/main/java/com/gerken/sofa/spout/IUserIdReaderSpout.java" oEntry="art000101" refimpl="refimpl/art000101" entry="IUserIdReaderSpout_java" folder="/src/main/java/com/gerken/sofa/spout" file="IUserIdReaderSpout.java" />
+	<file path="src/main/java/com/gerken/sofa/spout/UserIdReaderSpout.java" oEntry="art000102" refimpl="refimpl/art000102" entry="UserIdReaderSpout_java" folder="/src/main/java/com/gerken/sofa/spout" file="UserIdReaderSpout.java" />
+	<file path="src/main/java/com/gerken/sofa/topology/StackoverflowAnalyticsTopology.java" oEntry="art000103" refimpl="refimpl/art000103" entry="StackoverflowAnalyticsTopology_java" folder="/src/main/java/com/gerken/sofa/topology" file="StackoverflowAnalyticsTopology.java" />
+	<file path="src/main/java/com/gerken/sofa/util/AggregatePrediction.java" oEntry="art000104" refimpl="refimpl/art000104" entry="AggregatePrediction_java" folder="/src/main/java/com/gerken/sofa/util" file="AggregatePrediction.java" />
+	<file path="src/main/java/com/gerken/sofa/util/AlarmClock.java" oEntry="art000105" refimpl="refimpl/art000105" entry="AlarmClock_java" folder="/src/main/java/com/gerken/sofa/util" file="AlarmClock.java" />
+	<file path="src/main/java/com/gerken/sofa/util/FormatUtil.java" oEntry="art000106" refimpl="refimpl/art000106" entry="FormatUtil_java" folder="/src/main/java/com/gerken/sofa/util" file="FormatUtil.java" />
+	<file path="src/main/java/com/gerken/sofa/util/IStackoverflowAnalyticsLogger.java" oEntry="art000107" refimpl="refimpl/art000107" entry="IStackoverflowAnalyticsLogger_java" folder="/src/main/java/com/gerken/sofa/util" file="IStackoverflowAnalyticsLogger.java" />
+	<file path="src/main/java/com/gerken/sofa/util/OpRepPredictor.java" oEntry="art000108" refimpl="refimpl/art000108" entry="OpRepPredictor_java" folder="/src/main/java/com/gerken/sofa/util" file="OpRepPredictor.java" />
+	<file path="src/main/java/com/gerken/sofa/util/Point.java" oEntry="art000109" refimpl="refimpl/art000109" entry="Point_java" folder="/src/main/java/com/gerken/sofa/util" file="Point.java" />
+	<file path="src/main/java/com/gerken/sofa/util/PredictionAggregator.java" oEntry="art000110" refimpl="refimpl/art000110" entry="PredictionAggregator_java" folder="/src/main/java/com/gerken/sofa/util" file="PredictionAggregator.java" />
+	<file path="src/main/java/com/gerken/sofa/util/RepRegressionCalc.java" oEntry="art000111" refimpl="refimpl/art000111" entry="RepRegressionCalc_java" folder="/src/main/java/com/gerken/sofa/util" file="RepRegressionCalc.java" />
+	<file path="src/main/java/com/gerken/sofa/util/StackoverflowAnalyticsLogger.java" oEntry="art000112" refimpl="refimpl/art000112" entry="StackoverflowAnalyticsLogger_java" folder="/src/main/java/com/gerken/sofa/util" file="StackoverflowAnalyticsLogger.java" />
+	<file path="src/main/java/com/gerken/sofa/util/StdDevCalc.java" oEntry="art000113" refimpl="refimpl/art000113" entry="StdDevCalc_java" folder="/src/main/java/com/gerken/sofa/util" file="StdDevCalc.java" />
+	<file path="src/main/java/com/gerken/sofa/util/TaskHook.java" oEntry="art000114" refimpl="refimpl/art000114" entry="TaskHook_java" folder="/src/main/java/com/gerken/sofa/util" file="TaskHook.java" />
+	<file path="src/main/java/com/gerken/sofa/util/TermPredictor.java" oEntry="art000115" refimpl="refimpl/art000115" entry="TermPredictor_java" folder="/src/main/java/com/gerken/sofa/util" file="TermPredictor.java" />
+	<file path="src/main/resources/dev.properties" oEntry="art000116" refimpl="refimpl/art000116" entry="dev_properties" folder="/src/main/resources" file="dev.properties" />
+	<file path="src/main/resources/logging.properties" oEntry="art000117" refimpl="refimpl/art000117" entry="logging_properties" folder="/src/main/resources" file="logging.properties" />
+	<file path="src/main/resources/prod.properties" oEntry="art000118" refimpl="refimpl/art000118" entry="prod_properties" folder="/src/main/resources" file="prod.properties" />
+	<file path="src/test/java/com/gerken/sofa/bolt/NewQuestionParserBoltTest.java" oEntry="art000119" refimpl="refimpl/art000119" entry="NewQuestionParserBoltTest_java" folder="/src/test/java/com/gerken/sofa/bolt" file="NewQuestionParserBoltTest.java" />
+	<file path="src/test/java/com/gerken/sofa/bolt/NewQuestionReaderBoltTest.java" oEntry="art000120" refimpl="refimpl/art000120" entry="NewQuestionReaderBoltTest_java" folder="/src/test/java/com/gerken/sofa/bolt" file="NewQuestionReaderBoltTest.java" />
+	<file path="src/test/java/com/gerken/sofa/bolt/OpRepAnalyticsBoltTest.java" oEntry="art000121" refimpl="refimpl/art000121" entry="OpRepAnalyticsBoltTest_java" folder="/src/test/java/com/gerken/sofa/bolt" file="OpRepAnalyticsBoltTest.java" />
+	<file path="src/test/java/com/gerken/sofa/bolt/OpRepPredictorBoltTest.java" oEntry="art000122" refimpl="refimpl/art000122" entry="OpRepPredictorBoltTest_java" folder="/src/test/java/com/gerken/sofa/bolt" file="OpRepPredictorBoltTest.java" />
+	<file path="src/test/java/com/gerken/sofa/bolt/QuestionParserBoltTest.java" oEntry="art000123" refimpl="refimpl/art000123" entry="QuestionParserBoltTest_java" folder="/src/test/java/com/gerken/sofa/bolt" file="QuestionParserBoltTest.java" />
+	<file path="src/test/java/com/gerken/sofa/bolt/QuestionReaderBoltTest.java" oEntry="art000124" refimpl="refimpl/art000124" entry="QuestionReaderBoltTest_java" folder="/src/test/java/com/gerken/sofa/bolt" file="QuestionReaderBoltTest.java" />
+	<file path="src/test/java/com/gerken/sofa/bolt/ReputationPredictorBoltTest.java" oEntry="art000125" refimpl="refimpl/art000125" entry="ReputationPredictorBoltTest_java" folder="/src/test/java/com/gerken/sofa/bolt" file="ReputationPredictorBoltTest.java" />
+	<file path="src/test/java/com/gerken/sofa/bolt/TermPredictorBoltTest.java" oEntry="art000126" refimpl="refimpl/art000126" entry="TermPredictorBoltTest_java" folder="/src/test/java/com/gerken/sofa/bolt" file="TermPredictorBoltTest.java" />
+	<file path="src/test/java/com/gerken/sofa/bolt/TermRepStdDevBoltTest.java" oEntry="art000127" refimpl="refimpl/art000127" entry="TermRepStdDevBoltTest_java" folder="/src/test/java/com/gerken/sofa/bolt" file="TermRepStdDevBoltTest.java" />
+	<file path="src/test/java/com/gerken/sofa/bolt/UserReaderBoltTest.java" oEntry="art000128" refimpl="refimpl/art000128" entry="UserReaderBoltTest_java" folder="/src/test/java/com/gerken/sofa/bolt" file="UserReaderBoltTest.java" />
+	<file path="src/test/java/com/gerken/sofa/mock/MockedBoltOutputCollector.java" oEntry="art000129" refimpl="refimpl/art000129" entry="MockedBoltOutputCollector_java" folder="/src/test/java/com/gerken/sofa/mock" file="MockedBoltOutputCollector.java" />
+	<file path="src/test/java/com/gerken/sofa/mock/MockedLocalCluster.java" oEntry="art000130" refimpl="refimpl/art000130" entry="MockedLocalCluster_java" folder="/src/test/java/com/gerken/sofa/mock" file="MockedLocalCluster.java" />
+	<file path="src/test/java/com/gerken/sofa/mock/MockedOutputFieldsDeclarer.java" oEntry="art000131" refimpl="refimpl/art000131" entry="MockedOutputFieldsDeclarer_java" folder="/src/test/java/com/gerken/sofa/mock" file="MockedOutputFieldsDeclarer.java" />
+	<file path="src/test/java/com/gerken/sofa/mock/MockedSpoutOutputCollector.java" oEntry="art000132" refimpl="refimpl/art000132" entry="MockedSpoutOutputCollector_java" folder="/src/test/java/com/gerken/sofa/mock" file="MockedSpoutOutputCollector.java" />
+	<file path="src/test/java/com/gerken/sofa/mock/MockedTuple.java" oEntry="art000133" refimpl="refimpl/art000133" entry="MockedTuple_java" folder="/src/test/java/com/gerken/sofa/mock" file="MockedTuple.java" />
+	<file path="src/test/java/com/gerken/sofa/spout/UserIdReaderSpoutTest.java" oEntry="art000134" refimpl="refimpl/art000134" entry="UserIdReaderSpoutTest_java" folder="/src/test/java/com/gerken/sofa/spout" file="UserIdReaderSpoutTest.java" />
+	<file path="target/stackoverflow-analytics-storm-1.0.0-SNAPSHOT-jar-with-dependencies.jar" oEntry="art000135" refimpl="refimpl/art000135" entry="stackoverflow-analytics-storm-1_0_0-SNAPSHOT-jar-with-dependencies_jar" folder="/target" file="stackoverflow-analytics-storm-1.0.0-SNAPSHOT-jar-with-dependencies.jar" />
+	<file path="target/stackoverflow-analytics-storm-1.0.0-SNAPSHOT.jar" oEntry="art000136" refimpl="refimpl/art000136" entry="stackoverflow-analytics-storm-1_0_0-SNAPSHOT_jar" folder="/target" file="stackoverflow-analytics-storm-1.0.0-SNAPSHOT.jar" />
+	<file path="target/classes/dev.properties" oEntry="art000137" refimpl="refimpl/art000137" entry="dev_properties" folder="/target/classes" file="dev.properties" />
+	<file path="target/classes/logging.properties" oEntry="art000138" refimpl="refimpl/art000138" entry="logging_properties" folder="/target/classes" file="logging.properties" />
+	<file path="target/classes/prod.properties" oEntry="art000139" refimpl="refimpl/art000139" entry="prod_properties" folder="/target/classes" file="prod.properties" />
+	<file path="target/classes/com/gerken/sofa/bolt/IAnswerReaderBolt.class" oEntry="art000140" refimpl="refimpl/art000140" entry="IAnswerReaderBolt_class" folder="/target/classes/com/gerken/sofa/bolt" file="IAnswerReaderBolt.class" />
+	<file path="target/classes/com/gerken/sofa/bolt/INewQuestionParserBolt.class" oEntry="art000141" refimpl="refimpl/art000141" entry="INewQuestionParserBolt_class" folder="/target/classes/com/gerken/sofa/bolt" file="INewQuestionParserBolt.class" />
+	<file path="target/classes/com/gerken/sofa/bolt/INewQuestionReaderBolt.class" oEntry="art000142" refimpl="refimpl/art000142" entry="INewQuestionReaderBolt_class" folder="/target/classes/com/gerken/sofa/bolt" file="INewQuestionReaderBolt.class" />
+	<file path="target/classes/com/gerken/sofa/bolt/IOpRepAnalyticsBolt.class" oEntry="art000143" refimpl="refimpl/art000143" entry="IOpRepAnalyticsBolt_class" folder="/target/classes/com/gerken/sofa/bolt" file="IOpRepAnalyticsBolt.class" />
+	<file path="target/classes/com/gerken/sofa/bolt/IOpRepPredictorBolt.class" oEntry="art000144" refimpl="refimpl/art000144" entry="IOpRepPredictorBolt_class" folder="/target/classes/com/gerken/sofa/bolt" file="IOpRepPredictorBolt.class" />
+	<file path="target/classes/com/gerken/sofa/bolt/IQuestionParserBolt.class" oEntry="art000145" refimpl="refimpl/art000145" entry="IQuestionParserBolt_class" folder="/target/classes/com/gerken/sofa/bolt" file="IQuestionParserBolt.class" />
+	<file path="target/classes/com/gerken/sofa/bolt/IQuestionReaderBolt.class" oEntry="art000146" refimpl="refimpl/art000146" entry="IQuestionReaderBolt_class" folder="/target/classes/com/gerken/sofa/bolt" file="IQuestionReaderBolt.class" />
+	<file path="target/classes/com/gerken/sofa/bolt/IReputationPredictorBolt.class" oEntry="art000147" refimpl="refimpl/art000147" entry="IReputationPredictorBolt_class" folder="/target/classes/com/gerken/sofa/bolt" file="IReputationPredictorBolt.class" />
+	<file path="target/classes/com/gerken/sofa/bolt/ITermPredictorBolt.class" oEntry="art000148" refimpl="refimpl/art000148" entry="ITermPredictorBolt_class" folder="/target/classes/com/gerken/sofa/bolt" file="ITermPredictorBolt.class" />
+	<file path="target/classes/com/gerken/sofa/bolt/ITermRepStdDevBolt.class" oEntry="art000149" refimpl="refimpl/art000149" entry="ITermRepStdDevBolt_class" folder="/target/classes/com/gerken/sofa/bolt" file="ITermRepStdDevBolt.class" />
+	<file path="target/classes/com/gerken/sofa/bolt/IUserReaderBolt.class" oEntry="art000150" refimpl="refimpl/art000150" entry="IUserReaderBolt_class" folder="/target/classes/com/gerken/sofa/bolt" file="IUserReaderBolt.class" />
+	<file path="target/classes/com/gerken/sofa/bolt/NewQuestionParserBolt.class" oEntry="art000151" refimpl="refimpl/art000151" entry="NewQuestionParserBolt_class" folder="/target/classes/com/gerken/sofa/bolt" file="NewQuestionParserBolt.class" />
+	<file path="target/classes/com/gerken/sofa/bolt/NewQuestionReaderBolt.class" oEntry="art000152" refimpl="refimpl/art000152" entry="NewQuestionReaderBolt_class" folder="/target/classes/com/gerken/sofa/bolt" file="NewQuestionReaderBolt.class" />
+	<file path="target/classes/com/gerken/sofa/bolt/OpRepAnalyticsBolt.class" oEntry="art000153" refimpl="refimpl/art000153" entry="OpRepAnalyticsBolt_class" folder="/target/classes/com/gerken/sofa/bolt" file="OpRepAnalyticsBolt.class" />
+	<file path="target/classes/com/gerken/sofa/bolt/OpRepPredictorBolt.class" oEntry="art000154" refimpl="refimpl/art000154" entry="OpRepPredictorBolt_class" folder="/target/classes/com/gerken/sofa/bolt" file="OpRepPredictorBolt.class" />
+	<file path="target/classes/com/gerken/sofa/bolt/QuestionParserBolt.class" oEntry="art000155" refimpl="refimpl/art000155" entry="QuestionParserBolt_class" folder="/target/classes/com/gerken/sofa/bolt" file="QuestionParserBolt.class" />
+	<file path="target/classes/com/gerken/sofa/bolt/QuestionReaderBolt.class" oEntry="art000156" refimpl="refimpl/art000156" entry="QuestionReaderBolt_class" folder="/target/classes/com/gerken/sofa/bolt" file="QuestionReaderBolt.class" />
+	<file path="target/classes/com/gerken/sofa/bolt/ReputationPredictorBolt.class" oEntry="art000157" refimpl="refimpl/art000157" entry="ReputationPredictorBolt_class" folder="/target/classes/com/gerken/sofa/bolt" file="ReputationPredictorBolt.class" />
+	<file path="target/classes/com/gerken/sofa/bolt/TermPredictorBolt.class" oEntry="art000158" refimpl="refimpl/art000158" entry="TermPredictorBolt_class" folder="/target/classes/com/gerken/sofa/bolt" file="TermPredictorBolt.class" />
+	<file path="target/classes/com/gerken/sofa/bolt/TermRepStdDevBolt.class" oEntry="art000159" refimpl="refimpl/art000159" entry="TermRepStdDevBolt_class" folder="/target/classes/com/gerken/sofa/bolt" file="TermRepStdDevBolt.class" />
+	<file path="target/classes/com/gerken/sofa/bolt/UserReaderBolt.class" oEntry="art000160" refimpl="refimpl/art000160" entry="UserReaderBolt_class" folder="/target/classes/com/gerken/sofa/bolt" file="UserReaderBolt.class" />
+	<file path="target/classes/com/gerken/sofa/logic/NewQuestionParserBoltLogic.class" oEntry="art000161" refimpl="refimpl/art000161" entry="NewQuestionParserBoltLogic_class" folder="/target/classes/com/gerken/sofa/logic" file="NewQuestionParserBoltLogic.class" />
+	<file path="target/classes/com/gerken/sofa/logic/NewQuestionReaderBoltLogic.class" oEntry="art000162" refimpl="refimpl/art000162" entry="NewQuestionReaderBoltLogic_class" folder="/target/classes/com/gerken/sofa/logic" file="NewQuestionReaderBoltLogic.class" />
+	<file path="target/classes/com/gerken/sofa/logic/OpRepAnalyticsBoltLogic.class" oEntry="art000163" refimpl="refimpl/art000163" entry="OpRepAnalyticsBoltLogic_class" folder="/target/classes/com/gerken/sofa/logic" file="OpRepAnalyticsBoltLogic.class" />
+	<file path="target/classes/com/gerken/sofa/logic/OpRepPredictorBoltLogic.class" oEntry="art000164" refimpl="refimpl/art000164" entry="OpRepPredictorBoltLogic_class" folder="/target/classes/com/gerken/sofa/logic" file="OpRepPredictorBoltLogic.class" />
+	<file path="target/classes/com/gerken/sofa/logic/QuestionParserBoltLogic.class" oEntry="art000165" refimpl="refimpl/art000165" entry="QuestionParserBoltLogic_class" folder="/target/classes/com/gerken/sofa/logic" file="QuestionParserBoltLogic.class" />
+	<file path="target/classes/com/gerken/sofa/logic/QuestionReaderBoltLogic.class" oEntry="art000166" refimpl="refimpl/art000166" entry="QuestionReaderBoltLogic_class" folder="/target/classes/com/gerken/sofa/logic" file="QuestionReaderBoltLogic.class" />
+	<file path="target/classes/com/gerken/sofa/logic/ReputationPredictorBoltLogic.class" oEntry="art000167" refimpl="refimpl/art000167" entry="ReputationPredictorBoltLogic_class" folder="/target/classes/com/gerken/sofa/logic" file="ReputationPredictorBoltLogic.class" />
+	<file path="target/classes/com/gerken/sofa/logic/TermPredictorBoltLogic.class" oEntry="art000168" refimpl="refimpl/art000168" entry="TermPredictorBoltLogic_class" folder="/target/classes/com/gerken/sofa/logic" file="TermPredictorBoltLogic.class" />
+	<file path="target/classes/com/gerken/sofa/logic/TermRepStdDevBoltLogic.class" oEntry="art000169" refimpl="refimpl/art000169" entry="TermRepStdDevBoltLogic_class" folder="/target/classes/com/gerken/sofa/logic" file="TermRepStdDevBoltLogic.class" />
+	<file path="target/classes/com/gerken/sofa/logic/UserIdReaderSpoutLogic.class" oEntry="art000170" refimpl="refimpl/art000170" entry="UserIdReaderSpoutLogic_class" folder="/target/classes/com/gerken/sofa/logic" file="UserIdReaderSpoutLogic.class" />
+	<file path="target/classes/com/gerken/sofa/logic/UserReaderBoltLogic.class" oEntry="art000171" refimpl="refimpl/art000171" entry="UserReaderBoltLogic_class" folder="/target/classes/com/gerken/sofa/logic" file="UserReaderBoltLogic.class" />
+	<file path="target/classes/com/gerken/sofa/spout/IUserIdReaderSpout.class" oEntry="art000172" refimpl="refimpl/art000172" entry="IUserIdReaderSpout_class" folder="/target/classes/com/gerken/sofa/spout" file="IUserIdReaderSpout.class" />
+	<file path="target/classes/com/gerken/sofa/spout/UserIdReaderSpout.class" oEntry="art000173" refimpl="refimpl/art000173" entry="UserIdReaderSpout_class" folder="/target/classes/com/gerken/sofa/spout" file="UserIdReaderSpout.class" />
+	<file path="target/classes/com/gerken/sofa/topology/StackoverflowAnalyticsTopology.class" oEntry="art000174" refimpl="refimpl/art000174" entry="StackoverflowAnalyticsTopology_class" folder="/target/classes/com/gerken/sofa/topology" file="StackoverflowAnalyticsTopology.class" />
+	<file path="target/classes/com/gerken/sofa/util/AggregatePrediction.class" oEntry="art000175" refimpl="refimpl/art000175" entry="AggregatePrediction_class" folder="/target/classes/com/gerken/sofa/util" file="AggregatePrediction.class" />
+	<file path="target/classes/com/gerken/sofa/util/AlarmClock.class" oEntry="art000176" refimpl="refimpl/art000176" entry="AlarmClock_class" folder="/target/classes/com/gerken/sofa/util" file="AlarmClock.class" />
+	<file path="target/classes/com/gerken/sofa/util/FormatUtil.class" oEntry="art000177" refimpl="refimpl/art000177" entry="FormatUtil_class" folder="/target/classes/com/gerken/sofa/util" file="FormatUtil.class" />
+	<file path="target/classes/com/gerken/sofa/util/IStackoverflowAnalyticsLogger.class" oEntry="art000178" refimpl="refimpl/art000178" entry="IStackoverflowAnalyticsLogger_class" folder="/target/classes/com/gerken/sofa/util" file="IStackoverflowAnalyticsLogger.class" />
+	<file path="target/classes/com/gerken/sofa/util/OpRepPredictor.class" oEntry="art000179" refimpl="refimpl/art000179" entry="OpRepPredictor_class" folder="/target/classes/com/gerken/sofa/util" file="OpRepPredictor.class" />
+	<file path="target/classes/com/gerken/sofa/util/Point.class" oEntry="art000180" refimpl="refimpl/art000180" entry="Point_class" folder="/target/classes/com/gerken/sofa/util" file="Point.class" />
+	<file path="target/classes/com/gerken/sofa/util/PredictionAggregator.class" oEntry="art000181" refimpl="refimpl/art000181" entry="PredictionAggregator_class" folder="/target/classes/com/gerken/sofa/util" file="PredictionAggregator.class" />
+	<file path="target/classes/com/gerken/sofa/util/RepRegressionCalc.class" oEntry="art000182" refimpl="refimpl/art000182" entry="RepRegressionCalc_class" folder="/target/classes/com/gerken/sofa/util" file="RepRegressionCalc.class" />
+	<file path="target/classes/com/gerken/sofa/util/StackoverflowAnalyticsLogger.class" oEntry="art000183" refimpl="refimpl/art000183" entry="StackoverflowAnalyticsLogger_class" folder="/target/classes/com/gerken/sofa/util" file="StackoverflowAnalyticsLogger.class" />
+	<file path="target/classes/com/gerken/sofa/util/StdDevCalc.class" oEntry="art000184" refimpl="refimpl/art000184" entry="StdDevCalc_class" folder="/target/classes/com/gerken/sofa/util" file="StdDevCalc.class" />
+	<file path="target/classes/com/gerken/sofa/util/TaskHook.class" oEntry="art000185" refimpl="refimpl/art000185" entry="TaskHook_class" folder="/target/classes/com/gerken/sofa/util" file="TaskHook.class" />
+	<file path="target/classes/com/gerken/sofa/util/TermPredictor.class" oEntry="art000186" refimpl="refimpl/art000186" entry="TermPredictor_class" folder="/target/classes/com/gerken/sofa/util" file="TermPredictor.class" />
+	<file path="target/maven-archiver/pom.properties" oEntry="art000187" refimpl="refimpl/art000187" entry="pom_properties" folder="/target/maven-archiver" file="pom.properties" />
+	<file path="target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" oEntry="art000188" refimpl="refimpl/art000188" entry="createdFiles_lst" folder="/target/maven-status/maven-compiler-plugin/compile/default-compile" file="createdFiles.lst" />
+	<file path="target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" oEntry="art000189" refimpl="refimpl/art000189" entry="inputFiles_lst" folder="/target/maven-status/maven-compiler-plugin/compile/default-compile" file="inputFiles.lst" />
+	<folder path="src" />
+	<folder path="src/main" />
+	<folder path="src/main/java" />
+	<folder path="src/main/java/com" />
+	<folder path="src/main/java/com/gerken" />
+	<folder path="src/main/java/com/gerken/sofa" />
+	<folder path="src/main/java/com/gerken/sofa/bolt" />
+	<folder path="src/main/java/com/gerken/sofa/logic" />
+	<folder path="src/main/java/com/gerken/sofa/spout" />
+	<folder path="src/main/java/com/gerken/sofa/topology" />
+	<folder path="src/main/java/com/gerken/sofa/util" />
+	<folder path="src/main/resources" />
+	<folder path="src/test" />
+	<folder path="src/test/java" />
+	<folder path="src/test/java/com" />
+	<folder path="src/test/java/com/gerken" />
+	<folder path="src/test/java/com/gerken/sofa" />
+	<folder path="src/test/java/com/gerken/sofa/bolt" />
+	<folder path="src/test/java/com/gerken/sofa/mock" />
+	<folder path="src/test/java/com/gerken/sofa/spout" />
+	<folder path="src/test/resources" />
+	<folder path="target" />
+	<folder path="target/archive-tmp" />
+	<folder path="target/classes" />
+	<folder path="target/classes/com" />
+	<folder path="target/classes/com/gerken" />
+	<folder path="target/classes/com/gerken/sofa" />
+	<folder path="target/classes/com/gerken/sofa/bolt" />
+	<folder path="target/classes/com/gerken/sofa/logic" />
+	<folder path="target/classes/com/gerken/sofa/spout" />
+	<folder path="target/classes/com/gerken/sofa/topology" />
+	<folder path="target/classes/com/gerken/sofa/util" />
+	<folder path="target/generated-sources" />
+	<folder path="target/generated-sources/annotations" />
+	<folder path="target/maven-archiver" />
+	<folder path="target/maven-status" />
+	<folder path="target/maven-status/maven-compiler-plugin" />
+	<folder path="target/maven-status/maven-compiler-plugin/compile" />
+	<folder path="target/maven-status/maven-compiler-plugin/compile/default-compile" />
+	<folder path="target/test-classes" />
+	</project>
+</referenceImplementation>

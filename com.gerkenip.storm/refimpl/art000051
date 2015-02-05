@@ -1,0 +1,13 @@
+com/gerken/sofa/bean/NewQuestionOpInfo.class
+com/gerken/sofa/bean/TermStat.class
+com/gerken/sofa/bean/RepStat.class
+com/gerken/sofa/bean/EarnedTagInfo.class
+com/gerken/sofa/bean/QuestionSpec.class
+com/gerken/sofa/bean/MeaningfulTerm.class
+com/gerken/sofa/bean/UserSpec.class
+com/gerken/sofa/bean/OpRepBestFit.class
+com/gerken/sofa/exception/DataException.class
+com/gerken/sofa/bean/NewQuestionTerm.class
+com/gerken/sofa/bean/ReputationPrediction.class
+com/gerken/sofa/bean/AnswerSpec.class
+com/gerken/sofa/bean/NewQuestion.class

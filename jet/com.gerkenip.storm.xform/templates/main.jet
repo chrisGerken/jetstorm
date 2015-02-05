@@ -307,6 +307,8 @@
 
     <ws:copyFile target="{$topology/@monitorProject}/js/gerken.storm.monitor.js" src="templates/topology/monitorJs" replace="true" />
 
+    <ws:file path="{$topology/@stormProject}/src/main/java/{$topology/@utilDir}/TimerUtil.java" template="templates/topology/timerUtilJava.jet" replace="true" />
+
 
     *** Begin custom generation updates for topology (4)
 

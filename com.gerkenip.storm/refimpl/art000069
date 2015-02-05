@@ -1,0 +1,25 @@
+package com.gerken.sofa.bolt;
+
+import backtype.storm.tuple.Tuple;
+
+import com.gerken.sofa.bean.*;
+
+public interface IAnswerReaderBolt {
+
+	/*
+	 *  Emits an instance of AnswerSpec to stream Answers
+	 */
+	public void emitToAnswers(AnswerSpec answerSpec);
+	
+	/*
+	 *  Emits an instance of AnswerSpec to stream Answers
+	 */
+	public void emitToAnswersWithoutAnchor(AnswerSpec answerSpec);
+
+    public void ack();
+
+    public void fail();
+
+	public int getTaskId();
+
+}

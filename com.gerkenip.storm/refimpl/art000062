@@ -1,0 +1,66 @@
+digraph G { 
+node [style=filled, fillcolor=plum1 ,shape=rectangle, fontsize=20, color=black];
+edge [fontsize=10, color=blue4, fontcolor=blue4];
+
+Legalese [style=filled, fillcolor=floralwhite ,fontsize=20,color=black,label="{Stackoverflow Analytics|(c) 2013 Chris Gerken}", shape=record];
+
+Users [style=filled, fillcolor=mintcream ,fontsize=12,color=black,label="{Stream: Users|{UserSpec|{userId}}}", shape=record];
+Answers [style=filled, fillcolor=mintcream ,fontsize=12,color=black,label="{Stream: Answers|{AnswerSpec|{answerId|userId|questionId|userAnswerRep|userTotalRep}}}", shape=record];
+Tags [style=filled, fillcolor=mintcream ,fontsize=12,color=black,label="{Stream: Tags|{EarnedTagInfo|{userId|tag|count}}}", shape=record];
+Questions [style=filled, fillcolor=mintcream ,fontsize=12,color=black,label="{Stream: Questions|{QuestionSpec|{questionId|ownerId|ownerRep|questionText|questionTags|answerId|answerRep|userId}}}", shape=record];
+TermStats [style=filled, fillcolor=mintcream ,fontsize=12,color=black,label="{Stream: TermStats|{TermStat|{questionTerm|questionTag|answerRep|userId}}}", shape=record];
+RepStats [style=filled, fillcolor=mintcream ,fontsize=12,color=black,label="{Stream: RepStats|{RepStat|{opRep|questionTag|answerRep|userId}}}", shape=record];
+OpRepBestFits [style=filled, fillcolor=mintcream ,fontsize=12,color=black,label="{Stream: OpRepBestFits|{OpRepBestFit|{userId|tag|coefficients}}}", shape=record];
+MeaningfulTerms [style=filled, fillcolor=mintcream ,fontsize=12,color=black,label="{Stream: MeaningfulTerms|{MeaningfulTerm|{term|tag|positive|negative|expectedRep|userId}}}", shape=record];
+PredictionsByTerms [style=filled, fillcolor=mintcream ,fontsize=12,color=black,label="{Stream: PredictionsByTerms|{ReputationPrediction|{rep|questionId|userId|metric}}}", shape=record];
+PredictionsByOpRep [style=filled, fillcolor=mintcream ,fontsize=12,color=black,label="{Stream: PredictionsByOpRep|{ReputationPrediction|{rep|questionId|userId|metric}}}", shape=record];
+NewQuestions [style=filled, fillcolor=mintcream ,fontsize=12,color=black,label="{Stream: NewQuestions|{NewQuestion|{questionId|questionText|questionTags|ownerId|ownerRep|userId}}}", shape=record];
+NewQuestionTerms [style=filled, fillcolor=mintcream ,fontsize=12,color=black,label="{Stream: NewQuestionTerms|{NewQuestionTerm|{term|tag|questionId|count|userId}}}", shape=record];
+NewQuestionOpInfos [style=filled, fillcolor=mintcream ,fontsize=12,color=black,label="{Stream: NewQuestionOpInfos|{NewQuestionOpInfo|{questionId|questionTags|ownerId|ownerRep|userId}}}", shape=record];
+"User Id Reader (1)"  [shape=invhouse] ;
+"User Reader (1)"  [shape=ellipse, fillcolor=palegoldenrod] ;
+"Question Reader (1)"  [shape=ellipse, fillcolor=palegoldenrod] ;
+"Question Parser (1)"  [shape=ellipse, fillcolor=palegoldenrod] ;
+"OP Rep Analytics (1)"  [shape=ellipse, fillcolor=palegoldenrod] ;
+"Term Rep Std Dev (1)"  [shape=ellipse, fillcolor=palegoldenrod] ;
+"Term Predictor (3)"  [shape=ellipse, fillcolor=palegoldenrod] ;
+"OP Rep Predictor (1)"  [shape=ellipse, fillcolor=palegoldenrod] ;
+"New Question Reader (1)"  [shape=ellipse, fillcolor=palegoldenrod] ;
+"New Question Parser (1)"  [shape=ellipse, fillcolor=palegoldenrod] ;
+"Reputation Predictor (1)"  [shape=ellipse, fillcolor=palegoldenrod] ;
+
+"User Id Reader (1)" -> Users  [penwidth=10];
+"User Reader (1)" -> Answers  [penwidth=10];
+"User Reader (1)" -> Tags  [penwidth=10];
+"Question Reader (1)" -> Questions  [penwidth=10];
+"Question Parser (1)" -> TermStats  [penwidth=10];
+"Question Parser (1)" -> RepStats  [penwidth=10];
+"OP Rep Analytics (1)" -> OpRepBestFits  [penwidth=10];
+"Term Rep Std Dev (1)" -> MeaningfulTerms  [penwidth=10];
+"Term Predictor (3)" -> PredictionsByTerms  [penwidth=10];
+"OP Rep Predictor (1)" -> PredictionsByOpRep  [penwidth=10];
+"New Question Reader (1)" -> NewQuestions  [penwidth=10];
+"New Question Parser (1)" -> NewQuestionTerms  [penwidth=10];
+"New Question Parser (1)" -> NewQuestionOpInfos  [penwidth=10];
+
+Users -> "User Reader (1)"  [penwidth=8];
+Answers -> "Question Reader (1)"  [penwidth=8];
+Questions -> "Question Parser (1)"  [penwidth=8];
+RepStats -> "OP Rep Analytics (1)"  [penwidth=8];
+TermStats -> "Term Rep Std Dev (1)"  [penwidth=8];
+MeaningfulTerms -> "Term Predictor (3)"  [penwidth=8];
+NewQuestionTerms -> "Term Predictor (3)"  [penwidth=8];
+OpRepBestFits -> "OP Rep Predictor (1)"  [penwidth=8];
+NewQuestionOpInfos -> "OP Rep Predictor (1)"  [penwidth=8];
+Tags -> "New Question Reader (1)"  [penwidth=8];
+NewQuestions -> "New Question Parser (1)"  [penwidth=8];
+PredictionsByTerms -> "Reputation Predictor (1)"  [penwidth=8];
+PredictionsByOpRep -> "Reputation Predictor (1)"  [penwidth=8];
+
+Legalese -> "User Id Reader (1)" [style=invis, len=30]
+
+}
+
+
+
+

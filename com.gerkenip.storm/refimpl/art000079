@@ -1,0 +1,36 @@
+package com.gerken.sofa.bolt;
+
+import backtype.storm.tuple.Tuple;
+
+import com.gerken.sofa.bean.*;
+
+public interface IUserReaderBolt {
+
+	/*
+	 *  Emits an instance of AnswerSpec to stream Answers
+	 */
+	public void emitToAnswers(AnswerSpec answerSpec);
+	
+	/*
+	 *  Emits an instance of AnswerSpec to stream Answers
+	 */
+	public void emitToAnswersWithoutAnchor(AnswerSpec answerSpec);
+
+
+	/*
+	 *  Emits an instance of EarnedTagInfo to stream Tags
+	 */
+	public void emitToTags(EarnedTagInfo earnedTagInfo);
+	
+	/*
+	 *  Emits an instance of EarnedTagInfo to stream Tags
+	 */
+	public void emitToTagsWithoutAnchor(EarnedTagInfo earnedTagInfo);
+
+    public void ack();
+
+    public void fail();
+
+	public int getTaskId();
+
+}

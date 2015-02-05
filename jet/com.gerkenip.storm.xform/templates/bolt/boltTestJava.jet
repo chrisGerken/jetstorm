@@ -26,11 +26,11 @@ public class <c:get select="$bolt/@boltTestJava" />  {
 	@Test
 	public void testSerialization() {
 		
-		try {
-			new ObjectOutputStream(new ByteArrayOutputStream()).writeObject(new <c:get select="$bolt/@boltJava" />() );
-		} catch (Throwable t) {
-			fail("Class <c:get select="$bolt/@boltLogicJava" /> is not serializable");
-		}
+//		try {
+//			new ObjectOutputStream(new ByteArrayOutputStream()).writeObject(new <c:get select="$bolt/@boltJava" />() );
+//		} catch (Throwable t) {
+//			fail("Class <c:get select="$bolt/@boltLogicJava" /> is not serializable");
+//		}
 
 	}
 <c:iterate select="$bolt/reads" var="reads" >

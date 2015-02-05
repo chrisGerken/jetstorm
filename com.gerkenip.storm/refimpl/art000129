@@ -1,0 +1,116 @@
+package com.gerken.sofa.mock;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import com.gerken.sofa.bean.*;
+
+import backtype.storm.task.IOutputCollector;
+import backtype.storm.tuple.Tuple;
+
+public class MockedBoltOutputCollector implements IOutputCollector {
+
+	public boolean acked = false;
+	public boolean failed = false;
+	public Throwable error = null;
+
+	public List<AnswerSpec> emittedToAnswers = new ArrayList<AnswerSpec>();
+	public List<EarnedTagInfo> emittedToTags = new ArrayList<EarnedTagInfo>();
+	public List<QuestionSpec> emittedToQuestions = new ArrayList<QuestionSpec>();
+	public List<TermStat> emittedToTermStats = new ArrayList<TermStat>();
+	public List<RepStat> emittedToRepStats = new ArrayList<RepStat>();
+	public List<OpRepBestFit> emittedToOpRepBestFits = new ArrayList<OpRepBestFit>();
+	public List<MeaningfulTerm> emittedToMeaningfulTerms = new ArrayList<MeaningfulTerm>();
+	public List<ReputationPrediction> emittedToPredictionsByTerms = new ArrayList<ReputationPrediction>();
+	public List<ReputationPrediction> emittedToPredictionsByOpRep = new ArrayList<ReputationPrediction>();
+	public List<NewQuestion> emittedToNewQuestions = new ArrayList<NewQuestion>();
+	public List<NewQuestionTerm> emittedToNewQuestionTerms = new ArrayList<NewQuestionTerm>();
+	public List<NewQuestionOpInfo> emittedToNewQuestionOpInfos = new ArrayList<NewQuestionOpInfo>();
+	public List<Object> others = new ArrayList<Object>();
+	
+	public MockedBoltOutputCollector() {
+
+	}
+
+	@Override
+	public List<Integer> emit(String streamId, Collection<Tuple> anchors, List<Object> tuple) {
+		
+		List<Integer> result = new ArrayList<Integer>();
+		
+		if (streamId == null) { return result; }
+		
+		if (streamId.equals("Answers")) {
+			emittedToAnswers.add(new AnswerSpec(new MockedTuple(streamId, tuple)));
+			return result;
+		}
+		if (streamId.equals("Tags")) {
+			emittedToTags.add(new EarnedTagInfo(new MockedTuple(streamId, tuple)));
+			return result;
+		}
+		if (streamId.equals("Questions")) {
+			emittedToQuestions.add(new QuestionSpec(new MockedTuple(streamId, tuple)));
+			return result;
+		}
+		if (streamId.equals("TermStats")) {
+			emittedToTermStats.add(new TermStat(new MockedTuple(streamId, tuple)));
+			return result;
+		}
+		if (streamId.equals("RepStats")) {
+			emittedToRepStats.add(new RepStat(new MockedTuple(streamId, tuple)));
+			return result;
+		}
+		if (streamId.equals("OpRepBestFits")) {
+			emittedToOpRepBestFits.add(new OpRepBestFit(new MockedTuple(streamId, tuple)));
+			return result;
+		}
+		if (streamId.equals("MeaningfulTerms")) {
+			emittedToMeaningfulTerms.add(new MeaningfulTerm(new MockedTuple(streamId, tuple)));
+			return result;
+		}
+		if (streamId.equals("PredictionsByTerms")) {
+			emittedToPredictionsByTerms.add(new ReputationPrediction(new MockedTuple(streamId, tuple)));
+			return result;
+		}
+		if (streamId.equals("PredictionsByOpRep")) {
+			emittedToPredictionsByOpRep.add(new ReputationPrediction(new MockedTuple(streamId, tuple)));
+			return result;
+		}
+		if (streamId.equals("NewQuestions")) {
+			emittedToNewQuestions.add(new NewQuestion(new MockedTuple(streamId, tuple)));
+			return result;
+		}
+		if (streamId.equals("NewQuestionTerms")) {
+			emittedToNewQuestionTerms.add(new NewQuestionTerm(new MockedTuple(streamId, tuple)));
+			return result;
+		}
+		if (streamId.equals("NewQuestionOpInfos")) {
+			emittedToNewQuestionOpInfos.add(new NewQuestionOpInfo(new MockedTuple(streamId, tuple)));
+			return result;
+		}
+		
+		others.add(tuple);
+		return result;
+	}
+
+	@Override
+	public void emitDirect(int taskId, String streamId, Collection<Tuple> anchors, List<Object> tuple) {
+
+	}
+
+	@Override
+	public void ack(Tuple input) {
+		acked = true;
+	}
+
+	@Override
+	public void fail(Tuple input) {
+		failed = true;
+	}
+
+	@Override
+	public void reportError(Throwable error) {
+		this.error = error;
+	}
+
+}

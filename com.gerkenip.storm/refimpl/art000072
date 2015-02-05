@@ -1,0 +1,25 @@
+package com.gerken.sofa.bolt;
+
+import backtype.storm.tuple.Tuple;
+
+import com.gerken.sofa.bean.*;
+
+public interface IOpRepAnalyticsBolt {
+
+	/*
+	 *  Emits an instance of OpRepBestFit to stream OpRepBestFits
+	 */
+	public void emitToOpRepBestFits(OpRepBestFit opRepBestFit);
+	
+	/*
+	 *  Emits an instance of OpRepBestFit to stream OpRepBestFits
+	 */
+	public void emitToOpRepBestFitsWithoutAnchor(OpRepBestFit opRepBestFit);
+
+    public void ack();
+
+    public void fail();
+
+	public int getTaskId();
+
+}

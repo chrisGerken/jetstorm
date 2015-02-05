@@ -1,0 +1,14 @@
+package com.gerken.sofa.bolt;
+
+import backtype.storm.tuple.Tuple;
+
+import com.gerken.sofa.bean.*;
+
+public interface IReputationPredictorBolt {
+    public void ack();
+
+    public void fail();
+
+	public int getTaskId();
+
+}

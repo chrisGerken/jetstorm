@@ -1,0 +1,82 @@
+package com.gerken.sofa.util;
+
+import java.util.ArrayList;
+
+public class StdDevCalc implements Comparable<StdDevCalc> {
+
+	private double m;
+	private double q;
+	private double k;
+	private double sum;
+	private boolean first = true;
+	private ArrayList<Double> xs = new ArrayList<Double>();
+	private String label;
+	
+	public StdDevCalc(String label) {
+		this.label = label;
+	}
+
+	public double add(double x) {
+		xs.add(x);
+		if (first) {
+			m = x;
+			q = 0;
+			k = 1.0;
+			first = false;
+			sum = x;
+			return 0.0;
+		}
+		double m_prev = m;
+		k = k + 1.0;
+		m = m_prev + (x - m_prev) / k;
+		q = q + ((k - 1.0) * (x - m_prev) * (x - m_prev) / k);
+		sum = sum + x;
+		return getStdDev();
+	}
+	
+	public double getStdDev() {
+		return Math.sqrt(q/k);
+	}
+	
+	public double getMean() {
+		return sum / k;
+	}
+
+	public double getCount() {
+		return k;
+	}
+	
+	public double getConfMin() {
+		return getMean() - getStdDev();
+	}
+	
+	public double getConfMax() {
+		return getMean() + getStdDev();
+	}
+	
+	public String toString() {
+		StringBuffer sb = new StringBuffer();
+		sb.append(label);
+		sb.append("   k=");
+		sb.append(String.valueOf(getCount()));
+		sb.append(";  mean=");
+		sb.append(String.valueOf(getMean()));
+		sb.append(";  std dev=");
+		sb.append(String.valueOf(getStdDev()));
+		sb.append(";  ");
+		for (int i = 0; i < xs.size(); i++) {
+			sb.append(" "+xs.get(i));
+		}
+		return sb.toString();
+	}
+
+	@Override
+	public int compareTo(StdDevCalc o) {
+		double other = o.getMean() - o.getStdDev();
+		double sd = getMean() - getStdDev();
+		if (sd < other) { return -1; }
+		if (sd > other) { return  1; }
+		return 0;
+	}
+
+}

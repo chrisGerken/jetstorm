@@ -1,0 +1,147 @@
+package com.gerken.sofa.util;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.StringTokenizer;
+
+import org.elasticsearch.index.fielddata.BytesValues.Iter;
+
+import com.gerken.sofa.bean.NewQuestionOpInfo;
+import com.gerken.sofa.bean.OpRepBestFit;
+import com.gerken.sofa.bean.ReputationPrediction;
+import com.gerkenip.stackoverflow.model.Question;
+
+public class OpRepPredictor {
+
+	private HashMap<String, ArrayList<Double>> byTag = new HashMap<String, ArrayList<Double>>();
+	private HashMap<Long, NewQuestionOpInfo> infos = new HashMap<Long, NewQuestionOpInfo>();
+	private long nextReport = 0;
+	private String userId;
+	
+	public OpRepPredictor() {
+	}
+
+	public ReputationPrediction[] add(OpRepBestFit opRepBestFit) {
+		String tag = opRepBestFit.getTag();
+		String coeffs = opRepBestFit.getCoefficients();
+		byTag.put(tag, parse(coeffs));
+		userId = opRepBestFit.getUserId();
+		return predict(infos.values());
+	}
+
+	private ArrayList<Double> parse(String coeffs) {
+		ArrayList<Double> result = new ArrayList<Double>();
+		StringTokenizer st = new StringTokenizer(coeffs,"\t");
+		while (st.hasMoreElements()) {
+			result.add(Double.parseDouble(st.nextToken()));
+		}
+		return result;
+	}
+
+	public ReputationPrediction[] add(NewQuestionOpInfo newQuestionOpInfo) {
+		Long questionId = newQuestionOpInfo.getQuestionId();
+		infos.put(questionId, newQuestionOpInfo);
+		ArrayList<NewQuestionOpInfo> list = new ArrayList<NewQuestionOpInfo>();
+		list.add(newQuestionOpInfo);
+		userId = newQuestionOpInfo.getUserId();
+		return predict(list);
+	}
+
+	private ReputationPrediction[] predict(Collection<NewQuestionOpInfo> list) {
+
+		report();
+		
+		ArrayList<ReputationPrediction> preds = new ArrayList<ReputationPrediction>();
+
+		Iterator<NewQuestionOpInfo> iter = list.iterator();
+		while (iter.hasNext()) {
+
+			NewQuestionOpInfo info = iter.next();
+			String tag[] = FormatUtil.split(info.getQuestionTags());
+			Long qid = info.getQuestionId();
+			String userId = info.getUserId();
+			Double rep = (double) info.getOwnerRep();
+			rep = Math.log(rep);
+			
+			double max = evaluate(rep,tag[0]);
+			for (int i = 1; i < tag.length; i++) {
+				double score = evaluate(rep,tag[i]);
+				if (max < score) {
+					max = score;
+				}
+			}
+			
+			ReputationPrediction pred = new ReputationPrediction(max, qid, userId, "OpRepPredictor");
+			preds.add(pred);
+				
+		}
+		
+		ReputationPrediction[] pred = new ReputationPrediction[preds.size()];
+		preds.toArray(pred);
+		return pred;
+	}
+
+	private double evaluate(Double rep, String tag) {
+		
+		ArrayList<Double> coeffs = byTag.get(tag);
+		if (coeffs == null) {
+			return 0.0;
+		}
+
+		double sum = 0.0;
+		for (int i = 0; i < coeffs.size(); i++) {
+			sum = sum + (Math.pow(rep, i) * coeffs.get(i));
+		}
+
+		return sum;
+	}
+
+	private void report() {
+		if (nextReport > System.currentTimeMillis()) {
+			return;
+		}
+
+		if (byTag.size() == 0) { 
+			nextReport = System.currentTimeMillis() + 5000;
+			return; 
+		}
+
+		String tag[] = new String[byTag.size()];
+		byTag.keySet().toArray(tag);
+		
+		try {
+			FileWriter fw = new FileWriter("/home/chrisgerken/opRepCoeffs_"+userId+".csv");
+			String delim = ",";
+			
+			fw.write("OP Rep");
+			for (int i = 0; i < tag.length; i++) {
+				fw.write(delim+tag[i]);
+			}
+			fw.write("\n");
+			
+			for (double rep = 1.0; rep < 10.1; rep = rep + 0.1) {
+
+				fw.write(""+rep);
+				for (int i = 0; i < tag.length; i++) {
+					double exp = evaluate(rep, tag[i]);
+					fw.write(delim+exp);
+				}
+				fw.write("\n");
+				
+			}
+
+			fw.close();
+		
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		nextReport = System.currentTimeMillis() + 5000;
+	}
+
+}

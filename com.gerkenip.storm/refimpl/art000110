@@ -1,0 +1,119 @@
+package com.gerken.sofa.util;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+
+import com.gerken.sofa.bean.ReputationPrediction;
+import com.gerkenip.stackoverflow.model.Question;
+import com.gerkenip.stackoverflow.model.User;
+
+public class PredictionAggregator {
+
+	private String userId;
+	private HashMap<Long, AggregatePrediction> aps = new HashMap<Long, AggregatePrediction>();
+	private HashSet<String> allMetrics = new HashSet<String>();
+	private long nextReport = 0;
+	private User user;
+	
+	public PredictionAggregator(String userId) {
+		this.userId = userId;
+		user = User.get(userId);
+	}
+
+	public void add(ReputationPrediction rp) {
+		Double score = rp.getRep();
+		Long qid = rp.getQuestionId();
+		String metric = rp.getMetric();
+		
+		AggregatePrediction ap = aps.get(qid);
+		if (ap == null) {
+			ap = new AggregatePrediction(qid);
+			aps.put(qid, ap);
+		}
+		
+		ap.setScore(metric, score);
+		allMetrics.add(metric);
+	}
+	
+	public void report() {
+
+		if (nextReport > System.currentTimeMillis()) {
+			return;
+		}
+		
+		AggregatePrediction arr[] = new AggregatePrediction[aps.size()];
+		aps.values().toArray(arr);
+		
+		for (int i = 0; i < arr.length; i++) {
+			arr[i].removeBestRank();
+		}
+		
+		Iterator<String > metrics = allMetrics.iterator();
+		while (metrics.hasNext()) {
+			String metric = metrics.next();
+			AggregatePrediction.currentMetric = metric;
+			Arrays.sort(arr);
+			for (int i = 0; i < arr.length; i++) {
+				if (arr[i].hasMetric(metric)) {
+					arr[i].setRank(metric, i+1);
+				} else {
+					arr[i].setRank(metric, arr.length+1);
+				}
+			}
+		}
+		
+		AggregatePrediction.currentMetric = "Best";
+		Arrays.sort(arr);
+		
+		try {
+			FileWriter fw = new FileWriter("/home/chrisgerken/stackoverflow_"+userId+".html");
+			fw.write("<html>\n");
+
+			fw.write("<h2>Predicted reputation for "+user.getDisplayName()+"\n");
+			
+			fw.write("<table border=\"2\" cellpadding=\"10\">\n");
+
+			for (int i = 0; i < arr.length; i++) {
+				Question question = Question.get(arr[i].getQuestionId());
+				User user = User.get(question.getOwnerId());
+				fw.write("<tr>\n");
+				fw.write("<td>"+question.getId()+"</td>\n");
+				fw.write("<td>"+question.asHtmlLink()+"</td>\n");
+				fw.write("<td>"+user.asHtmlLink()+"</td>\n");
+				fw.write("<td>"+FormatUtil.flatten(question.getTags())+"</td>\n");
+				fw.write("</tr>\n");
+
+				metrics = allMetrics.iterator();
+				while (metrics.hasNext()) {
+					String metric = metrics.next();
+					if (arr[i].hasMetric(metric)) {
+						int rank = arr[i].getRank(metric);
+						double score = arr[i].score(metric);
+						score = Math.floor(score * 10) / 10.0;
+						String pred = "" + score + " (#"+rank+" "+metric+")";
+						fw.write("<tr>\n");
+						fw.write("<td>&nbsp;</td>\n");
+						fw.write("<td colspan=3>"+pred+"</td>\n");
+						fw.write("</tr>\n");
+					}
+				}
+			}
+
+			fw.write("</table>\n");
+			fw.write("</html>\n");
+			fw.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		nextReport = System.currentTimeMillis() + 5000;
+		
+	}
+	
+
+}

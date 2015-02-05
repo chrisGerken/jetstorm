@@ -1,0 +1,49 @@
+package com.gerken.sofa.mock;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.gerken.sofa.bean.*;
+
+import backtype.storm.spout.ISpoutOutputCollector;
+
+public class MockedSpoutOutputCollector implements ISpoutOutputCollector {
+	
+	public List<UserSpec> emittedToUsers = new ArrayList<UserSpec>();
+	public List<UserSpec> idsForUsers = new ArrayList<UserSpec>();
+	public List<Object> others = new ArrayList<Object>();
+
+	public MockedSpoutOutputCollector() {
+	}
+
+	@Override
+	public List<Integer> emit(String streamId, List<Object> tuple, Object messageId) {
+		
+		List<Integer> result = new ArrayList<Integer>();
+		
+		if (streamId == null) { return result; }
+		
+		if (streamId.equals("Users")) {
+			emittedToUsers.add(new UserSpec(new MockedTuple(streamId, tuple)));
+			if (messageId == null) {
+				messageId = UserSpec.sample();
+			}
+			idsForUsers.add((UserSpec)messageId);
+			return result;
+		}
+		
+		others.add(tuple);
+		return result;
+		
+	}
+
+	@Override
+	public void emitDirect(int taskId, String streamId, List<Object> tuple,
+			Object messageId) {  
+	}
+
+	@Override
+	public void reportError(Throwable error) {
+	}
+
+}

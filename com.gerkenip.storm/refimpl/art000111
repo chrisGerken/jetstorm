@@ -1,0 +1,105 @@
+package com.gerken.sofa.util;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+
+import org.apache.commons.math.stat.regression.OLSMultipleLinearRegression;
+
+import com.gerken.sofa.bean.OpRepBestFit;
+
+public class RepRegressionCalc {
+
+	private HashMap<String, ArrayList<Point>> data = new HashMap<String, ArrayList<Point>>();
+	
+	private static int MIN_POINTS = 10;
+	private static int PARMS_ORDER = 3;
+	
+	public RepRegressionCalc() {
+		
+	}
+
+	public void add(String tag, Integer opRep, Integer answerRep) {
+
+		double x = Math.log(opRep);
+		double y = (double) answerRep;
+		Point point = new Point(x,y);
+		
+		ArrayList<Point> points = data.get(tag);
+		if (points == null) {
+			points = new ArrayList<Point>();
+			data.put(tag,points);
+		}
+		points.add(point);
+		
+	}
+
+	public OpRepBestFit[] bestFits(String userId) {
+		
+		ArrayList<OpRepBestFit> results = new ArrayList<OpRepBestFit>();
+		
+		Iterator<String> tags = data.keySet().iterator();
+		while (tags.hasNext()) {
+
+			String tag = tags.next();
+			ArrayList<Point> points = data.get(tag);
+			
+			if (points.size() >= MIN_POINTS) {
+				try {
+					double parm[] = doBestFit(points);
+
+					StringBuffer sb = new StringBuffer();
+					String delim = "";
+					for (int e=0; e < parm.length; e++) {
+						sb.append(delim+parm[e]);
+						delim = "\t";
+					}
+					String coefficients = sb.toString();
+
+					OpRepBestFit opRepBestFit = new OpRepBestFit(userId, tag, coefficients);
+					results.add(opRepBestFit);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}	
+			}
+
+		}
+
+		OpRepBestFit[] fit = new OpRepBestFit[results.size()];
+		results.toArray(fit);
+
+		return fit;	
+	}
+
+	private double[] doBestFit(ArrayList<Point> points) {
+
+		int samples = points.size();
+		int order = PARMS_ORDER;
+		
+		double y[] = new double[samples];
+		double x[][] = new double[samples][order+1];
+		
+		for (int i = 0; i < samples; i++) {
+			Point point = points.get(i);
+			y[i] = point.getY();
+			for (int e = 0; e <= order; e++) {
+				x[i][e] = Math.pow(point.getX(), e);
+			}
+		}
+		
+		OLSMultipleLinearRegression regression = new OLSMultipleLinearRegression();
+		regression.setNoIntercept(true);
+		regression.newSampleData(y, x);
+		
+		double parm[] =  regression.estimateRegressionParameters();
+		for (int i = 0; i < parm.length; i++) {
+			if (Double.isNaN(parm[i])) {
+				System.out.println("NaN in regression parms");
+			}
+		}
+		
+		return parm;
+
+	}
+	
+}

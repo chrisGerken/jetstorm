@@ -1,0 +1,224 @@
+package com.gerken.sofa.topology;
+
+	// Begin imports
+	
+import com.gerken.sofa.spout.*;
+import com.gerken.sofa.bolt.*;
+import com.gerken.sofa.util.AlarmClock;
+import com.gerken.sofa.util.StackoverflowAnalyticsLogger;
+import com.gerken.sofa.util.IStackoverflowAnalyticsLogger;
+import com.gerken.sofa.util.TaskHook;
+
+import backtype.storm.Config;
+import backtype.storm.ILocalCluster;
+import backtype.storm.LocalCluster;
+import backtype.storm.StormSubmitter;
+import backtype.storm.generated.AlreadyAliveException;
+import backtype.storm.generated.InvalidTopologyException;
+import backtype.storm.generated.NotAliveException;
+import backtype.storm.generated.StormTopology;
+import backtype.storm.topology.BoltDeclarer;
+import backtype.storm.topology.TopologyBuilder;
+import backtype.storm.tuple.Fields;
+import backtype.storm.utils.Utils;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+
+	// End imports
+public class StackoverflowAnalyticsTopology {
+
+    static final String DEFAULT_TARGET  = "dev";
+
+	public static boolean quiesce = false;
+
+    private static Config config = null;
+    static List<String> TARGETS = Arrays.asList(new String[] {"dev", "devstable", "staging", "prod"});
+
+    private static IStackoverflowAnalyticsLogger log = StackoverflowAnalyticsLogger.getInstance();
+    
+    private static ILocalCluster localCluster = new LocalCluster();
+
+    public static void main(String[] args) throws Exception {
+
+			// Begin topology execution code
+
+    	String target = DEFAULT_TARGET;
+    	
+    	for (int i = 0; i < args.length; i++) {
+    		System.out.println("args["+i+"] = "+args[i]);
+    	}
+     
+    	if (args.length > 0 && TARGETS.contains(args[0])) {
+    		target = args[0];
+        } else if (args.length > 0) {
+        	System.out.println("Invalid target environment specified");
+        	return;
+        }
+
+        config = loadConfig(target);
+       	
+        List<String> hooksList= new ArrayList<String>();
+        hooksList.add(TaskHook.class.getName());
+        config.put(Config.TOPOLOGY_AUTO_TASK_HOOKS, hooksList);
+        
+       	if (isRunLocally()) {
+       		submitTopologyLocal();
+       	} else {
+       		submitTopology();
+       	}
+       	
+			// End topology execution code
+
+    }
+    
+    public static void submitTopology() {
+    
+    	StormTopology topology = createTopology();
+       	String topologyName = config.get("topology.name").toString();
+
+       	try {
+			StormSubmitter.submitTopology(topologyName, config, topology);
+		} catch (AlreadyAliveException e) {
+			log.severe("StackoverflowAnalyticsTopology","submitToplogy","Topology was already alive: "+e);
+		} catch (InvalidTopologyException e) {
+			log.severe("StackoverflowAnalyticsTopology","submitToplogy","Invalid topology: "+e);
+		}
+
+    }
+    
+    public static void submitTopologyLocal() {
+    
+    	StormTopology topology = createTopology();
+       	String topologyName = config.get("topology.name").toString();
+
+		try {
+			getLocalCluster().submitTopology(topologyName, config, topology);
+			
+			int sleepMinutes;
+			try {
+				sleepMinutes = ((Integer) config.get("sleep.after.submit.minutes")).intValue();
+			} catch (NumberFormatException e) {
+				sleepMinutes = 1;
+			}
+			new AlarmClock(sleepMinutes * 60000,5*60000).go();
+			
+			getLocalCluster().killTopology(topologyName);
+			getLocalCluster().shutdown();
+		} catch (AlreadyAliveException e) {
+			log.severe("StackoverflowAnalyticsTopology","submitTopologyLocal","Topology was already alive: "+e);
+		} catch (InvalidTopologyException e) {
+			log.severe("StackoverflowAnalyticsTopology","submitTopologyLocal","Invalid topology: "+e);
+		} catch (NotAliveException e) {
+			log.severe("StackoverflowAnalyticsTopology","submitTopologyLocal","Topology is not yet alive: "+e);
+		}
+
+    }
+
+    public static Config loadConfig(String env) {
+        log.fine("StackoverflowAnalyticsTopology","submitToplogy","Initializing " + env + " topology");
+        Properties props = new Properties();
+        Config config = new Config();
+        try {
+            props.load(StackoverflowAnalyticsTopology.class.getResourceAsStream("/" + env + ".properties"));
+           for (Object prop : props.keySet()) {
+				Object value = props.get(prop);
+				try {
+					// see if it's an Integer
+					int intValue = Integer.parseInt(String.valueOf(value));
+					config.put(prop.toString(), intValue);
+				} catch (NumberFormatException e) {
+					config.put(prop.toString(), value);					
+				}
+				
+				log.fine("StackoverflowAnalyticsTopology","submitToplogy",prop.toString() + "=" + value);
+			}
+            config.put(Config.TOPOLOGY_FALL_BACK_ON_JAVA_SERIALIZATION, true);
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+        return config;
+    }
+
+    public static StormTopology createTopology() {
+
+        TopologyBuilder builder = new TopologyBuilder();
+		BoltDeclarer boltDeclarer;
+		
+		int parallelismHint = 0;
+
+        parallelismHint = (Integer)config.get("UserIdReader.parallelismHint");
+        builder.setSpout("UserIdReader", new UserIdReaderSpout(), parallelismHint);
+
+        parallelismHint = (Integer)config.get("UserReader.parallelismHint");
+        boltDeclarer = builder.setBolt("UserReader", new UserReaderBolt(), parallelismHint);
+        boltDeclarer.shuffleGrouping("UserIdReader","Users");
+
+        parallelismHint = (Integer)config.get("QuestionReader.parallelismHint");
+        boltDeclarer = builder.setBolt("QuestionReader", new QuestionReaderBolt(), parallelismHint);
+        boltDeclarer.shuffleGrouping("UserReader","Answers");
+
+        parallelismHint = (Integer)config.get("QuestionParser.parallelismHint");
+        boltDeclarer = builder.setBolt("QuestionParser", new QuestionParserBolt(), parallelismHint);
+        boltDeclarer.shuffleGrouping("QuestionReader","Questions");
+
+        parallelismHint = (Integer)config.get("OpRepAnalytics.parallelismHint");
+        boltDeclarer = builder.setBolt("OpRepAnalytics", new OpRepAnalyticsBolt(), parallelismHint);
+        boltDeclarer.fieldsGrouping("QuestionParser","RepStats",new Fields("questionTag"));
+
+        parallelismHint = (Integer)config.get("TermRepStdDev.parallelismHint");
+        boltDeclarer = builder.setBolt("TermRepStdDev", new TermRepStdDevBolt(), parallelismHint);
+        boltDeclarer.fieldsGrouping("QuestionParser","TermStats",new Fields("questionTerm", "questionTag"));
+
+        parallelismHint = (Integer)config.get("TermPredictor.parallelismHint");
+        boltDeclarer = builder.setBolt("TermPredictor", new TermPredictorBolt(), parallelismHint);
+        boltDeclarer.fieldsGrouping("TermRepStdDev","MeaningfulTerms",new Fields("userId", "term"));
+        boltDeclarer.fieldsGrouping("NewQuestionParser","NewQuestionTerms",new Fields("userId", "term"));
+
+        parallelismHint = (Integer)config.get("OpRepPredictor.parallelismHint");
+        boltDeclarer = builder.setBolt("OpRepPredictor", new OpRepPredictorBolt(), parallelismHint);
+        boltDeclarer.fieldsGrouping("OpRepAnalytics","OpRepBestFits",new Fields("userId"));
+        boltDeclarer.fieldsGrouping("NewQuestionParser","NewQuestionOpInfos",new Fields("userId"));
+
+        parallelismHint = (Integer)config.get("NewQuestionReader.parallelismHint");
+        boltDeclarer = builder.setBolt("NewQuestionReader", new NewQuestionReaderBolt(), parallelismHint);
+        boltDeclarer.shuffleGrouping("UserReader","Tags");
+
+        parallelismHint = (Integer)config.get("NewQuestionParser.parallelismHint");
+        boltDeclarer = builder.setBolt("NewQuestionParser", new NewQuestionParserBolt(), parallelismHint);
+        boltDeclarer.shuffleGrouping("NewQuestionReader","NewQuestions");
+
+        parallelismHint = (Integer)config.get("ReputationPredictor.parallelismHint");
+        boltDeclarer = builder.setBolt("ReputationPredictor", new ReputationPredictorBolt(), parallelismHint);
+        boltDeclarer.fieldsGrouping("TermPredictor","PredictionsByTerms",new Fields("userId"));
+        boltDeclarer.fieldsGrouping("OpRepPredictor","PredictionsByOpRep",new Fields("userId"));
+
+        return builder.createTopology();
+    }
+    
+    public static IStackoverflowAnalyticsLogger getLogger() {
+    	return log;
+    }
+    
+    private static ILocalCluster getLocalCluster() {
+    	return localCluster;
+    }
+    
+    public static void setLocalCluster(ILocalCluster cluster) {
+    	localCluster = cluster;
+    }
+    
+    public static boolean isRunLocally() {
+        return Boolean.parseBoolean(config.get("topology.run.locally").toString());
+    }
+
+
+
+}

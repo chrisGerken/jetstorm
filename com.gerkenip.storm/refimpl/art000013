@@ -1,0 +1,340 @@
+package com.gerken.sofa.bean;
+
+// Begin imports 
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectStreamException;
+import java.io.Serializable;
+
+import java.util.ArrayList;
+import java.util.Date;
+
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
+
+import com.gerken.sofa.exception.DataException;
+
+import backtype.storm.tuple.Tuple;
+import backtype.storm.tuple.Values;
+
+// End imports 
+
+public class NewQuestion implements Serializable, Comparable<NewQuestion> {
+
+	private Long _questionId;
+	private String _questionText;
+	private String _questionTags;
+	private String _ownerId;
+	private Integer _ownerRep;
+	private String _userId;
+
+	public NewQuestion(Tuple tuple) {
+		_questionId = tuple.getLong(0);
+		_questionText = tuple.getString(1);
+		_questionTags = tuple.getString(2);
+		_ownerId = tuple.getString(3);
+		_ownerRep = tuple.getInteger(4);
+		_userId = tuple.getString(5);
+	}
+
+	public NewQuestion() {
+
+	}
+
+	public NewQuestion(JSONObject json) throws DataException {
+		try { json = json.getJSONObject("NewQuestion"); } 
+		catch (Throwable t) {
+			throw new DataException("Invalid JSON structure for NewQuestion constructor");
+		}
+		if (json.has("questionId")) {
+			try { _questionId = json.getLong("questionId"); } catch (Throwable t) {}
+		}
+		if (json.has("questionText")) {
+			try { _questionText = json.getString("questionText"); } catch (Throwable t) {}
+		}
+		if (json.has("questionTags")) {
+			try { _questionTags = json.getString("questionTags"); } catch (Throwable t) {}
+		}
+		if (json.has("ownerId")) {
+			try { _ownerId = json.getString("ownerId"); } catch (Throwable t) {}
+		}
+		if (json.has("ownerRep")) {
+			try { _ownerRep = json.getInt("ownerRep"); } catch (Throwable t) {}
+		}
+		if (json.has("userId")) {
+			try { _userId = json.getString("userId"); } catch (Throwable t) {}
+		}
+	}
+
+	public NewQuestion(Long _questionId, String _questionText, String _questionTags, String _ownerId, Integer _ownerRep, String _userId) {	
+		this._questionId = _questionId;
+		this._questionText = _questionText;
+		this._questionTags = _questionTags;
+		this._ownerId = _ownerId;
+		this._ownerRep = _ownerRep;
+		this._userId = _userId;
+	}
+
+	public Values asValues() {
+		return new Values(_questionId, _questionText, _questionTags, _ownerId, _ownerRep, _userId);
+	}
+
+	public Long getQuestionId() { 
+		return _questionId;
+	}
+	
+	public void setQuestionId(Long value) {
+		this._questionId = value;
+	}
+
+	public String getQuestionText() { 
+		return _questionText;
+	}
+	
+	public void setQuestionText(String value) {
+		this._questionText = value;
+	}
+
+	public String getQuestionTags() { 
+		return _questionTags;
+	}
+	
+	public void setQuestionTags(String value) {
+		this._questionTags = value;
+	}
+
+	public String getOwnerId() { 
+		return _ownerId;
+	}
+	
+	public void setOwnerId(String value) {
+		this._ownerId = value;
+	}
+
+	public Integer getOwnerRep() { 
+		return _ownerRep;
+	}
+	
+	public void setOwnerRep(Integer value) {
+		this._ownerRep = value;
+	}
+
+	public String getUserId() { 
+		return _userId;
+	}
+	
+	public void setUserId(String value) {
+		this._userId = value;
+	}
+
+	private void writeObject(java.io.ObjectOutputStream out) throws IOException {
+
+		if (_questionId == null) {
+			out.writeBoolean(false);
+		} else {
+			out.writeBoolean(true);
+			out.writeLong(_questionId);
+		}
+
+		if (_questionText == null) {
+			out.writeBoolean(false);
+		} else {
+			out.writeBoolean(true);
+			out.writeInt(_questionText.length());
+			out.write(_questionText.getBytes());
+		}
+
+		if (_questionTags == null) {
+			out.writeBoolean(false);
+		} else {
+			out.writeBoolean(true);
+			out.writeInt(_questionTags.length());
+			out.write(_questionTags.getBytes());
+		}
+
+		if (_ownerId == null) {
+			out.writeBoolean(false);
+		} else {
+			out.writeBoolean(true);
+			out.writeInt(_ownerId.length());
+			out.write(_ownerId.getBytes());
+		}
+
+		if (_ownerRep == null) {
+			out.writeBoolean(false);
+		} else {
+			out.writeBoolean(true);
+			out.writeInt(_ownerRep);
+		}
+
+		if (_userId == null) {
+			out.writeBoolean(false);
+		} else {
+			out.writeBoolean(true);
+			out.writeInt(_userId.length());
+			out.write(_userId.getBytes());
+		}
+
+	}
+
+	private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+
+		if (in.readBoolean()) {
+			_questionId = in.readLong();
+		} else {
+			_questionId = null;
+		}
+
+		if (in.readBoolean()) {
+			byte b[] = new byte[in.readInt()];
+			in.read(b);
+			_questionText = new String(b);
+		} else {
+			_questionText = null;
+		}
+
+		if (in.readBoolean()) {
+			byte b[] = new byte[in.readInt()];
+			in.read(b);
+			_questionTags = new String(b);
+		} else {
+			_questionTags = null;
+		}
+
+		if (in.readBoolean()) {
+			byte b[] = new byte[in.readInt()];
+			in.read(b);
+			_ownerId = new String(b);
+		} else {
+			_ownerId = null;
+		}
+
+		if (in.readBoolean()) {
+			_ownerRep = in.readInt();
+		} else {
+			_ownerRep = null;
+		}
+
+		if (in.readBoolean()) {
+			byte b[] = new byte[in.readInt()];
+			in.read(b);
+			_userId = new String(b);
+		} else {
+			_userId = null;
+		}
+
+	}
+	
+	@Override
+	public String toString() {
+
+		StringBuffer sb = new StringBuffer();
+		sb.append("NewQuestion [questionId = " + _questionId + "; questionText = " + _questionText + "; questionTags = " + _questionTags + "; ownerId = " + _ownerId + "; ownerRep = " + _ownerRep + "; userId = " + _userId + "]");
+		return sb.toString();
+		
+	}
+	
+	public JSONObject toJson() throws DataException {
+	
+		JSONObject json = new JSONObject();
+
+		try { 
+ 			if (_questionId != null) {
+ 				json.putOpt("questionId", _questionId);
+ 			}
+ 			if (_questionText != null) {
+ 				json.putOpt("questionText", _questionText);
+ 			}
+ 			if (_questionTags != null) {
+ 				json.putOpt("questionTags", _questionTags);
+ 			}
+ 			if (_ownerId != null) {
+ 				json.putOpt("ownerId", _ownerId);
+ 			}
+ 			if (_ownerRep != null) {
+ 				json.putOpt("ownerRep", _ownerRep);
+ 			}
+ 			if (_userId != null) {
+ 				json.putOpt("userId", _userId);
+ 			}
+ 		} catch (JSONException e) {
+ 			throw new DataException("JSON error when persisting NewQuestion to JSON",e);
+ 		}
+ 		
+ 		JSONObject result = new JSONObject();
+		try { 		
+			result.put("NewQuestion", json);
+ 		} catch (JSONException e) {
+ 			throw new DataException("JSON error when persisting NewQuestion to JSON",e);
+ 		}
+		return result;
+	}
+
+	public String toJsonString() {
+		try {
+			return toJson().toString();
+		} catch (DataException e) {
+			return "{ \"error\":\"+e.toString()+\"}";
+		}
+	}
+	
+	@Override
+	public int hashCode() {
+
+		// Begin hashCode logic 
+
+		return super.hashCode();
+
+		// End hashCode logic 
+
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+
+		// Begin equals logic 
+
+		if (obj instanceof NewQuestion) {
+			NewQuestion other = (NewQuestion) obj;
+		
+		}
+
+		return super.equals(obj);
+
+		// End equals logic 
+
+	}
+
+	public int compareTo(NewQuestion o) {
+
+		// Begin compare logic 
+
+
+		// return -1 if this < that
+		//         0 if this = that
+		//         1 if this > that
+
+		if (o instanceof NewQuestion) {
+			NewQuestion other = (NewQuestion) o;
+		
+		}
+	
+		return 0;
+
+		// End compare logic 
+
+	}
+
+	public static NewQuestion sample() {
+	
+		return new NewQuestion(1L, "Howdy", "Howdy", "Howdy", 0, "Howdy");
+	
+	}
+
+// Begin custom methods 
+
+
+// End custom methods 
+	
+}

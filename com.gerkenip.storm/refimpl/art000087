@@ -1,0 +1,105 @@
+package com.gerken.sofa.bolt;
+
+import com.gerken.sofa.bean.*;
+import com.gerken.sofa.logic.*;
+import com.gerken.sofa.topology.StackoverflowAnalyticsTopology;
+import com.gerken.sofa.util.IStackoverflowAnalyticsLogger;
+
+import backtype.storm.task.OutputCollector;
+import backtype.storm.task.TopologyContext;
+import backtype.storm.topology.IRichBolt;
+import backtype.storm.topology.OutputFieldsDeclarer;
+import backtype.storm.tuple.Fields;
+import backtype.storm.tuple.Tuple;
+import backtype.storm.tuple.Values;
+
+import java.util.Map; 
+
+public class TermPredictorBolt implements IRichBolt, ITermPredictorBolt {
+
+	private static final long serialVersionUID = 1L;
+	private OutputCollector collector;
+	private Map<String, Object> config;
+    private static final IStackoverflowAnalyticsLogger log = StackoverflowAnalyticsTopology.getLogger();
+	private TermPredictorBoltLogic logic = new TermPredictorBoltLogic();
+	private Tuple anchor = null;
+	private int taskId;	
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@Override
+    public void prepare(Map config, TopologyContext context, OutputCollector collector) {
+        this.collector = collector;
+        this.config = config;
+         try { taskId = context.getThisTaskId(); }
+        catch (Throwable t) { taskId = 1; }
+        logic.prepare(config,context,this);		
+    }
+
+	/*
+	 *  Emits an instance of ReputationPrediction to stream PredictionsByTerms
+	 */
+	public void emitToPredictionsByTerms(ReputationPrediction reputationPrediction) {
+		Values values = reputationPrediction.asValues();
+		collector.emit("PredictionsByTerms",anchor,values);
+	}
+
+
+	/*
+	 *  Emits an instance of ReputationPrediction to stream PredictionsByTerms
+	 */
+	public void emitToPredictionsByTermsWithoutAnchor(ReputationPrediction reputationPrediction) {
+		Values values = reputationPrediction.asValues();
+		collector.emit("PredictionsByTerms",values);
+	}
+
+    @Override
+    public void execute(Tuple tuple) {
+    	anchor = tuple;
+	    try {
+	    	if ("MeaningfulTerms".equals(tuple.getSourceStreamId())) {
+	    		MeaningfulTerm meaningfulTerm = new MeaningfulTerm(tuple);
+	            logic.readFromMeaningfulTerms(meaningfulTerm, this);
+	    	}
+	
+	    	if ("NewQuestionTerms".equals(tuple.getSourceStreamId())) {
+	    		NewQuestionTerm newQuestionTerm = new NewQuestionTerm(tuple);
+	            logic.readFromNewQuestionTerms(newQuestionTerm, this);
+	    	}
+	
+		} catch (Exception e) { 
+			log.severe("TermPredictorBolt", "execute", "Error executing Tuple", e); 
+	    }
+	}
+	
+    @Override
+    /*
+    *  NOTE: This method is not guaranteed to get called! Do not depend on it!
+    */
+    public void cleanup() {
+		logic.cleanup(this);
+    }
+
+    @Override
+    public void declareOutputFields(OutputFieldsDeclarer declarer) {
+        declarer.declareStream("PredictionsByTerms",new Fields("rep", "questionId", "userId", "metric"));
+    }
+    
+    public void ack() {
+    	collector.ack(anchor);
+    }
+    
+    public void fail() {
+    	collector.fail(anchor);
+    }
+
+	@Override
+	public Map<String, Object> getComponentConfiguration() {
+		return config;
+	}
+	
+	@Override
+	public int getTaskId() {
+		return taskId;
+	}
+
+}

@@ -1,1 +1,0 @@
-java -cp target/rube-goldberg-printer-storm-1.0.0-SNAPSHOT-jar-with-dependencies.jar -Djava.util.logging.config.file=src/main/resources/logging.properties com.gerkenip.rgp.topology.RubeGoldbergPrinterTopology 

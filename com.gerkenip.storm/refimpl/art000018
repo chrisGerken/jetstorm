@@ -1,0 +1,274 @@
+package com.gerken.sofa.bean;
+
+// Begin imports 
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectStreamException;
+import java.io.Serializable;
+
+import java.util.ArrayList;
+import java.util.Date;
+
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
+
+import com.gerken.sofa.exception.DataException;
+
+import backtype.storm.tuple.Tuple;
+import backtype.storm.tuple.Values;
+
+// End imports 
+
+public class RepStat implements Serializable, Comparable<RepStat> {
+
+	private Integer _opRep;
+	private String _questionTag;
+	private Integer _answerRep;
+	private String _userId;
+
+	public RepStat(Tuple tuple) {
+		_opRep = tuple.getInteger(0);
+		_questionTag = tuple.getString(1);
+		_answerRep = tuple.getInteger(2);
+		_userId = tuple.getString(3);
+	}
+
+	public RepStat() {
+
+	}
+
+	public RepStat(JSONObject json) throws DataException {
+		try { json = json.getJSONObject("RepStat"); } 
+		catch (Throwable t) {
+			throw new DataException("Invalid JSON structure for RepStat constructor");
+		}
+		if (json.has("opRep")) {
+			try { _opRep = json.getInt("opRep"); } catch (Throwable t) {}
+		}
+		if (json.has("questionTag")) {
+			try { _questionTag = json.getString("questionTag"); } catch (Throwable t) {}
+		}
+		if (json.has("answerRep")) {
+			try { _answerRep = json.getInt("answerRep"); } catch (Throwable t) {}
+		}
+		if (json.has("userId")) {
+			try { _userId = json.getString("userId"); } catch (Throwable t) {}
+		}
+	}
+
+	public RepStat(Integer _opRep, String _questionTag, Integer _answerRep, String _userId) {	
+		this._opRep = _opRep;
+		this._questionTag = _questionTag;
+		this._answerRep = _answerRep;
+		this._userId = _userId;
+	}
+
+	public Values asValues() {
+		return new Values(_opRep, _questionTag, _answerRep, _userId);
+	}
+
+	public Integer getOpRep() { 
+		return _opRep;
+	}
+	
+	public void setOpRep(Integer value) {
+		this._opRep = value;
+	}
+
+	public String getQuestionTag() { 
+		return _questionTag;
+	}
+	
+	public void setQuestionTag(String value) {
+		this._questionTag = value;
+	}
+
+	public Integer getAnswerRep() { 
+		return _answerRep;
+	}
+	
+	public void setAnswerRep(Integer value) {
+		this._answerRep = value;
+	}
+
+	public String getUserId() { 
+		return _userId;
+	}
+	
+	public void setUserId(String value) {
+		this._userId = value;
+	}
+
+	private void writeObject(java.io.ObjectOutputStream out) throws IOException {
+
+		if (_opRep == null) {
+			out.writeBoolean(false);
+		} else {
+			out.writeBoolean(true);
+			out.writeInt(_opRep);
+		}
+
+		if (_questionTag == null) {
+			out.writeBoolean(false);
+		} else {
+			out.writeBoolean(true);
+			out.writeInt(_questionTag.length());
+			out.write(_questionTag.getBytes());
+		}
+
+		if (_answerRep == null) {
+			out.writeBoolean(false);
+		} else {
+			out.writeBoolean(true);
+			out.writeInt(_answerRep);
+		}
+
+		if (_userId == null) {
+			out.writeBoolean(false);
+		} else {
+			out.writeBoolean(true);
+			out.writeInt(_userId.length());
+			out.write(_userId.getBytes());
+		}
+
+	}
+
+	private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+
+		if (in.readBoolean()) {
+			_opRep = in.readInt();
+		} else {
+			_opRep = null;
+		}
+
+		if (in.readBoolean()) {
+			byte b[] = new byte[in.readInt()];
+			in.read(b);
+			_questionTag = new String(b);
+		} else {
+			_questionTag = null;
+		}
+
+		if (in.readBoolean()) {
+			_answerRep = in.readInt();
+		} else {
+			_answerRep = null;
+		}
+
+		if (in.readBoolean()) {
+			byte b[] = new byte[in.readInt()];
+			in.read(b);
+			_userId = new String(b);
+		} else {
+			_userId = null;
+		}
+
+	}
+	
+	@Override
+	public String toString() {
+
+		StringBuffer sb = new StringBuffer();
+		sb.append("RepStat [opRep = " + _opRep + "; questionTag = " + _questionTag + "; answerRep = " + _answerRep + "; userId = " + _userId + "]");
+		return sb.toString();
+		
+	}
+	
+	public JSONObject toJson() throws DataException {
+	
+		JSONObject json = new JSONObject();
+
+		try { 
+ 			if (_opRep != null) {
+ 				json.putOpt("opRep", _opRep);
+ 			}
+ 			if (_questionTag != null) {
+ 				json.putOpt("questionTag", _questionTag);
+ 			}
+ 			if (_answerRep != null) {
+ 				json.putOpt("answerRep", _answerRep);
+ 			}
+ 			if (_userId != null) {
+ 				json.putOpt("userId", _userId);
+ 			}
+ 		} catch (JSONException e) {
+ 			throw new DataException("JSON error when persisting RepStat to JSON",e);
+ 		}
+ 		
+ 		JSONObject result = new JSONObject();
+		try { 		
+			result.put("RepStat", json);
+ 		} catch (JSONException e) {
+ 			throw new DataException("JSON error when persisting RepStat to JSON",e);
+ 		}
+		return result;
+	}
+
+	public String toJsonString() {
+		try {
+			return toJson().toString();
+		} catch (DataException e) {
+			return "{ \"error\":\"+e.toString()+\"}";
+		}
+	}
+	
+	@Override
+	public int hashCode() {
+
+		// Begin hashCode logic 
+
+		return super.hashCode();
+
+		// End hashCode logic 
+
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+
+		// Begin equals logic 
+
+		if (obj instanceof RepStat) {
+			RepStat other = (RepStat) obj;
+		
+		}
+
+		return super.equals(obj);
+
+		// End equals logic 
+
+	}
+
+	public int compareTo(RepStat o) {
+
+		// Begin compare logic 
+
+
+		// return -1 if this < that
+		//         0 if this = that
+		//         1 if this > that
+
+		if (o instanceof RepStat) {
+			RepStat other = (RepStat) o;
+		
+		}
+	
+		return 0;
+
+		// End compare logic 
+
+	}
+
+	public static RepStat sample() {
+	
+		return new RepStat(0, "Howdy", 0, "Howdy");
+	
+	}
+
+// Begin custom methods 
+
+
+// End custom methods 
+	
+}
