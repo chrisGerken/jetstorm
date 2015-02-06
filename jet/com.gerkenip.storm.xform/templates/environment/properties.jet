@@ -17,6 +17,21 @@ event.visualization.logging=false
 
 <c:userRegion># Begin custom properties<c:initialCode>
 
+<c:iterate select="$topology/spout" var="spout" >
+gumbo.<c:get select="$spout/@name" />.color=250,0,0
+</c:iterate>
+<c:iterate select="$topology/bolt" var="bolt" >
+gumbo.<c:get select="$bolt/@name" />.color=250,0,0
+</c:iterate>
+
+<c:iterate select="$topology/spout" var="spout" >
+timer.<c:get select="$spout/@name" />.every=100
+timer.<c:get select="$spout/@name" />.count=1
+</c:iterate>
+<c:iterate select="$topology/bolt" var="bolt" >
+timer.<c:get select="$bolt/@name" />.time=10
+</c:iterate>
+
 sleep.after.submit.minutes=30
 
 topology.workers=1

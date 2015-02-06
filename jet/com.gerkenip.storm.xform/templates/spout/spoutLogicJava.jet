@@ -7,6 +7,8 @@ import <c:get select="$topology/@spoutPkg" />.<c:get select="$spout/@iSpoutJava"
 import <c:get select="$topology/@utilPkg" />.<c:get select="$topology/@loggerJava" />;
 import <c:get select="$topology/@utilPkg" />.<c:get select="$topology/@iLoggerJava" />;
 
+import com.gerkenip.timers.Generator;
+
 import backtype.storm.task.TopologyContext;
 
 import java.io.Serializable;
@@ -23,6 +25,8 @@ public class <c:get select="$spout/@spoutLogicJava" /> implements Serializable {
     private static final <c:get select="$topology/@iLoggerJava" /> log = <c:get select="$topology/@loggerJava" />.getInstance();
     private boolean written = false;
 
+    private Generator gen;
+
 		</c:initialCode>// End declarations</c:userRegion> 
 
     public void nextTuple(final <c:get select="$spout/@iSpoutJava" /> spout) {
@@ -31,12 +35,13 @@ public class <c:get select="$spout/@spoutLogicJava" /> implements Serializable {
 			
         try {
 
+        	if (gen.pending()) {
+
+				// emit a tuple
+
+        	}
 
         	
-       		Thread.sleep(100);
-
-    	} catch (InterruptedException e) {
-    		log.finest("<c:get select="$spout/@spoutLogicJava" />","nextTuple", e.toString());
         } catch (Exception e) {
        		log.severe("<c:get select="$spout/@spoutLogicJava" />","nextTuple", e.toString());
         }
@@ -49,6 +54,7 @@ public class <c:get select="$spout/@spoutLogicJava" /> implements Serializable {
 
 			<c:userRegion>// Begin open() logic<c:initialCode> 
  
+    	gen = new Generator(map, "<c:get select="$spout/@name" />");
  
 			</c:initialCode>// End open() logic</c:userRegion> 
 
