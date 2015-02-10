@@ -66,10 +66,9 @@ public class <c:get select="$topology/@topologyJava" /> {
         }
 
         config = loadConfig(target);
-       	
-        if ("true".equals(config.get("storm.monitor.enabled").toString())) {
-        	TaskHook.registerTo(config);
-        }
+
+		// Handles the case where monitoring is turned off or not requested
+       	TaskHook.registerTo(config);
         
        	if (isRunLocally()) {
        		submitTopologyLocal();

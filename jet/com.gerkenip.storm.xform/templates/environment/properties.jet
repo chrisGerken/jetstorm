@@ -36,9 +36,10 @@ sleep.after.submit.minutes=30
 
 topology.workers=1
 
-storm.monitor.enabled=false
-storm.monitor.host=localhost
-storm.monitor.port=8087
-storm.monitor.bucketSize=1000
+gumbo.enabled=true
+gumbo.server.kind=local
+gumbo.server.key=<c:get select="$topology/@name" />
+gumbo.local.port=8087
+gumbo.bucketSize=1000
 
 </c:initialCode># End custom properties</c:userRegion>
