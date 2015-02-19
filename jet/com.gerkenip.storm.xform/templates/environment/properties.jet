@@ -17,11 +17,8 @@ event.visualization.logging=false
 
 <c:userRegion># Begin custom properties<c:initialCode>
 
-<c:iterate select="$topology/spout" var="spout" >
-gumbo.<c:get select="$spout/@name" />.color=250,0,0
-</c:iterate>
-<c:iterate select="$topology/bolt" var="bolt" >
-gumbo.<c:get select="$bolt/@name" />.color=250,0,0
+<c:iterate select="$topology/*/emits" var="emits" >
+gumbo.<c:get select="$emits/@stream" />.color=0,0,0
 </c:iterate>
 
 <c:iterate select="$topology/spout" var="spout" >

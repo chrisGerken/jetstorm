@@ -82,6 +82,10 @@
 
             *** Begin custom model updates for reads (280)
 
+			<c:if test="not($topology/*/emits[@stream=$reads/@stream]/@type)" >
+				<c:log severity="error">Bolt <c:get select="$bolt/@label"/> reads from ill-defined stream <c:get select="$reads/@stream" /></c:log>
+			</c:if>
+
             *** End custom model updates for reads (280)
 
 
