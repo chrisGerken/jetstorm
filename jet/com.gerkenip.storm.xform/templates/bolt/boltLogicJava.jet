@@ -26,7 +26,9 @@ public class <c:get select="$bolt/@boltLogicJava" /> implements Serializable {
 
     private static final <c:get select="$topology/@iLoggerJava" /> log = <c:get select="$topology/@topologyJava" />.getLogger();
 
-    private Sleeper sleeper;
+<c:iterate select="$bolt/reads" var="reads" >
+    private Sleeper sleeperFor<c:get select="$reads/@stream" />;
+</c:iterate>
 
 		</c:initialCode>// End declarations</c:userRegion> 
 <c:iterate select="$bolt/reads" var="reads" >
@@ -35,7 +37,7 @@ public class <c:get select="$bolt/@boltLogicJava" /> implements Serializable {
 
 			<c:userRegion>// Begin <c:get select="$reads/@execMethod" />() logic<c:initialCode> 
 
-		sleeper.sleep();
+		sleeperFor<c:get select="$reads/@stream" />.sleep();
 
 			</c:initialCode>// End <c:get select="$reads/@execMethod" />() logic</c:userRegion> 
 
@@ -46,7 +48,9 @@ public class <c:get select="$bolt/@boltLogicJava" /> implements Serializable {
 
 			<c:userRegion>// Begin prepare() logic<c:initialCode> 
 
-    	sleeper = new Sleeper(conf, "<c:get select="$bolt/@name" />");
+<c:iterate select="$bolt/reads" var="reads" >
+    	sleeperFor<c:get select="$reads/@stream" /> = new Sleeper(conf, "<c:get select="$bolt/@name" />.<c:get select="$reads/@stream" />");
+</c:iterate>
 
 			</c:initialCode>// End prepare() logic</c:userRegion> 
 

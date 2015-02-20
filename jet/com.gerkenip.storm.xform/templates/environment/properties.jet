@@ -26,7 +26,9 @@ timer.<c:get select="$spout/@name" />.every=100
 timer.<c:get select="$spout/@name" />.count=1
 </c:iterate>
 <c:iterate select="$topology/bolt" var="bolt" >
-timer.<c:get select="$bolt/@name" />.time=10
+<c:iterate select="$bolt/reads" var="reads" >
+timer.<c:get select="$bolt/@name" />.<c:get select="$reads/@stream" />.time=10
+</c:iterate>
 </c:iterate>
 
 sleep.after.submit.minutes=30
