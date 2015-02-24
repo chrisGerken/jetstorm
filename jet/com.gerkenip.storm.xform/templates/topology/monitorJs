@@ -291,7 +291,7 @@ function topology(data,id,vertical) {
 	}
 
 	var prevwidth = ctx.lineWidth;
-	ctx.lineWidth = 2;
+	ctx.lineWidth = 3;
 	for (var i in graph.edges) {
 		var edge = graph.edges[i];
 		
