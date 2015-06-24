@@ -51,7 +51,7 @@ public class <c:get select="$spout/@spoutJava" /> implements IRichSpout, <c:get 
     @Override
     public void declareOutputFields(OutputFieldsDeclarer declarer) {
 <c:iterate select="$spout/emits" var="emits" >    
-        declarer.declareStream("<c:get select="$emits/@stream" />", <c:get select="$emits/@type" />.asFields());
+        declarer.declareStream("<c:get select="$emits/@stream" />", new Fields(<c:get select="$emits/@type" />.fields));
 </c:iterate>	
     }
 
@@ -65,7 +65,7 @@ public class <c:get select="$spout/@spoutJava" /> implements IRichSpout, <c:get 
      * Unreliably emit an instance of <c:get select="$emits/@type" /> to stream <c:get select="$emits/@stream" />.  
      */
 	public void <c:get select="$emits/@emitMethod" />(<c:get select="$emits/@type" /> <c:get select="$emits/@emitVar" />) {
-		Values values = <c:get select="$emits/@emitVar" />.asValues();
+		Values values = Marshaller.asValues(<c:get select="$emits/@emitVar" />);
 		collector.get().emit("<c:get select="$emits/@stream" />",values);
 	}
 
@@ -75,7 +75,7 @@ public class <c:get select="$spout/@spoutJava" /> implements IRichSpout, <c:get 
      * notification of message ack or fail.  
      */
 	public void <c:get select="$emits/@emitMethod" />(<c:get select="$emits/@type" /> <c:get select="$emits/@emitVar" />, <c:get select="$emits/@type" /> messageID) {
-		Values values = <c:get select="$emits/@emitVar" />.asValues();
+		Values values = Marshaller.asValues(<c:get select="$emits/@emitVar" />);
 		collector.get().emit("<c:get select="$emits/@stream" />",values,messageID);
 	}
 </c:iterate>

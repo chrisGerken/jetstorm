@@ -3,6 +3,7 @@ package <c:get select="$topology/@boltPkg" />;
 import <c:get select="$topology/@beanPkg" />.*;
 import <c:get select="$topology/@logicPkg" />.*;
 import <c:get select="$topology/@topologyPkg" />.<c:get select="$topology/@topologyJava" />;
+import <c:get select="$topology/@utilPkg" />.Marshaller;
 import <c:get select="$topology/@utilPkg" />.<c:get select="$topology/@iLoggerJava" />;
 
 import backtype.storm.task.OutputCollector;
@@ -40,7 +41,7 @@ public class <c:get select="$bolt/@boltJava" /> implements IRichBolt, <c:get sel
 	 *  Emits an instance of <c:get select="$emits/@type" /> to stream <c:get select="$emits/@stream" />
 	 */
 	public void <c:get select="$emits/@emitMethod" />(<c:get select="$emits/@type" /> <c:get select="$emits/@emitVar" />) {
-		Values values = <c:get select="$emits/@emitVar" />.asValues();
+		Values values = Marshaller.asValues(<c:get select="$emits/@emitVar" />);
 		collector.emit("<c:get select="$emits/@stream" />",anchor,values);
 	}
 
@@ -49,7 +50,7 @@ public class <c:get select="$bolt/@boltJava" /> implements IRichBolt, <c:get sel
 	 *  Emits an instance of <c:get select="$emits/@type" /> to stream <c:get select="$emits/@stream" />
 	 */
 	public void <c:get select="$emits/@emitMethod" />WithoutAnchor(<c:get select="$emits/@type" /> <c:get select="$emits/@emitVar" />) {
-		Values values = <c:get select="$emits/@emitVar" />.asValues();
+		Values values = Marshaller.asValues(<c:get select="$emits/@emitVar" />);
 		collector.emit("<c:get select="$emits/@stream" />",values);
 	}
 </c:iterate>
@@ -60,7 +61,7 @@ public class <c:get select="$bolt/@boltJava" /> implements IRichBolt, <c:get sel
 	    try {
 <c:iterate select="$bolt/reads" var="reads" >
 	    	if ("<c:get select="$reads/@stream" />".equals(tuple.getSourceStreamId())) {
-	    		<c:get select="$reads/@type" /> <c:get select="$reads/@execVar" /> = new <c:get select="$reads/@type" />(tuple);
+	    		<c:get select="$reads/@type" /> <c:get select="$reads/@execVar" /> = Marshaller.as<c:get select="$reads/@type" />(tuple);
 	            logic.<c:get select="$reads/@execMethod" />(<c:get select="$reads/@execVar" />, this);
 	    	}
 </c:iterate>	
@@ -80,7 +81,7 @@ public class <c:get select="$bolt/@boltJava" /> implements IRichBolt, <c:get sel
     @Override
     public void declareOutputFields(OutputFieldsDeclarer declarer) {
 <c:iterate select="$bolt/emits" var="emits" >    
-        declarer.declareStream("<c:get select="$emits/@stream" />", <c:get select="$emits/@type" />.asFields());
+        declarer.declareStream("<c:get select="$emits/@stream" />", new Fields(<c:get select="$emits/@type" />.fields));
 </c:iterate>	
     }
     

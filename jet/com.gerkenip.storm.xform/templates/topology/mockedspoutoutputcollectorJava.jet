@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import <c:get select="$topology/@beanPkg" />.*;
+import <c:get select="$topology/@utilPkg" />.*;
 
 import backtype.storm.spout.ISpoutOutputCollector;
 
@@ -28,7 +29,7 @@ public class MockedSpoutOutputCollector implements ISpoutOutputCollector {
 		
 <c:iterate select="$topology/spout/emits" var="emits">
 		if (streamId.equals("<c:get select="$emits/@stream" />")) {
-			emittedTo<c:get select="$emits/@stream" />.add(new <c:get select="$emits/@type" />(new MockedTuple(streamId, tuple)));
+			emittedTo<c:get select="$emits/@stream" />.add(Marshaller.as<c:get select="$emits/@type" />(new MockedTuple(streamId, tuple)));
 			if (messageId == null) {
 				messageId = <c:get select="$emits/@type" />.sample();
 			}

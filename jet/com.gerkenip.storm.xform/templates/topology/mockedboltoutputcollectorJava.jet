@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 
 import <c:get select="$topology/@beanPkg" />.*;
+import <c:get select="$topology/@utilPkg" />.*;
 
 import backtype.storm.task.IOutputCollector;
 import backtype.storm.tuple.Tuple;
@@ -34,7 +35,7 @@ public class MockedBoltOutputCollector implements IOutputCollector {
 		
 <c:iterate select="$topology/bolt/emits" var="emits">
 		if (streamId.equals("<c:get select="$emits/@stream" />")) {
-			emittedTo<c:get select="$emits/@stream" />.add(new <c:get select="$emits/@type" />(new MockedTuple(streamId, tuple)));
+			emittedTo<c:get select="$emits/@stream" />.add(Marshaller.as<c:get select="$emits/@type" />(new MockedTuple(streamId, tuple)));
 			return result;
 		}
 </c:iterate>
