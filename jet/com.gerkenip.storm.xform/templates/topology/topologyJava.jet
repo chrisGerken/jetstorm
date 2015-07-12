@@ -10,6 +10,8 @@ import <c:get select="$topology/@utilPkg" />.AlarmClock;
 import <c:get select="$topology/@utilPkg" />.<c:get select="$topology/@loggerJava" />;
 import <c:get select="$topology/@utilPkg" />.<c:get select="$topology/@iLoggerJava" />;
 
+import org.apache.log4j.Logger;
+
 import backtype.storm.Config;
 import backtype.storm.ILocalCluster;
 import backtype.storm.LocalCluster;
@@ -44,9 +46,8 @@ public class <c:get select="$topology/@topologyJava" /> {
     private static Config config = null;
     static List<String> TARGETS = Arrays.asList(new String[] {<c:iterate select="$topology/environment" var="environment" delimiter=", ">"<c:get select="$environment/@name" />"</c:iterate>});
 
-    private static <c:get select="$topology/@iLoggerJava" /> log = <c:get select="$topology/@loggerJava" />.getInstance();
-    
     private static ILocalCluster localCluster = new LocalCluster();
+    private static final Logger log = Logger.getLogger(<c:get select="$topology/@topologyJava" />.class);
 
     public static void main(String[] args) throws Exception {
 
@@ -88,9 +89,9 @@ public class <c:get select="$topology/@topologyJava" /> {
        	try {
 			StormSubmitter.submitTopology(topologyName, config, topology);
 		} catch (AlreadyAliveException e) {
-			log.severe("<c:get select="$topology/@topologyJava" />","submitToplogy","Topology was already alive: "+e);
+			log.error("<c:get select="$topology/@topologyJava" /> Topology was already alive: "+e);
 		} catch (InvalidTopologyException e) {
-			log.severe("<c:get select="$topology/@topologyJava" />","submitToplogy","Invalid topology: "+e);
+			log.error("<c:get select="$topology/@topologyJava" /> Invalid topology: "+e);
 		}
 
     }
@@ -114,17 +115,17 @@ public class <c:get select="$topology/@topologyJava" /> {
 			getLocalCluster().killTopology(topologyName);
 			getLocalCluster().shutdown();
 		} catch (AlreadyAliveException e) {
-			log.severe("<c:get select="$topology/@topologyJava" />","submitTopologyLocal","Topology was already alive: "+e);
+			log.error("<c:get select="$topology/@topologyJava" /> Topology was already alive: "+e);
 		} catch (InvalidTopologyException e) {
-			log.severe("<c:get select="$topology/@topologyJava" />","submitTopologyLocal","Invalid topology: "+e);
+			log.error("<c:get select="$topology/@topologyJava" /> Invalid topology: "+e);
 		} catch (NotAliveException e) {
-			log.severe("<c:get select="$topology/@topologyJava" />","submitTopologyLocal","Topology is not yet alive: "+e);
+			log.error("<c:get select="$topology/@topologyJava" /> Topology is not yet alive: "+e);
 		}
 
     }
 
     public static Config loadConfig(String env) {
-        log.fine("<c:get select="$topology/@topologyJava" />","submitToplogy","Initializing " + env + " topology");
+        log.info("<c:get select="$topology/@topologyJava" /> Initializing " + env + " topology");
         Properties props = new Properties();
         Config config = new Config();
         try {
@@ -139,11 +140,11 @@ public class <c:get select="$topology/@topologyJava" /> {
 					config.put(prop.toString(), value);					
 				}
 				
-				log.fine("<c:get select="$topology/@topologyJava" />","submitToplogy",prop.toString() + "=" + value);
+				log.info("<c:get select="$topology/@topologyJava" /> "+ prop.toString() + "=" + value);
 			}
             config.put(Config.TOPOLOGY_FALL_BACK_ON_JAVA_SERIALIZATION, true);
         } catch(IOException e) {
-            e.printStackTrace();
+			log.error("<c:get select="$topology/@topologyJava" /> Error loading configuration: "+e);
         }
         return config;
     }
@@ -190,10 +191,6 @@ public class <c:get select="$topology/@topologyJava" /> {
 </c:iterate>
 
         return builder.createTopology();
-    }
-    
-    public static <c:get select="$topology/@iLoggerJava" /> getLogger() {
-    	return log;
     }
     
     private static ILocalCluster getLocalCluster() {

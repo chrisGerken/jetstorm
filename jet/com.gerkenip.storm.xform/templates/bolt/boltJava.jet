@@ -6,6 +6,8 @@ import <c:get select="$topology/@topologyPkg" />.<c:get select="$topology/@topol
 import <c:get select="$topology/@utilPkg" />.Marshaller;
 import <c:get select="$topology/@utilPkg" />.<c:get select="$topology/@iLoggerJava" />;
 
+import org.apache.log4j.Logger;
+
 import backtype.storm.task.OutputCollector;
 import backtype.storm.task.TopologyContext;
 import backtype.storm.topology.IRichBolt;
@@ -21,7 +23,7 @@ public class <c:get select="$bolt/@boltJava" /> implements IRichBolt, <c:get sel
 	private static final long serialVersionUID = 1L;
 	private OutputCollector collector;
 	private Map<String, Object> config;
-    private static final <c:get select="$topology/@iLoggerJava" /> log = <c:get select="$topology/@topologyJava" />.getLogger();
+    private static final Logger log = Logger.getLogger(<c:get select="$bolt/@boltJava" />.class);
 	private <c:get select="$bolt/@boltLogicJava" /> logic = new <c:get select="$bolt/@boltLogicJava" />();
 	private Tuple anchor = null;
 	private int taskId;	
@@ -66,7 +68,7 @@ public class <c:get select="$bolt/@boltJava" /> implements IRichBolt, <c:get sel
 	    	}
 </c:iterate>	
 		} catch (Exception e) { 
-			log.severe("<c:get select="$bolt/@boltJava" />", "execute", "Error executing Tuple", e); 
+			log.error("<c:get select="$bolt/@boltJava" /> execute() error", e); 
 	    }
 	}
 	

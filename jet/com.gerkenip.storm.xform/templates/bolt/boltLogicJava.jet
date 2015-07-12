@@ -8,6 +8,8 @@ import <c:get select="$topology/@topologyPkg" />.<c:get select="$topology/@topol
 import <c:get select="$topology/@utilPkg" />.<c:get select="$topology/@loggerJava" />;
 import <c:get select="$topology/@utilPkg" />.<c:get select="$topology/@iLoggerJava" />;
 
+import org.apache.log4j.Logger;
+
 import com.gerkenip.timers.Sleeper;
 
 import backtype.storm.task.TopologyContext;
@@ -24,7 +26,7 @@ public class <c:get select="$bolt/@boltLogicJava" /> implements Serializable {
 		
 		<c:userRegion>// Begin declarations<c:initialCode> 
 
-    private static final <c:get select="$topology/@iLoggerJava" /> log = <c:get select="$topology/@topologyJava" />.getLogger();
+    private static final Logger log = Logger.getLogger(<c:get select="$bolt/@boltLogicJava" />.class);
 
 <c:iterate select="$bolt/reads" var="reads" >
     private Sleeper sleeperFor<c:get select="$reads/@stream" />;

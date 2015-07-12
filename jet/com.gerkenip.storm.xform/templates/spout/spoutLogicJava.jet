@@ -7,6 +7,8 @@ import <c:get select="$topology/@spoutPkg" />.<c:get select="$spout/@iSpoutJava"
 import <c:get select="$topology/@utilPkg" />.<c:get select="$topology/@loggerJava" />;
 import <c:get select="$topology/@utilPkg" />.<c:get select="$topology/@iLoggerJava" />;
 
+import org.apache.log4j.Logger;
+
 import com.gerkenip.timers.Generator;
 
 import backtype.storm.task.TopologyContext;
@@ -22,7 +24,7 @@ public class <c:get select="$spout/@spoutLogicJava" /> implements Serializable {
 		 
 	private static final long serialVersionUID = 1L;
 
-    private static final <c:get select="$topology/@iLoggerJava" /> log = <c:get select="$topology/@loggerJava" />.getInstance();
+    private static final Logger log = Logger.getLogger(<c:get select="$spout/@spoutLogicJava" />.class);
     private boolean written = false;
 
     private Generator gen;
@@ -43,7 +45,7 @@ public class <c:get select="$spout/@spoutLogicJava" /> implements Serializable {
 
         	
         } catch (Exception e) {
-       		log.severe("<c:get select="$spout/@spoutLogicJava" />","nextTuple", e.toString());
+       		log.error("<c:get select="$spout/@spoutLogicJava" /> nextTuple() error: "+ e.toString());
         }
 
 			</c:initialCode>// End nextTuple() logic</c:userRegion> 

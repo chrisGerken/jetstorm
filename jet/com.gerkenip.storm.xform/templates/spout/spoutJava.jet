@@ -4,6 +4,8 @@ import <c:get select="$topology/@beanPkg" />.*;
 import <c:get select="$topology/@logicPkg" />.*;
 import <c:get select="$topology/@utilPkg" />.*;
 
+import org.apache.log4j.Logger;
+
 import backtype.storm.spout.SpoutOutputCollector;
 import backtype.storm.task.TopologyContext;
 import backtype.storm.topology.IRichSpout;
@@ -24,7 +26,7 @@ public class <c:get select="$spout/@spoutJava" /> implements IRichSpout, <c:get 
 	private <c:get select="$spout/@spoutLogicJava" /> logic = new <c:get select="$spout/@spoutLogicJava" />();
 	private int taskId;	
 
-    private static final <c:get select="$topology/@iLoggerJava" /> log = <c:get select="$topology/@topologyJava" />.getLogger();
+    private static final Logger log = Logger.getLogger(<c:get select="$spout/@spoutJava" />.class);
 
     @Override
     public void nextTuple() {
@@ -34,7 +36,7 @@ public class <c:get select="$spout/@spoutJava" /> implements IRichSpout, <c:get 
 			logic.nextTuple(this);
 
         } catch (Exception e) {
-            log.severe("<c:get select="$spout/@spoutJava" />","nextTuple",e.toString());
+            log.error("<c:get select="$spout/@spoutJava" /> nextTuple() error: " + e.toString());
         }
     }
 

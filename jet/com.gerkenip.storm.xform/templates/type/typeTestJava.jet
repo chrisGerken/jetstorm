@@ -9,7 +9,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import org.codehaus.jettison.json.JSONObject;
+import org.atomsg.util.Marshaller;
 import org.junit.Test;
 
 </c:initialCode>// End imports</c:userRegion> 
@@ -19,7 +19,7 @@ public class <c:get select="$type/@typeTestJava" /> {
 	@Test
 	public void testJsonification() {
 		try {
-			new <c:get select="$type/@typeJava" />(new JSONObject(<c:get select="$type/@typeJava" />.sample().toJsonString()));
+			Marshaller.as<c:get select="$type/@typeJava" />(Marshaller.asJson(<c:get select="$type/@typeJava" />.sample()));
 		} catch (Exception e) {
 			fail("Failed JSONification");
 		}
@@ -27,7 +27,7 @@ public class <c:get select="$type/@typeTestJava" /> {
 	
 	@Test
 	public void testTupilization() {
-		<c:get select="$type/@typeJava" />.sample().asValues();
+		Marshaller.asValues(<c:get select="$type/@typeJava" />.sample());
 	}
 
 	@Test

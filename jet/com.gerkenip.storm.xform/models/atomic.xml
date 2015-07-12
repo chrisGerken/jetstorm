@@ -1,0 +1,42 @@
+
+<root>
+
+    <topology  label="Atomic Messages"  mavenGroupId="org.atomsg"  basePackage="org.atomsg"  provider="Chris Gerken">
+
+        <spout  label="Generator"  instances="1">
+            <emits  stream="NewMessages"  type="Message"/>
+        </spout>
+
+        <spout  label="Message Reader"  instances="1">
+            <emits  stream="OldMessages"  type="Message"/>
+        </spout>
+
+        <bolt  label="Message Splitter"  instances="4">
+            <reads  stream="NewMessages"  grouping="shuffle" />
+            <reads  stream="OldMessages"  grouping="shuffle" />
+            <emits  stream="SplitMessages"  type="Message" />
+            <emits  stream="AtomicMessages"  type="Message" />
+        </bolt>
+
+        <bolt  label="Message Writer"  instances="4">
+            <reads  stream="SplitMessages"  grouping="shuffle" />
+        </bolt>
+
+        <bolt  label="Message Aggregator"  instances="4">
+            <reads  stream="AtomicMessages"  grouping="shuffle" />
+        </bolt>
+
+        <type  name="Message">
+            <field  name="messageGroup"  	type="Long" />
+            <field  name="correlationID"  	type="Long" />
+            <field  name="createTime"  		type="Long" />
+            <field  name="fullValue"  		type="Integer" />
+            <field  name="currentValue"  	type="Integer" />
+        </type>
+
+        <environment  name="dev"  runLocally="true"  default="true" />
+        <environment  name="prod"  runLocally="false"  default="false" />
+
+    </topology>
+
+</root>
