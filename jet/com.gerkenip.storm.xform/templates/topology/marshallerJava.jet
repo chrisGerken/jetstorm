@@ -1,0 +1,117 @@
+package <c:get select="$topology/@utilPkg" />;
+
+	<c:userRegion>// Begin imports<c:initialCode>
+
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
+
+import <c:get select="$topology/@exceptionPkg" />.DataException;
+import <c:get select="$topology/@beanPkg" />.*;
+
+import backtype.storm.tuple.Tuple;
+import backtype.storm.tuple.Values;
+
+	</c:initialCode>// End imports</c:userRegion>
+	
+public class Marshaller {
+
+<c:iterate select="$topology/type" var="type" >
+	public static <c:get select="$type/@typeJava" /> as<c:get select="$type/@typeJava" />(Tuple tuple) {
+		return new <c:get select="$type/@typeJava" />(<c:iterate select="$type/field" var="field" delimiter=", ">
+<c:choose select="$field/@type" >
+<c:when test=" 'String' ">					tuple.getString(<c:get select="$field/@index"/>)</c:when>
+<c:when test=" 'Integer' ">					tuple.getInteger(<c:get select="$field/@index"/>)</c:when>
+<c:when test=" 'Date' ">					new Date(tuple.getLong(<c:get select="$field/@index"/>))</c:when>
+<c:when test=" 'Long' ">					tuple.getLong(<c:get select="$field/@index"/>)</c:when>
+<c:when test=" 'Double' ">					tuple.getDouble(<c:get select="$field/@index"/>)</c:when>
+<c:when test=" 'Boolean' ">					tuple.getBoolean(<c:get select="$field/@index"/>)</c:when>
+</c:choose>
+</c:iterate>);	
+	}
+
+	public static <c:get select="$type/@typeJava" /> as<c:get select="$type/@typeJava" />(JSONObject json) throws DataException {
+		try { json = json.getJSONObject("<c:get select="$type/@typeJava" />"); } 
+		catch (Throwable t) {
+			throw new DataException("Invalid JSON structure for <c:get select="$type/@typeJava" /> constructor");
+		}
+		<c:get select="$type/@typeJava" /> bean = new <c:get select="$type/@typeJava" />();
+<c:iterate select="$type/field" var="field">
+<c:choose select="$field/@type" >
+<c:when test=" 'String' ">
+		if (json.has("<c:get select="$field/@name"/>")) {
+			try { bean.<c:get select="$field/@setter"/>(json.getString("<c:get select="$field/@name"/>")); } catch (Throwable t) {}
+		}
+</c:when>
+<c:when test=" 'Integer' ">
+		if (json.has("<c:get select="$field/@name"/>")) {
+			try { bean.<c:get select="$field/@setter"/>(json.getInt("<c:get select="$field/@name"/>")); } catch (Throwable t) {}
+		}
+</c:when>
+<c:when test=" 'Date' ">
+		if (json.has("<c:get select="$field/@name"/>")) {
+			try { bean.<c:get select="$field/@setter"/>(new Date(json.getLong("<c:get select="$field/@name"/>"))); } catch (Throwable t) {}
+		}
+</c:when>
+<c:when test=" 'Long' ">
+		if (json.has("<c:get select="$field/@name"/>")) {
+			try { bean.<c:get select="$field/@setter"/>(json.getLong("<c:get select="$field/@name"/>")); } catch (Throwable t) {}
+		}
+</c:when>
+<c:when test=" 'Double' ">
+		if (json.has("<c:get select="$field/@name"/>")) {
+			try { bean.<c:get select="$field/@setter"/>(json.getDouble("<c:get select="$field/@name"/>")); } catch (Throwable t) {}
+		}
+</c:when>
+<c:when test=" 'Boolean' ">
+		if (json.has("<c:get select="$field/@name"/>")) {
+			try { bean.<c:get select="$field/@setter"/>(json.getBoolean("<c:get select="$field/@name"/>")); } catch (Throwable t) {}
+		}
+</c:when>
+</c:choose>
+</c:iterate>	
+		return bean;
+	}
+
+	public static Values asValues(<c:get select="$type/@typeJava" /> bean) {
+		return new Values(<c:iterate select="$type/field" var="field" delimiter=", ">bean.<c:get select="$field/@getter"/>()</c:iterate>);
+	}
+	
+	public static JSONObject asJson(<c:get select="$type/@typeJava" /> bean) throws DataException {
+	
+		JSONObject json = new JSONObject();
+
+		try { 
+ <c:iterate select="$type/field" var="field">
+ 			if (bean.<c:get select="$field/@getter"/>() != null) {
+ 				json.putOpt("<c:get select="$field/@name"/>", bean.<c:get select="$field/@getter"/>());
+ 			}
+ </c:iterate>			
+ 		} catch (JSONException e) {
+ 			throw new DataException("JSON error when persisting <c:get select="$type/@typeJava" /> to JSON",e);
+ 		}
+ 		
+ 		JSONObject result = new JSONObject();
+		try { 		
+			result.put("<c:get select="$type/@typeJava" />", json);
+ 		} catch (JSONException e) {
+ 			throw new DataException("JSON error when persisting <c:get select="$type/@typeJava" /> to JSON",e);
+ 		}
+		return result;
+	}
+
+	public static String asJsonString(<c:get select="$type/@typeJava" /> bean) {
+		try {
+			return asJson(bean).toString();
+		} catch (DataException e) {
+			return "{ \"error\":\"+e.toString()+\"}";
+		}
+	}
+</c:iterate>
+
+	<c:userRegion>// Begin custom methods<c:initialCode>
+	
+	
+	
+	</c:initialCode>// End custom methods</c:userRegion>
+
+}

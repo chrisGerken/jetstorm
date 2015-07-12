@@ -69,18 +69,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>storm</groupId>
-            <artifactId>storm</artifactId>
-            <version>0.8.2</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.activemq</groupId>
-            <artifactId>activemq-core</artifactId>
-            <version>5.4.0</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
             <groupId>org.codehaus.jettison</groupId>
             <artifactId>jettison</artifactId>
             <version>1.2</version>
@@ -93,19 +81,28 @@
             <scope>test</scope>
         </dependency>
         <dependency>
+        	<groupId>org.apache.storm</groupId>
+        	<artifactId>storm</artifactId>
+        	<version>0.9.3</version>
+        	<type>pom</type>
+        	<scope>provided</scope>
+        </dependency>
+        <dependency>
+        	<groupId>org.apache.storm</groupId>
+        	<artifactId>storm-core</artifactId>
+        	<version>0.9.3</version>
+        	<scope>provided</scope>
+        	<exclusions>
+        		<exclusion>
+        			<artifactId>slf4j-api</artifactId>
+        			<groupId>org.slf4j</groupId>
+        		</exclusion>
+        	</exclusions>
+        </dependency>
+        <dependency>
         	<groupId>com.gerkenip</groupId>
         	<artifactId>monitor</artifactId>
         	<version>1.0.0-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-        	<groupId>org.slf4j</groupId>
-        	<artifactId>slf4j-api</artifactId>
-        	<version>1.7.5</version>
-        </dependency>
-        <dependency>
-        	<groupId>org.slf4j</groupId>
-        	<artifactId>slf4j-log4j12</artifactId>
-        	<version>1.7.5</version>
         </dependency>
         <dependency>
         	<groupId>com.gerkenip</groupId>
