@@ -25,9 +25,10 @@
             <url>http://oss.sonatype.org/content/repositories/github-releases/</url>
         </repository>
 		<repository>
-		  <id>clojars.org</id>
-		  <url>http://clojars.org/repo</url>
-		</repository>
+      		<id>repo.hortonworks.com</id>
+      		<name>Hortonworks HDP Maven Repository</name>
+      		<url>http://repo.hortonworks.com/content/repositories/releases/</url>
+    	</repository>
     </repositories>
     <build>
         <plugins>
